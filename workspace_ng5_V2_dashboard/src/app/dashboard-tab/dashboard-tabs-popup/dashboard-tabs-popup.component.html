@@ -1,0 +1,24 @@
+<div class="scrollableModel modal-popup">
+    <div class="header-title-container modal-header scrollableModel ">
+        <span class="paddingLeft10">
+            <b> Add new Tab</b>
+        </span>
+    </div>
+    <div class="content-container">
+        <div class="textfieldWrapper">
+            <smart-textfield class="marginTop0" [config]="smartTextFieldConfig" (onChange) = "onChangeValue($event)" [(modelData)]="tabNameModel">
+            </smart-textfield>
+
+            <span [style.display]="(isDoneDisabled && userEnteredValue.length)? '': 'none'" class="duplicate-title-error">Tab with the same title is already present in this view.</span>
+            <span class = "tabs-word-length">{{userEnteredValue.length}}/30</span>
+        </div>
+
+    </div>
+    <div class="footer modal-footer modal-footer-normalScroll">
+        <div class="right">
+            <smart-button [config]="btnDoneConfig" (callback)="OnDone()" [ngClass]="{'disabled':isDoneDisabled}"></smart-button>
+            <smart-button [config]="btnCancelConfig" (callback)="OnCancel()"></smart-button>
+        </div>
+    </div>
+</div>
+<div class="lean-overlay" (click)="OnCancel()"></div>

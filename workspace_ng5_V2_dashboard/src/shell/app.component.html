@@ -1,0 +1,10 @@
+<div class="main-container" id="main-container-id">
+  <router-outlet></router-outlet>
+</div>
+<!-- <smart-notification></smart-notification> -->
+<smart-global-loader [config]="globalLoaderConfig"></smart-global-loader>
+<!-- <smart-theme-palette></smart-theme-palette> --> 
+<ng-container #renderPopupContainer></ng-container>
+<ng-template #renderPopupTemplate let-manifestPath="manifestPath" let-config="config">
+  <smart-outlet [path]="manifestPath" [childConfig]="config"></smart-outlet>
+</ng-template>

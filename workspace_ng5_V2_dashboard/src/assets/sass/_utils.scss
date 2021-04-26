@@ -1,0 +1,223 @@
+﻿
+////
+/// @group UTILS
+////
+
+@charset "UTF-8";
+/*variables*/
+$small-screen-up: 601px !default;
+
+
+
+@mixin margin($margin...){margin:$margin;}
+@mixin marginTop($top){margin-top:$top;}
+@mixin marginRight($right){margin-right:$right;}
+@mixin marginBtm($btm){margin-bottom:$btm;}
+@mixin marginLeft($left){margin-left:$left;}
+
+// padding Mixing
+@mixin padding($padding...){padding:$padding;}
+@mixin paddingTop($top){padding-top:$top;}
+@mixin paddingRight($right){padding-right:$right;}
+@mixin paddingBtm($btm){padding-bottom:$btm;}
+@mixin paddingLeft($left){padding-left:$left;}
+
+// position space Mixing
+@mixin top($top){top:$top;}
+@mixin right($right){right:$right;}
+@mixin btm($btm){bottom:$btm;}
+@mixin left($left){left:$left;}
+
+// font mixing
+@function calculateRem($size) {
+  $remSize: $size / 14px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  //font-size: $size !important;
+  font-size: calculateRem($size) !important;
+}
+
+
+// ----------------------------------------------------------------------
+
+  // Transitions
+
+// ----------------------------------------------------------------------
+
+/// Apply transition over an element
+///
+/// @parameter {String} | opacity
+///
+/// @link http://caniuse.com/#feat=css-transitions
+///
+/// @example scss - Basic Usage Sass
+///    .element {
+///        @include transitions(opacity 1s ease)
+///    }
+///
+/// @example scss - Basic Usage CSS Output
+///    .element {
+///        -webkit-transition: opacity 1s ease;
+///	       -moz-transition: opacity 1s ease;
+///        -o-transition: opacity 1s ease;
+///        -ms-transition: opacity 1s ease;
+///        transition: opacity 1s ease;
+///    }
+///
+
+@mixin transitions($all...) {
+	-webkit-transition: $all;
+	-moz-transition: $all;
+	-o-transition: $all;
+	-ms-transition: $all;
+	transition: $all;
+}
+
+@mixin transform($all...){
+	-webkit-transform: $all;
+	-moz-transform: $all;
+	-o-transform: $all;
+	-ms-transform: $all;
+	transform: $all;
+
+}
+
+// position Mixing
+@mixin position($position){position:$position;}
+
+// border radius Mixing
+@mixin radius($radius){
+	border-radius:$radius;
+	-moz-border-radius:$radius;
+	-ms-border-radius:$radius;
+	-o-border-radius:$radius;
+	-webkit-border-radius:$radius;
+	}
+
+// box shadow Mixing
+@mixin boxShadow($shadows...) {
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  -ms-box-shadow: $shadows;
+  -o-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+// box sizing Mixing
+@mixin boxSizing($args) {
+	-webkit-box-sizing: $args;
+	-moz-box-sizing: $args;
+	box-sizing: $args;
+}
+
+// Transforms Mixing
+@mixin transform($args) {
+	-webkit-transform: $args;
+	-moz-transform: $args;
+	-ms-transform: $args;
+	-o-transform: $args;
+	transform: $args;
+}
+// translate Mixing
+@mixin translateX($x){@include transform(translateX($x));}
+@mixin translateY($y){@include transform(translateY($y));}
+
+@mixin translate($x,$y){
+	@include transform(translate($x,$y));
+}
+// scale Mixing
+@mixin scale($unit...){
+	@include transform(scale($unit));
+}
+
+// rotate Mixing
+@mixin rotate($deg){
+	@include transform(rotate($deg));
+}
+
+// 3d translate Mixing
+@mixin translate3d($x,$y,$z) {
+	@include transform(translate3d($x,$y,$z));
+}
+
+// column count Mixing
+@mixin columnCount($num){
+	 -webkit-column-count: $num;
+	 -moz-column-count: $num;
+	 -o-column-count:$num;
+	 -ms-column-count:$num;
+	 column-count: $num;
+}
+
+//extend statement
+%displayNone{display: none !important;}
+%displayBlock{display: block;}
+
+
+// ----------------------------------------------------------------------
+
+  // Animations
+
+// ----------------------------------------------------------------------
+
+/// Apply animations over an element
+///
+/// @parameter {String} | opacity
+///
+/// @link http://caniuse.com/#feat=css-transitions
+///
+/// @example scss - Basic Usage Sass
+///    .element {
+///        @include transitions(opacity 1s ease)
+///    }
+///
+/// @example scss - Basic Usage CSS Output
+///    .element {
+///        -webkit-transition: opacity 1s ease;
+///	       -moz-transition: opacity 1s ease;
+///        -o-transition: opacity 1s ease;
+///        -ms-transition: opacity 1s ease;
+///        transition: opacity 1s ease;
+///    }
+///
+@mixin animation($animate...) {
+	$max: length($animate);
+	$animations: '';
+
+	@for $i from 1 through $max {
+		$animations: #{$animations + nth($animate, $i)};
+
+		@if $i < $max {
+			$animations: #{$animations + ", "};
+		}
+	}
+
+	animation: $animations;
+	-webkit-animation: $animations;
+	-moz-animation: $animations;
+	-ms-animation: $animations;
+	-o-animation: $animations;
+}
+
+@mixin keyframes($animationName) {
+	@keyframes #{$animationName} {
+		@content;
+	}
+
+	@-webkit-keyframes #{$animationName} {
+		@content;
+	}
+
+	@-moz-keyframes #{$animationName} {
+		@content;
+	}
+
+	@-ms-keyframes #{$animationName} {
+		@content;
+	}
+
+	@-o-keyframes #{$animationName} {
+		@content;
+	}
+}

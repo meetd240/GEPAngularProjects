@@ -1,0 +1,148 @@
+<span [style.display]="config.config.driveConfig.driveActive && !_dashboardCommService.oppFinderState.oppFinderFlag ? ''
+    : 'none'">
+<label class="driver-class" [style.display]="config.config.driveConfig.isDriver ? '' : 'none'" [innerHTML]="constants.UIMessageConstants.STRING_DRIVER">
+</label>
+</span>
+<div class="right dashboard-card-content" id="dashboard-card-header-{{config.config.cardId}}">
+    <span class="extra-nav-icon" [style.display]="!_dashboardCommService.oppFinderState.oppFinderFlag ? '' : 'none'">
+        <linked-view-filter [config]="config.config"></linked-view-filter>
+    </span>
+    <ng-template
+        [ngIf]="config.config.WidgetDataRecordLength != undefined && config.config.WidgetDataRecordLength != 0 && config.config.WidgetDataRecordLength > 0 && config.config.sort.isActive && !_dashboardCommService.oppFinderState.oppFinderFlag">
+        <span>
+            <smart-dropdown *ngIf="uiConfig.showSortOption" [position]="'left'" [autoClose]="false"
+                [(showDD)]="config.config.sort.showSort">
+                <a class='dd_activator dropdown-button waves-effect white-text marginRight5' smartTooltip
+                    [config]="sortTooltipConfig" (click)="sortCard()">
+                    <i class="icon iconSmall blue-text">
+                        <svg class="dashboardCardHeaderIcons">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Sort">
+                            </use>
+                        </svg>
+                    </i>
+                </a>
+                <ul class='dd_data dropdown-content sortDDContent'>
+
+                    <li class="dropdown-content-header">
+                        <div class="title"> {{ 'Sort by' }}</div>
+                    </li>
+
+                    <li class="dropdown-content-content">
+                        <ul class="sort-dropdown-content">
+                            <li *ngFor="let sortoption of config.config?.sort.items; let ind=index;trackBy: reportObjectId;"
+                                (click)="toggleAscDsc(ind,sortoption)" class=" sort-options truncate">
+
+                                <span class="cursorPointer paddingLeft0 filterTitle" title="{{sortoption.name}}"
+                                    [ngClass]="{'sort-dd-selected-color':(ind==config.config.sort.selectedIndex)}">
+                                    {{sortoption.name}}
+                                </span>
+
+                                <span class="right cursorPointer" smartTooltip [config]="sortoption.tooltipConfig"
+                                    [ngClass]="{'sort-dd-selected-color':(ind==config.config.sort.selectedIndex)}">
+                                    <i class="icon iconSmall right">
+                                        <svg>
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                attr.xlink:href="{{ setSortAsicon(sortoption.sortas) }}"></use>
+                                        </svg>
+                                    </i>
+                                </span>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-content-footer">
+                        <div class="right">
+                            <smart-button [config]="closeSortButtonConfig" (callback)="closeSort()"></smart-button>
+                            <smart-button [config]="applySortButtonConfig" (callback)="applySort($event)">
+                            </smart-button>
+                        </div>
+                    </li>
+                </ul>
+            </smart-dropdown>
+        </span>
+    </ng-template>
+    <span class="extra-nav-icon" *ngIf="uiConfig.showFilterOption">
+        <a class='waves-effect white-text panelBox-header--aLink marginRight5' (click)="filter()">
+            <i class="icon iconSmall blue-text">
+                <svg>
+                    <use xlink:href="#icon_Filter"></use>
+                </svg>
+            </i>
+        </a>
+    </span>
+    <span class="extra-nav-icon" *ngIf="uiConfig.showFullScreenOption">
+        <a class='waves-effect white-text panelBox-header--aLink  marginRight5' smartTooltip
+            [config]="fullScreenTooltipConfig" (click)="fullscreen($event)">
+            <i class="icon iconSmall blue-text">
+                <svg class="dashboardCardHeaderIcons" id="card-fullscreen-icon-{{config.cardId}}">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink"  [attr.xlink:href]="fullScreenIcon">
+                    </use>
+                </svg>
+            </i>
+        </a>
+    </span>
+    <smart-dropdown [style.display]="config.config.isAccessibleReport && uiConfig.showKebabMenusOption ? '':'none'"
+        id="ddOptions" class="action-dropdown-container dashboard-kabab-menu " [position]="'left'"
+        [hidden]="_dashboardCommService.oppFinderState.oppFinderFlag">
+        <a class='dd_activator dropdown-button waves-effect white-text' smartTooltip [config]="menuTooltipConfig">
+            <i class="icon iconSmall blue-text">
+                <svg class="dashboardCardHeaderIcons">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_moreAction"></use>
+                </svg>
+            </i>
+        </a>
+        <ul class='dd_data dropdown-content dashboard-kebab-DD'>
+            <li *ngFor="let menu of uiConfig.kebabMenuOptions;let _conIndex = index;"
+                (click)="onKebabclick(menu,$event)">
+                <ng-template [ngIf]="menu.showOption">
+                    <a *ngIf="menu.showOption" class="cursorPointer rename">
+                        {{menu.export}}
+                        <span *ngIf="menu.expand" class="right gray-text">
+                            <i class="icon iconSmall transform-90">
+                                <svg class="dashboardCardHeaderIcons">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_UpChevron"></use>
+                                </svg>
+                            </i>
+                        </span>
+                    </a>
+                </ng-template>
+            </li>
+        </ul>
+    </smart-dropdown>
+</div>
+<!--Now the driveConfigDescription will be shown for the widget which are driver widget too if they are slaves i.e. if they are being already driven by some  other wigdet and then themself act as driver widget.-->
+<br><div class="driven-title" [innerHTML]="config.config.driveConfig.driveConfigDescription"
+    [title]="config.config.driveConfig.driveConfigDescription">
+</div>
+<div [hidden]='exportOptionsHidden' class="absolute exportOptions export-options-DD">
+    <ul class="margin0">
+        <li *ngFor="let exportOption of exportOptions;let _exIndex=index;" class="export-type">
+            <a class="padding10 gray-text" (click)="exportOptionsClick(exportOption,$event)">{{exportOption}}</a>
+        </li>
+    </ul>
+</div>
+<div class="editmode-container" *ngIf="config.config.showEdit">
+    <div class="textfieldWrapper">
+        <smart-textfield class="marginTop0" [config]="CardTitleConfig" [(modelData)]="graphTitle"
+            [hidden]="!config.config.showEdit"></smart-textfield>
+    </div>
+    <div class="action-buttons right">
+        <a href [hidden]="!config.config.showEdit" class="blue-text marginRight10" (click)="cancelChanges(config)">
+            <i class="icon iconSmall">
+                <svg>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Close"></use>
+                </svg>
+
+            </i>
+        </a>
+        <a [hidden]="!config.config.showEdit" class="blue-text " (click)="updateTitle(config)"
+            [ngClass]="{'disabled':graphTitle.value.trim().length===0}">
+            <i class="icon iconSmall">
+                <svg>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Check"></use>
+                </svg>
+
+            </i>
+        </a>
+    </div>
+</div>

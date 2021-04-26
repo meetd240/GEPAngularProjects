@@ -1,0 +1,43 @@
+.slider-widget {
+  padding-top: 20px;
+
+  .slider-unit {
+    margin-top: 14px;
+    margin-right: 3px;
+    margin-left: 12px;
+  }
+  .slider-input {
+    width: 85px;
+  }
+
+  .slider-range {
+    margin-top: 16px;
+    margin-left: 4px;
+    font-size: 12px;
+  }
+  .slider-seperator {
+    margin-top: 13px;
+    margin-left: 10px;
+    color: #a8a8a8;
+  }
+
+  .apply-btn {
+    float: right;
+    margin-top: 9px;
+  }
+
+  .reset-btn {
+    font-size: 12px;
+    float: right;
+  }
+
+  .redBorder {
+    border-bottom: 1px solid red;
+  }
+}
+.slider-apply-btn {
+  //position: relative;
+  //left: 85%;
+  //top: 10px;
+  float:right;
+}

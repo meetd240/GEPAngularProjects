@@ -1,0 +1,14 @@
+<div class="frame-container">
+  <!-- <smart-header activeDocument="Vision" [style.display]="_appConstants.userPreferences.moduleSettings.showSmartHedaerCompponent ? '' : 'none'">
+  </smart-header> -->
+
+  <ng-container #headerContainer></ng-container>
+  <ng-template #headerTemplate let-manifestPath='headerManifest.path' let-config='headerManifest.config'>
+    <smart-outlet [path]="headerManifest.path" [childConfig]="headerManifest.config"
+      (onInitialize)="onInitialize($event)" (onDeinitialize)="onDeinitialize($event)" (onActivate)="onActivate($event)">
+    </smart-outlet>
+  </ng-template>
+  <div class="child-page-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

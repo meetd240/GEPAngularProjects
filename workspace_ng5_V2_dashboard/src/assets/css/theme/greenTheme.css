@@ -1,0 +1,446 @@
+﻿nav,
+.extra-nav-wrap,
+.extra-nav-wrap .subHeaderWithFilter,
+.login-wrapper,
+.side-out-bm-nf-ct .collection,
+.side-out-bm-nf-ct .collection-item,
+.side-out-bm-nf-ct>div:first-child,
+.side-nav li:hover,
+.side-nav li:active,
+.side-nav li.active {
+	background-color: #367c2b;
+}
+
+::selection {
+	background-color: #367c2b;
+}
+
+a:focus,
+a:active:focus,
+a:hover:focus,
+a:visited:focus {
+	outline-color: #367c2b !important;
+}
+
+.extra-nav-wrap .global-search .searchWithHiddenTextField,
+.headersearch .searchWithHiddenTextField,
+.side-nav .smart-accordion-container .collection {
+	background-color: #367c2b !important;
+}
+
+.side-nav,
+.side-nav .smart-accordion-container .collection li:hover,
+.side-nav .smart-accordion-container .collection li:active,
+.side-nav .smart-accordion-container .collection li.active {
+	background-color: #479829;
+}
+
+.blueOverlay,
+.userConsentPopUp .modal-header {
+	background: #367c2b;
+}
+
+.nav-bottom-stick.copyrightBtmCont {
+	border-top-color: #479829;
+}
+
+.nav-right-buttons.nav-slide-active li:last-child a {
+	color: #FFF;
+}
+
+#profileOverlayUniId .overlayOkayButton {
+	color: #367c2b !important;
+}
+
+.blue-overlay {
+	background: rgba(54, 124, 43, 0.88);
+}
+
+/* =================================== Help Center =================================== */
+
+.help-center .title.support-title {
+	background: #367c2b;
+}
+
+.help-center .collection li .support-li {
+	background-color: #367c2b;
+}
+
+.support-title span {
+	color: #FFF;
+}
+
+/* =================================== Announcement =================================== */
+.side-out-bm-nf-ct .tabs {
+	background: #479829;
+}
+
+#slide-out-notification .borderBtmGray.tabparent-container,
+.nav-bottom-stick {
+	background: #367c2b;
+}
+
+.nav-notification.currentActive a,
+#slide-out-notification span.title,
+#slide-out-notification .icons-ops .icon {
+	color: #FFF;
+}
+
+.side-out-bm-nf-ct .tabs .tab a.active {
+	color: #FFF;
+	border-bottom: 2px solid #FDE100 !important;
+}
+
+#slide-out-notification .add-announce {
+	color: #FFF !important;
+}
+
+/* =================================== Bookmark =================================== */
+
+.side-nav #slide-out-bookmark li.collection-item a,
+.nav-bookmark.currentActive a {
+	color: #FFF;
+}
+
+#slide-out-bookmark .add-announce {
+	color: #FFF !important;
+}
+
+
+/* =================================== Fixed Button =================================== */
+.home-page a,
+.fixed-action-btn a,
+.home-page a:hover,
+.fixed-action-btn a:hover,
+.home-page a:focus,
+.fixed-action-btn a:focus {
+	background-color: #367c2b;
+}
+
+.fixed-action-btn .waves-effect.waves-light .waves-ripple {
+	background-color: #479829;
+}
+
+.recentDocSlider .slick-prev,
+.recentDocSlider .slick-next {
+	border-color: #367c2b;
+	color: #367c2b;
+}
+
+/* =================================== Intro =================================== */
+.introjs-overlay {
+	background: #367c2b !important;
+}
+
+/* =================================== Message Container =================================== */
+
+.messageIconContainer span {
+	background: #367c2b !important;
+}
+
+.messageBannerContainer .readMoreLink {
+	color: #367c2b;
+}
+
+/* =================================== Card Slider =================================== */
+
+.card-slider .slick-dots li.slick-active:after {
+	background: #367c2b;
+}
+
+/* =================================== Buttons =================================== */
+
+.fixedBottom .sliderTitle {
+	color: #367c2b;
+}
+
+.btn-flat,
+.whiteSecondaryBtn .btn,
+.whiteSecondaryBtn .btn:hover {
+	color: #367c2b !important;
+}
+
+.btn-flat:hover,
+.btn-flat:focus {
+	color: rgba(54, 124, 43, 0.88) !important;
+}
+
+.btn,
+.btn-large {
+	background-color: #367c2b;
+}
+
+.btn.blue-text {
+	color: #367c2b !important;
+}
+
+.btn:hover,
+.btn-large:hover,
+.btn:focus,
+.btn-large:focus {
+	background-color: #479829;
+}
+
+.btn.waves-effect.waves-light .waves-ripple,
+.btn-large.waves-effect.waves-light .waves-ripple {
+	background: #367c2b;
+}
+
+.card-slider .slick-prev,
+.card-slider .slick-next {
+	background: #367c2b !important;
+}
+
+.inverseButton a {
+	color: #367c2b;
+	background-color: #fff;
+}
+
+.inverseButton a:hover {
+	background-color: #367c2b;
+}
+
+.inverseButton .btn.waves-effect.waves-light .waves-ripple {
+	background: #479829;
+}
+
+/* =================================== Checkbox =================================== */
+[type="checkbox"].filled-in:checked+label:after {
+	border: 2px solid #367c2b !important;
+	background-color: #367c2b !important;
+}
+
+.filled-partial [type="checkbox"].filled-in:not(:checked)+label:after,
+.filled-partial [type="checkbox"].filled-in:checked+label:after {
+	background-color: #367c2b !important;
+}
+
+.inverseCheckBox [type="checkbox"].filled-in:checked+label:after {
+	border: 2px solid #FFF !important;
+}
+
+.inverseCheckBox [type="checkbox"].filled-in:checked+label:before {
+	border-bottom-color: #367c2b !important;
+	border-right-color: #367c2b !important;
+}
+
+/* =================================== Radio Button =================================== */
+[type="radio"].with-gap:checked+label:after,
+[type="radio"]:checked+label:after {
+	border-color: #367c2b;
+	background-color: #367c2b;
+}
+
+[type="radio"].with-gap:checked+label:before {
+	border-color: #367c2b;
+}
+
+/* =================================== Scroll bar =================================== */
+.help-center .scroll-element.scroll-y .scroll-element_outer .scroll-bar,
+.internal-external-notification .scroll-element.scroll-y .scroll-element_outer .scroll-bar {
+	background-color: #479829 !important;
+}
+
+/* =================================== Switch =================================== */
+.switch label input[type=checkbox]:checked+.lever {
+	background-color: #cccccc;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+	background-color: #479829;
+}
+
+/* =================================== Landing Page Filter =================================== */
+.panelBox-withSpace.top-to-bottom-slide {
+	background-color: #367c2b;
+}
+
+.sidebar-btn {
+	background-color: #367c2b !important;
+}
+
+/* =================================== SecNav =================================== */
+.secondary-navigation-one a {
+	background-color: #367c2b !important;
+}
+
+.secondary-navigation-one>ul>li.active>a,
+.secondary-navigation-one>ul>li.active>a:hover {
+	background-color: #fff !important;
+}
+
+.secondary-navigation-one>.thumbnails-wrap>li>a.active {
+	border: 3px solid #0177d6;
+	background-color: #fff !important;
+}
+
+.secondary-navigation-one>ul>li>.secNavconnector,
+a.initialDiv span {
+	background-color: #367c2b !important;
+}
+
+.secondary-navigation-one>.thumbnails-wrap>li>a:hover {
+	background-color: #0177d6 !important;
+}
+
+.spinner-blue,
+.spinner-blue-only {
+	border-color: #367c2b;
+}
+
+/* =================================== Invoice Change Image Popup Header =================================== */
+.popHdr {
+	background: #367c2b;
+}
+
+/* =================================== Search Field =================================== */
+.headersearch .searchWithHiddenTextField input {
+	border-bottom-color: #479829 !important;
+}
+
+/* =================================== Form Loader =================================== */
+.indeterminate-loader {
+	background-color: #367c2b;
+}
+
+.indeterminate-loader:after,
+.indeterminate-loader:before {
+	background-color: #56B931;
+}
+
+.section-card-slider .card-slider .slick-dots li.slick-active {
+	background: #367c2b;
+}
+
+.circle-clipper .circle {
+	border-color: #367c2b !important;
+}
+
+/* =================================== SmartBuy CSS =================================== */
+#smartbuy .sub-strip-bef {
+	background-color: #367c2b;
+}
+
+#smartbuy .search-result-list-wrap .search-result-list .result-item-wrap .result-item.active {
+	background-color: #ffde00;
+}
+
+#smartbuy .search-result-list-wrap .search-result-list .result-item-wrap .result-item.active svg {
+	color: #5c5c5c;
+}
+
+#smartbuy .go-next-step .icon.stepper-icon {
+	color: #ffde00;
+	background-color: #5c5c5c;
+}
+
+#smartbuy .numberedItem.active {
+	color: #5c5c5c;
+}
+
+#smartbuy .go-next-step .icon.stepper-icon svg {
+	margin: -1px;
+}
+
+#smartbuy .go-next-step .nextStepInformer .nextStepInformerWrap {
+	background-color: #ffde00;
+}
+
+#smartbuy .go-next-step .nextStepInformer .nextStepInformerWrap .nextstepval {
+	color: #5c5c5c !important;
+	text-shadow: 0 0 0 #5c5c5c;
+}
+
+#smartbuy .listing-card .listing-card-wrap .listing-card-button a {
+	color: #367c2b;
+}
+
+#smartbuy .main-slide-data .listing-main-wrap .listing-main .listing-info .listing-info-strip,
+#smartbuy .top-slide-strip .slide-title-strip .slide-title-strip-under,
+#smartbuy .sb-title .sb-title-underline {
+	background-color: #367c2b;
+}
+
+#smartbuy .top-slide-strip .slide-title-strip .stepin-wrap .stepin,
+#smartbuy .main-slide-data .listing-main-wrap .listing-main .stepin-wrap .stepin,
+#smartbuy .main-slide-wraper .stepin-wrap .stepin {
+	border: 2px solid #367c2b;
+	color: #367c2b;
+}
+
+#smartbuy .main-slide-wraper .main-slide-buttons .main-slide-icon {
+	color: #367c2b;
+}
+
+#smartbuy .go-next-step .nextStepInformer .nextStepInformerWrap svg {
+	color: #5c5c5c !important;
+}
+
+#smartbuy .go-next-step .nextStepInformer .halfround svg {
+	color: #ffde00;
+}
+
+#smartbuy .sub-header-cat-cont .sub-header-cat-item .sub-header-cat-item-content.active {
+	background-color: #ffde00;
+	color: #5c5c5c;
+}
+
+#smartbuy .sub-header-cat-cont .sub-header-cat-item .sub-header-cat-item-content.active svg {
+	color: #5c5c5c;
+}
+
+#smartbuy .main-slide-wraper .catalog-icon-wrap .icon,
+#smartbuy .main-slide-data .listing-main-wrap .listing-main .cat-icon-wrap-hero-card .icon {
+	color: #367c2b;
+}
+
+#subheader-element {
+	background-color: #367c2b !important;
+  }
+  
+  #subheader-filterContainer {
+	background-color: #367c2b !important;
+  }
+  
+  .announcementContainer .announcement-tabs-container {
+	 background: #367c2b !important;
+  }
+  
+  .announcementContainer .announcement-collection .announcement-collection-item {
+	 background-color: #367c2b !important;  
+  }
+  
+  .announcementContainer .announcement-tabs-container .announcement-list a.active {
+	 color: white !important;
+	 border-bottom: 2px solid yellow !important;
+  }
+  
+  .announcementContainer .announcement-collection .announcement-collection-item a.announce-title .title {
+	 color: white;   
+  }
+  
+  .announcementContainer .announcement-collection .announce-actions a i {
+	 color: white !important;  
+  }
+  
+  .bookmarkContainer .bookmark-tabs-container .bookmark-list .active {
+	 color: white !important;
+	 border-bottom: 2px solid yellow !important;
+  }
+  
+  
+  .bookmarkContainer .bookmark-tabs-container {
+	 background: #367c2b !important;    
+  }
+  
+  .bookmarkContainer .bookmark-scroll-container .bookmark-collection .bookmark-collection-item {
+	 background-color: #367c2b !important;     
+  }
+  
+.btn-flat {    
+    color: #367c2b !important;     
+}
+
+.bookmarkContainer .bookmark-scroll-container .bookmark-collection .bookmark-collection-item a {
+    color: white !important;
+}

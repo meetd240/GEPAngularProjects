@@ -1,0 +1,33 @@
+<div class="scrollableModel oppfinder-formula-popup modal-popup">
+    <div class="header-title-container modal-header scrollableModel ">
+        <span class="paddingLeft10 oppfinder-formula-label bold">
+            Opportunity Finder Overview
+        </span>
+    </div>
+    <div class="oppfinder-formula-content">
+        <div class="fontSize12 marginTop10">*In this Opportunity Finder, the user gets to see the suggested Best Payment Dates for Invoices under different {{config.api.opportunityType}}.</div>
+        <div class="fontSize12 marginTop10">*User also gets to see the Highest Potential Savings considering payments of Invoices on the suggested Best Payment Dates.</div>
+        <div class="fontSize12 marginTop10">*The Potential Savings are based on the consideration of paying the Invoices either on the Last Discount Date or on the Invoice Due Date.  </div>
+        <div class="fontSize12 marginTop10">*User gets to see the Invoices which were Paid On-Time and the Invoices which were Paid Late.</div>
+        <div class="fontSize12 marginTop10">*User gets to see the Penalties which were incurred on Late Paid Invoices.</div>
+        <div class="fontSize12 marginTop10">*User can feed the desired Cost of Capital % and the Late Payment Penalty % to see the Best Payment Dates, Potential Savings and incurred Penalties accordingly. </div>
+        <div class="fontSize12 marginTop10">*User can Create and Save Invoice Payment Savings Opportunities for different {{config.api.opportunityType}}.</div>
+        <div class="fontSize12 marginTop10">*The {{config.api.opportunityType}} and Invoices with the Highest Potential Savings are displayed on top in the grid.</div>
+        
+       
+    </div>
+    <!-- <ul >
+     
+            <li *ngFor = "let item of oppfinderOverviewList" class="fontSize14" >{{item}}</li>
+       
+    </ul> -->
+
+    <!-- no records found -->
+    <div class="oppfinder-formula-footer footer modal-footer modal-footer-normalScroll paddingBtm10">
+        <div class="right marginRight10">
+            <smart-button [config]="config.btnContinueConfig" (callback)="btnContinueClick()"></smart-button>
+        </div>
+    </div>
+</div>
+
+<div class="lean-overlay" (click)="onCancel()"></div>

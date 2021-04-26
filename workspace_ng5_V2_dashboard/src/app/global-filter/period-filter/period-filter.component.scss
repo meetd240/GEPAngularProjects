@@ -1,0 +1,83 @@
+.PeriodFilterWrapper {
+  .date-filter {
+    .dynamic-date-filter {
+      .dateRadio {
+        margin-left: 11px;
+      }
+      .rolling-date {
+        width: 10%;
+        margin-left: -62px;
+        margin-top: 87px;
+      }
+      .next-date {
+        width: 10%;
+        margin-left: -62px;
+        margin-top: 87px;
+      }
+      .current-date {
+        margin-top: 139px;
+        margin-left: -13px;
+      }
+    }
+    .condition-date-filter {
+      .date-filter-select {
+        padding-left: 26px;
+        margin-top: 6px;
+        height: 200px;
+      }
+    }
+    .FromLabel {
+      position: absolute;
+      margin-left: 12px;
+      font-size: 0.8rem;
+      color: rgba(0, 0, 0, 0.64);
+    }
+
+    .ToLabel {
+      position: absolute;
+      margin-left: 141px;
+      font-size: 0.8rem;
+      color: rgba(0, 0, 0, 0.64);
+    }
+  }
+  .year-filter {
+    .dynamic-year-filter {
+      .year-radio {
+        margin-left: 11px;
+      }
+      .rolling-year {
+        margin-top: 82px;
+        margin-left: -60px;
+      }
+      .next-year {
+        margin-top: 109px;
+        margin-left: -70px;
+      }
+      .current-year {
+        margin-top: 139px;
+        margin-left: -13px;
+        height: 200px;
+      }
+      .previous-quarter {
+        margin-top: 164px;
+        margin-left: -51px;
+      }
+      .next-quarter {
+        margin-top: 86px;
+        margin-left: -26px;
+      }
+    }
+    .condition-year-filter {
+      .year-filter-select {
+        padding-left: 26px;
+        margin-top: 6px;
+        height: 200px;
+      }
+    }
+  }
+}
+
+.addedToSlicer{
+  opacity: 0.5;
+  pointer-events: none;
+}

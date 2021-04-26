@@ -1,0 +1,29 @@
+{
+  "TotalCostPercentage": {
+    "TotalCostPercent": 65
+  },
+  "CategoryProfileCostDrivers": [
+    {
+      "id": 1,
+      "CategoryProfileCostDriverID": 27,
+      "CategoryProfileID": 84,
+      "CostDriverID": 1,
+      "NegotiationPotentialScoreID": 17,
+      "CostPercent": 59,
+      "InfluencingFactors": "yes",
+      "IsMarketIndexAvailable": true,
+      "Description": "test1",
+      "Source": "www.google.com",
+      "CostDriver": "ty",
+      "TotalSpend": 0,
+      "Cost": 0,
+      "NegotiationPotentialScore": {
+        "ScoreID": 13,
+        "ScoreDefination": "Nil",
+        "ScoreValue": 0,
+        "ScoreClassification": "costDriver"
+      },
+      "NegotiationPotentialScoreValue": 0
+    }
+  ]
+}

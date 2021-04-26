@@ -1,0 +1,74 @@
+<div class="scrollableModel modal-popup" [ngClass]="{'modal-Count-popup':oppFinderokFlag}">
+    <div class="header-title-container modal-header scrollableModel ">
+        <span class="paddingLeft10">
+            <strong>
+                {{_dashboardCommService.oppFinderState.strategy.name}}
+            </strong>
+        </span>
+    </div>
+    <div class="overflowHidden">
+         <div *ngIf="showGrid" class="grid-container">
+            <div id="flex -grid-wrapper" flex-grid [config]="gridData" (flexEvents)="flexEvents($event)"></div>
+            <ng-template
+            [ngIf]="gridData.showPagination">
+            <div class="floatL fontSize12  footer pagination-container paddingTop0 paddingLeft0 margin60"
+              [style.display]="block" [ngClass]="{'marginLeft30Per':config.isExpandedGraph}">
+              <div class="text-black64 pagination-title">
+                {{constants.UIMessageConstants.STRING_Showing}}
+                {{
+                       (
+                        gridData.pageSize * gridData.currentPage+1 < gridData.totalItems ?
+                        gridData.pageSize * gridData.currentPage+1 : gridData.totalItems
+                       )  - gridData.currentPage
+                }} -
+                {{
+                  (gridData.currentPage+1) * gridData.pageSize-1  <  gridData.totalItems ?
+                    (
+                      (gridData.currentPage+1) * gridData.pageSize-1
+                    ) - gridData.currentPage
+                    : gridData.totalItems
+                }} {{constants.UIMessageConstants.STRING_of}} {{gridData.totalItems}}
+                {{constants.UIMessageConstants.STRING_rows}}
+                <span [hidden]="gridData.totalItems<=gridData.pageSize">
+                  <span class=" marginLeft10">
+                    <span [ngClass]="{'disabled':  !gridData.isPrev}"
+                      class="text-black64 cursorPointer marginLeft5 pagination-arrow-title"
+                      (click)="previousClick()">&lsaquo;</span>
+                    <span class="text-black64 padding10 fontSize14">
+                      {{gridData.currentPage+1}}&nbsp; &#x2f;
+                      &nbsp;{{gridData.totalPages}}
+                    </span>
+                  </span>
+                  <span [ngClass]="{'disabled':  !gridData.isNext}"
+                    class=" text-black64 cursorPointer marginLeft5 pagination-arrow-title" (click)="nextClickPagination()">
+                    &rsaquo;
+                  </span>
+                </span>
+              </div>
+            </div>
+          </ng-template>  
+        </div>
+        <div class="paddingLeft17 overflowAuto">
+            <ng-container #PurchasePriceContainer></ng-container>
+            <ng-template #CommonTemplate let-config="config" let-manifestPath="manifestPath">         
+                <smart-outlet [path]="manifestPath" [childConfig]="config"></smart-outlet>
+            </ng-template>
+        </div>
+    </div>
+
+    <div id = "footer" class="footer modal-footer modal-footer-normalScroll paddingBtm10 marginRight10">
+        <div  *ngIf="oppFinderPPVFlag" class="right">
+            <smart-button [config]="btnCancelConfig" (callback)="onCancel()"></smart-button>
+            <smart-button *ngIf="showGrid" [config]="btnNextConfig" (callback)="nextClick()"></smart-button>
+            <smart-button *ngIf="!showGrid" [config]="btnDoneConfig" (callback)="doneClick()"></smart-button>
+        </div>
+
+            <div *ngIf="oppFinderConFlag" class="right">
+                <smart-button *ngIf="oppFinderButFlag" [config]="btnCancelConfig" (callback)="onCancel()"></smart-button>
+                <smart-button *ngIf="oppFinderButFlag" [config]="btnDoneConfig" (callback)="doneClick()"></smart-button>
+                <smart-button *ngIf="oppFinderokFlag" [config]="btnOkConfig" (callback)="onCancel()"></smart-button>
+            </div>
+
+    </div>
+</div>
+<div class="lean-overlay" (click)="onCancel()"></div>

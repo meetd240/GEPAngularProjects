@@ -1,0 +1,39 @@
+<div class="scrollableModel modal-popup">
+    <div class="header-title-container modal-header scrollableModel ">
+        <span class="paddingLeft10">
+            <b> SELECT A TAB</b>
+        </span>
+    </div>
+    <div class="content-container">
+        <div class="textfieldWrapper">
+            <ul class="tabs-list-container">
+                <li *ngFor="let _tab of lstTabs;let index=index" class="tab-info">
+                    <span>
+                        <span [ngClass]="{'disabled': _tab.disableTab}">
+                            <input type="radio" class="with-gap" [(ngModel)]="tabId" [name]="_tab.tabName"
+                                [value]="_tab.tabId" [id]="_tab.tabId" (change)="onTabSelect(_tab)" />
+                            <label for="{{_tab.tabId}}">{{_tab.tabName}}</label>
+                        </span>
+                        <smart-infotip [config]="msgTab.tabToolTip" [style.display]="(_tab.disableTab) ? '': 'none'">
+                            <a class='waves-effect'>
+                              <i class="icon iconSmall">
+                                <svg>
+                                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Info"></use>
+                                </svg>
+                              </i>
+                            </a>
+                          </smart-infotip>
+                    </span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="footer modal-footer modal-footer-normalScroll">
+        <div class="right">
+            <smart-button [config]="btnDoneConfig" (callback)="onDone()"></smart-button>
+            <smart-button [config]="btnCancelConfig" (callback)="onCancel()"></smart-button>
+        </div>
+    </div>
+</div>
+<div class="lean-overlay" (click)="onCancel()"></div>

@@ -1,0 +1,86 @@
+<div class="scrollableModel modal-popup panelBox-content manage-tabs-popup">
+    <div class="panelBox-body padding0 manage-tabs-popup-wrapper">
+      <div class="row margin0 manage-tabs-popup-body">
+        <div class="panelBox-content margin0 manage-tabs-popup-container">
+          <div class="panelBox-header">
+            <div class="header-title cursorPointer">
+              <span class="title marginLeft10 manage-tabs-title">Manage Tabs</span>
+            </div>
+          </div>
+          <div class="col s12 padding0 manage-tabs-container">
+            <div class="ui-draggable ui-draggable-handle manage-tabs-list scroll-inner-wrapp">
+              <ul class="ui-sortable row-container margin0" [config]="smartSortableConfig" smart-sortable>
+                <li class="draggable borderBottme5e5e5 manage-stage-dragable" id="tab-{{list.tabId}}"
+                *ngFor="let list of _tabsList; index as index;">
+                <span  *ngIf="list.isEditable === false">
+                  <span class="row-uidragger" id="iconDrag-{{list.tabId}}">
+                    <i class="icon ui-dragger collapsible-header-drag-icon ui-sortable-handle" >
+                      <svg>
+                        <use xlink:href="#icon_Drag"></use>
+                      </svg>
+                    </i>
+                  </span>
+                  <span class="tab-title" id="tab-name-{{list.tabId}}" title="{{list.title}}" [innerHTML]="list.title" ></span>
+                  <span class="delete-tab right" id="delete-tab-{{list.tabId}}">
+                    <a class='waves-effect' smartTooltip [config]="deleteTooltipConfig">
+                        <i class="icon iconSmall blue-text" (click)="deleteTab(list,index)">
+                            <svg>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_TrashCan"></use>
+                            </svg>
+                        </i>
+                    </a>
+                  </span>
+                  <span class="edit-tab right marginRight6" id="edit-tab-{{list.tabId}}" [ngClass]="{'disabled': disableAllOtherEditAndDoneButton}">
+                    <a class='waves-effect' smartTooltip [config]="editTooltipConfig">
+                        <i class="icon iconSmall blue-text" (click)="editTab(list,index)">
+                            <svg>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_editPen"></use>
+                            </svg>
+                        </i>
+                    </a>
+                  </span>
+                </span>
+                  <span class="edit-tab-container row" *ngIf="list.isEditable === true">
+
+                    <div class="edit-field col s10" style="display: inline;">
+                      <smart-textfield class="input-field marginTop0" [config]="smartTextFieldEditConfig" (onChange) = "onChangeValue($event,list)" [(modelData)]="list.userEnteredValue"></smart-textfield>
+                      <span [style.display]="(list.isDoneDisabled && list.userEnteredValue.value.length)? '': 'none'" class="duplicate-title-error">Tab with the same title is already present in this view.</span>
+                      <span class = "tabs-word-length">{{list.userEnteredValue.value.length}}/30</span>
+                    </div>
+                    
+                    <div class="col s2 marginTop10" style="display: inline;">
+                      <a href class="blue-text paddingRight10 cursorPointer" >
+                        <i class="icon iconSmall" (click)="closeEditTab($event,list,index)">
+                            <svg>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Close"></use>
+                            </svg>
+              
+                        </i>
+                    </a>
+                    <a class="blue-text cursorPointer" [ngClass]="{'disabled':list.isDoneDisabled}">
+                        <i class="icon iconSmall" (click)="doneEditTab($event,list,index,list.userEnteredValue.value)">
+                            <svg>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Check"></use>
+                            </svg>
+              
+                        </i>
+                    </a>
+                    </div>
+              
+                  </span>
+
+                </li>
+              </ul>
+            </div>
+            <div class="footer modal-footer modal-footer-normalScroll">
+              <span class="right">
+                <smart-button [config]="btnDoneConfig" (callback)="onDone()" [ngClass]="{'disabled':disableAllOtherEditAndDoneButton}" ></smart-button>
+                <smart-button [config]="btnCancelConfig" (callback)="onCancel()"></smart-button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lean-overlay" (click)="onCancel()"></div>

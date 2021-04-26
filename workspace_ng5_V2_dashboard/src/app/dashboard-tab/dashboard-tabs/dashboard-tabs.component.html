@@ -1,0 +1,33 @@
+<div class="col s12 borderBtmGray tabparent-container dashboard-tabs-container-wrapper">
+    <div class="tabparent">
+      <div class="scroll-wrapper scrollbar-outer relative width100P height100P">
+        <div id="scroll-1" class="scrollbar-outer scroll-content dashboard-tab-wrapper">
+          <div class="dashboard-tab-container">
+            <div class="hide-tab-scrollbar">
+              <div class="hide-tab-scrollbar">
+                <ul class="tabs left dashboard-tab-list">
+                  <li class="tab dashboard-tab cursorPointer" *ngFor="let tab of config;let index = index; trackBy:trackByTabId">
+                    <a id="dashboard-tab-{{tab.tabId}}" class="truncate"
+                      (click)="onDashboardTabChange(tab)" [title]="tab.title" [innerHTML]="tab.title"
+                      [ngClass]="{'activeTab': tab.isActive}"></a>     
+                  </li>
+                </ul>
+                <div class="tabs manage-tabs-container" [style.display]="showManageTabsIcon ? '' : 'none'">
+                  <div class="tab manage-tabs">
+                    <a (click)="openManageTabsPopup()">Manage Tabs</a></div>
+                  </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-container #popupContainer> </ng-container>
+  
+  <ng-template #manageTabsTemplate let-manifestPath="manifestPath" let-config="config">
+    <smart-outlet [path]="manifestPath" [childConfig]="config" (onInitialize)="onInitialize($event)"
+      (onDeinitialize)="onDeinitialize($event)"  (onActivate)="onActivate($event)"></smart-outlet>
+  </ng-template>

@@ -1,0 +1,85 @@
+.manage-tabs-popup{
+    &.modal-popup {
+        z-index: 2003;
+        position: fixed;
+        right: 0;
+        left: 0;
+        top: 89px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 40%;
+        background-color: #fff;
+        box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+        .modal-header {
+            padding: 18px 20px;
+            height: 60px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            .title {
+                font-size: 18px;
+            }
+        }   
+        .modal-footer {
+            padding: 10px 0px;
+            border-top: 1px solid #eee;
+            text-align: right;
+            height: 56px;
+        }
+    }
+    .manage-tabs-popup-wrapper{
+        .manage-tabs-popup-body{
+            .manage-tabs-popup-container{
+                .manage-tabs-title{
+                    font-size: 18px !important;
+                }
+                .manage-tabs-container{
+                    background-color: #fff; 
+                        .manage-tabs-list{
+                            border-bottom: none !important;
+                            max-height: 300px;
+                            overflow-y:auto;
+                            padding: 0px 10px;
+                            .manage-tabs-wrapper{
+                                margin-top: 0px;
+                            }
+                            li{
+                                padding: 10px 0px;
+                                .tab-title{
+                                    white-space: nowrap; 
+                                    max-width: 400px; 
+                                    overflow: hidden;
+                                    text-overflow: ellipsis; 
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    font-size: 13px;
+                                    margin-top: -14px;
+                                   }
+                            }
+                        }
+                 }
+            }
+        }
+    }
+}
+ .lean-overlay {
+    position: fixed;
+    display: block;
+    opacity: 0.5;
+    top: -100px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 125%;
+    width: 100%;
+    background: #000;
+    z-index: 999;
+}
+
+.duplicate-title-error{
+    font-size: smaller;
+    color: red;
+  }
+
+  .tabs-word-length{
+    float: right;
+  }

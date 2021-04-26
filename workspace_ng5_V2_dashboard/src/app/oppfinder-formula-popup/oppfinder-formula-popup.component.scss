@@ -1,0 +1,83 @@
+.oppfinder-formula-popup {
+    transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+    .oppfinder-formula-label{
+        font-size: 16px; 
+    }
+
+    .oppfinder-formula-content{
+        height: 300px;
+        overflow-y: auto;
+        margin: 10px;
+        margin-left: 25px;
+        padding-right: 10px;
+        clear: both;
+    }
+    
+    .oppfinder-formula-footer{
+        height: 43px;
+        padding: 0.6rem 0.7143rem;
+    }
+    
+    ul{
+        padding-left: 40px;
+    }
+
+    ul li{
+        list-style-type: disc;
+    }
+
+    .underline{
+        text-decoration: underline;
+    }
+
+}
+
+.modal-popup {
+    z-index: 2003;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 120px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 45%;
+    background-color: #fff;
+    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+    .modal-header {
+        padding: 18px 20px;
+        height: 60px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        text-transform: uppercase;
+        .title {
+            font-size: 18px;
+        }
+    }
+    .modal-body {
+        padding: 24px;
+    }
+    .modal-footer {
+        padding: 10px 0px;
+        border-top: 1px solid #eee;
+        text-align: right;
+        height: 56px;
+    }
+    .inActive {
+        display: none;
+    }
+    .isRadioEnabled {
+        display: none;
+    }
+}
+
+.lean-overlay {
+    position: fixed;
+    display: block;
+    opacity: 0.5;
+    top: -100px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 125%;
+    width: 100%;
+    background: #000;
+}

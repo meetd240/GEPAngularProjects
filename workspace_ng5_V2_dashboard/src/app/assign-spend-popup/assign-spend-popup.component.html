@@ -1,0 +1,57 @@
+<!--<div class="scrollableModel modal-popup"> -->
+    <div class="scrollableModel-inner assignspenddiv1">
+    <!-- <div class="header-title-container modal-header scrollableModel ">
+        <span class="paddingLeft10">
+            <strong>
+             {{constants.UIMessageConstants.STRING_SHOW_ASSIGNED_SPEND_POPUP}} 
+            </strong>
+        </span>
+    </div>
+
+    <div>
+        <table style="width:100%">
+            <tr>  
+              <th class="assignWidth"> <b>Total Assignable Spend :</b> {{config.TotalSpendDisplay}}</th>
+              <th class="assignWidth"> <b>Total Assigned % :</b> {{TotalAssignPer}}</th>
+              <th class="assignWidth"><b>Total Assigned Amount :</b> {{config.Currency}}{{formatter.format(TotalAssignAmt)}}</th> 
+              </tr>
+            
+           
+          </table>
+
+    </div> -->
+    <div class="contentassign overflowHidden assignspenddiv2">
+        <table style="width:100%">
+        <tr style="background-color: lightgray">
+            <th><b>
+                Suppliers</b> </th>
+            <th><b>
+                Assigned %</b> </th>
+            <th> <b>   
+               Assigned Amount </b> </th>
+           
+        </tr>
+        <tr>  
+            <th class="assignWidth"> <b>Total</b></th>
+            <th class="assignWidth">  {{TotalAssignPer}}</th>
+            <th class="assignWidth">{{config.Currency}}{{formatter.format(TotalAssignAmt)}}</th> 
+            </tr>
+            <tr *ngFor="let item of config.SelectedVAriables; let in = index">
+                <td>{{item[config.SupplierName]}}</td>
+              <td><input class='input-border' type="number" max="4" [(ngModel)]="item['EstPercent']"   (input)="onPercentChange($event.target.value,item)"></td>             
+              <td><input class='input-border' type='number' (input)="onAssignAmountChange($event.target.value,item)" [(ngModel)]="item['Assigned Amount']"></td>
+            </tr>
+        </table>
+    </div>
+    <!-- <div class="footer modal-footer modal-footer-normalScroll paddingBtm10 marginRight10">
+
+            <div  class="right">
+               
+                <smart-button  [config]="btnDoneConfig" (callback)="doneClick()"></smart-button>
+                
+            </div>
+
+    </div> -->
+</div>
+<!-- </div>
+<div class="lean-overlay" (click)="onCancel()"></div> -->

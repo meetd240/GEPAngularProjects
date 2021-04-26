@@ -1,0 +1,8 @@
+<div>
+<ng-container #slicerConfigurationPopUp></ng-container>
+</div>
+
+<ng-template #outletTemplate let-manifestPath="manifestPath" let-config="config">
+    <smart-outlet [path]="manifestPath" [childConfig]="config" (onInitialize)="onInitialize($event)"
+                    (onDeinitialize)="onDeinitialize($event)"  (onActivate)="onActivate($event)"></smart-outlet>
+  </ng-template>

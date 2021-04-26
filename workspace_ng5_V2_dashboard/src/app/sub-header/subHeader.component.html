@@ -1,0 +1,217 @@
+<div *ngIf="subheaderConfig&&subheaderConfig.viewInfoArray&&subheaderConfig.viewInfoArray.length>0">
+  <div id="subheader-element" class="row marginBtm0 extra-nav-wrap" [ngClass]="{'z-depth-0 ': (isFilterOpen == true)}"
+    smart-sticky-header>
+    <div class="col s12">
+
+      <div class="extra-nav-title">
+        <a href="javascript:history.go(-1);"
+          class="left waves-circle waves-effect waves-light extra-nav-title--back marginTop9">
+          <i class="icon small">
+            <svg>
+              <use xlink:href="#icon_Back"></use>
+            </svg>
+          </i>
+        </a>
+        <i class="icon small extra-nav-title--icon">
+          <svg>
+            <use xlink:href="#icon_RfxReq"></use>
+          </svg>
+        </i>
+        <div class="extra-nav-title--text" *ngIf="showDashboardSubHeader">
+          <!-- <smart-dropdown [autoClose]="true" [showDD]="dashboardViewDD"> -->
+          <span class="dd_activator dropdown-button white-text waves-effect" (click)="openDashboardViewsPopup()">
+            <span class="truncate inline-text dashboard-title" [style.overflow]="'hidden'"
+              [style.white-space]="'nowrap'" [style.max-width.px]="550"
+              title="{{subheaderConfig.dashboardName}}">{{subheaderConfig.dashboardName}} </span>
+            <a class="white-text paddingLeft6"
+              [style.display]="_appConstants.userPreferences.moduleSettings.showViewSelectionOption && showViewPopupInNextGen? '':'none'">
+              <i class="icon iconSmall">
+                <svg>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_DropArrow"></use>
+                </svg>
+              </i>
+            </a>
+          </span>
+          <span id="slideCopy" class="dd_activator dropdown-button white-text waves-effect"
+            [style.display]="_appConstants.userPreferences.moduleSettings.showCopyViewUrl ? '':'none'"
+            [hidden]="!subheaderConfig.showDashboardOnEmptyWidget">
+            <a (click)="copyDashboardUrl()" data-automation-id="copy" smartTooltip [config]="copyDashboardViewUrlConfig"
+              class="waves-circle waves-effect waves-light white-text paddingLeft6">
+              <i class="icon iconSmall">
+                <svg>
+                  <use xlink:href="#icon_Copy"></use>
+                </svg>
+              </i>
+            </a>
+          </span>
+
+          <!-- <ul class='dd_data dropdown-content dashboardDropDown' id="dashboardViewsDropdown">
+              <li *ngFor="let viewInfo of subheaderConfig.viewInfoArray;let viewIndex = index;trackBy viewIndex">
+                <a (click)="onChange(viewInfo,viewIndex)" class="cursorPointer justify-text"
+                  title="{{viewInfo.viewName}}">{{viewInfo.viewName}}
+                  <div *ngIf="!viewInfo.isOwn" class="fontSize12 notAvailable-status-text">Standard View</div>
+                  <div *ngIf="viewInfo.isOwn" class="fontSize12 notAvailable-status-text shared-users"> My View
+                    <span [hidden]="!viewInfo.isStandard">
+                      &nbsp;(Added to Standard View)
+                    </span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </smart-dropdown> -->
+
+        </div>
+        <div class="extra-nav-title--text" *ngIf="!showDashboardSubHeader">
+          <span class='white-text waves-effect'>
+          <span class="truncate inline-text dashboard-title" [style.overflow]="'hidden'"
+          [style.white-space]="'nowrap'" [style.max-width.px]="550"
+          title="{{subheaderConfig.dashboardName}}">{{subheaderConfig.dashboardName}} </span>
+          </span>
+        </div>
+      </div>
+
+      <ul class="right extra-nav-right-icon right-panel">
+        <li class="extra-nav-icon">
+          <a (click)="refreshWidget()"
+            [style.display]="_appConstants.userPreferences.moduleSettings.showRefreshViewOption ? '':'none'"
+            data-automation-id="refreshWidget" smartTooltip [config]="refreshWidgetTooltipConfig"
+            class="waves-circle waves-effect waves-light">
+            <i class="icon iconSmall"><svg>
+                <use xlink:href="#icon_Reset"></use>
+              </svg></i>
+          </a>
+        </li>
+        <!-- <li class="extra-nav-icon"
+          [style.display]="_appConstants.userPreferences.moduleSettings.showAddWidgetIconOption && _dashboardCommService.listofDistinctWidgetDataSource.length == 1 && (subheaderConfig.selectedDashboard.isOwn || isBidInsights) && subheaderConfig.HasUserVisionEditActivity ? '' : 'none'">
+          <a (click)="openReportGenerationPage()" data-automation-id="AddWidget" smartTooltip
+            [config]="addWidgetTooltipConfig" class="waves-circle waves-effect waves-light">
+            <i class="icon iconSmall"><svg>
+                <use xlink:href="#icon_CirclePlus"></use>
+              </svg></i>
+          </a>
+        </li> -->
+        <li class="extra-nav-icon"
+          [style.display]="_appConstants.userPreferences.moduleSettings.showAddWidgetIconOption  && ((subheaderConfig.selectedDashboard && subheaderConfig.selectedDashboard.isOwn) || isBidInsights) && subheaderConfig.HasUserVisionEditActivity ? '' : 'none'">
+          <smart-dropdown [position]="'left'" [autoClose]="true">
+           
+            <a  class='dd_activator dropdown-button white-text waves-circle waves-effect waves-light extra-nav-title--back left-panel marginTop9'>
+            <i class="icon iconSmall"><svg>
+                <use xlink:href="#icon_CirclePlus"></use>
+              </svg></i>
+          </a>
+            <!-- <a data-automation-id="{{list.dataAutomationID}}"  
+            class='dd_activator dropdown-button white-text waves-circle waves-effect waves-light extra-nav-title--back left-panel marginTop9'>
+            <i class="icon iconSmall">
+              <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_CirclePlus"></use>
+              </svg>
+            </i>
+          </a> -->
+            <ul id="add-to-dashboard-DD" class='dd_data dropdown-content add-to-dashboard-dropdown'>
+              <li *ngFor="let list of _dashboardCommService.addToDashboardList;let i=index;trackBy : id"
+                (click)="addToDashoard(list,$event)">
+                <a class="truncate cursorPointer" [title]="list.title" [innerHtml] = "list.title" *ngIf="list.showOption">
+                  <!--  add data-automation-id  -->
+                </a>
+              </li>
+            </ul>
+          </smart-dropdown>
+        </li>
+        <li class="extra-nav-icon"
+          [style.display]="_dashboardCommService.listofDistinctWidgetDataSource.length == 1 && _appConstants.userPreferences.moduleSettings['showSlicerFilter'] ? '' : 'none'"
+          [hidden]="!subheaderConfig.showDashboardOnEmptyWidget">
+          <a (click)="openSlicerConfiguration()" data-automation-id="slicer" smartTooltip [config]="slicerToolTip"
+            class="waves-circle waves-effect waves-light">
+            <i class="icon small">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M1 9h6v1H1zM1 12h7v1H1zM1 18h9v1H1zM1 15h9v1H1zM7 4l6 9v6l4 1v-7l6-9H7zm9.2 8.4l-.2.3v6l-2-.5v-5.5l-.2-.3L8.9 5h12.3l-5 7.4zM1 6h4v1H1z"/>
+              </svg>
+            </i>
+          </a>
+        </li>
+        <li class="extra-nav-icon addsharecounter" [style.display]="_appConstants.userPreferences.moduleSettings.showSharedDashboardViewPopup && subheaderConfig && subheaderConfig.selectedDashboard  && subheaderConfig.selectedDashboard.isOwn&& !subheaderConfig.selectedDashboard.isStandard && subheaderConfig.HasUserVisionEditActivity ? '' : 'none'">
+          <a (click)="openShareDashboardPopup()" data-automation-id="shareDashboardPopup" smartTooltip [config]="shareTooltipConfig"
+             class="waves-circle waves-effect waves-light">
+             <i class="icon small">
+               <svg>
+                 <use xlink:href="#icon_Share"></use>
+               </svg>
+             </i>
+           </a>
+           <span class="counter_circle"><label>{{_dashboardCommService.sharedUserCount}}</label></span>
+         </li>
+        <!-- <li class="extra-nav-icon"
+          [style.display]="_appConstants.userPreferences.moduleSettings.showFilterIconOption ? '':'none'"
+          [hidden]="!subheaderConfig.showDashboardOnEmptyWidget">
+          <a (click)="openFilter()" data-automation-id="filter" smartTooltip [config]="fullScreenTooltipConfig"
+            class="waves-circle waves-effect waves-light">
+            <i class="icon small">
+              <svg>
+                <use xlink:href="#icon_Filter"></use>
+              </svg>
+            </i>
+          </a>
+        </li> -->
+        <span *ngIf="headerKebabMenu.showKebabMenu">
+          <smart-dropdown [position]="'left'" [autoClose]="true">
+            <a smartTooltip [config]="actionTooltipConfig"
+              class='dd_activator dropdown-button white-text waves-circle waves-effect waves-light extra-nav-title--back left-panel marginTop9'>
+              <i class="icon iconSmall">
+                <svg>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_MenuKebab"></use>
+                </svg>
+              </i>
+            </a>
+            <ul id="sub-header-kebab-DD" class='dd_data dropdown-content'>
+              <li *ngFor="let eachAction of headerKebabMenu.options;let i=index;trackBy : trackByMenuOptions"
+                (click)="subHeaderMenuClick(eachAction,$event)">
+                <a [id]="eachAction.id" class="cursorPointer">
+                  {{eachAction.export}}
+                  <span *ngIf="eachAction.expand" class="right gray-text">
+                    <i class="icon iconSmall transform-90">
+                      <svg>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_UpChevron"></use>
+                      </svg>
+                    </i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </smart-dropdown>
+        </span>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- <span *ngIf="headerKebabMenu.showKebabMenu">
+    <div [hidden]='headerKebabMenu.expanded' id="exportDD" class="absolute exportOptions">
+      <ul class="margin0">
+        <li *ngFor="let type of headerKebabMenu.options" class="export-type">
+          <a class="padding10 gray-text" (click)="exportOptionsClick(type)">{{type}}</a>
+        </li>
+      </ul>
+    </div>
+  </span> -->
+
+
+  <div class="task-frame" id="subheader-filterContainer" [ngClass]="{'top-480': (isFilterOpen == false)}">
+    <!-- <router-outlet></router-outlet> -->
+    <div class="filter-wrapper">
+      <ng-container #globalFilter></ng-container>
+    </div>
+
+  </div>
+</div>
+<ng-container #viewRenamePopup>
+</ng-container>
+
+<ng-container #sharedDashBoardPopup>
+</ng-container>
+
+<ng-container #popupContainer>
+</ng-container>
+<ng-template #outletTemplate let-manifestPath="manifestPath" let-config="config">
+  <smart-outlet [path]="manifestPath" [childConfig]="config"  (onInitialize)="onInitialize($event)"
+                    (onDeinitialize)="onDeinitialize($event)"  (onActivate)="onActivate($event)"></smart-outlet>
+</ng-template>

@@ -1,0 +1,143 @@
+<ng-template [ngIf]="cardPagination.showPagination">
+  <div class="floatL fontSize12  footer pagination-container paddingTop0 paddingLeft0 marginBtm10"
+    [style.display]="!config.config.isAccessibleReport ? 'none' : 'block' "
+    [ngClass]="{'marginLeft30Per':config.config.isExpandedGraph,'bottomForPaginationOnFullscreen': config.isFullscreen}">
+    <div class="text-black64 pagination-title right"
+      [ngClass]="{'marginRight16' : config.config.isExpandedGraph &&config.config.reportDetails.reportViewType==0}">
+      <span [style.display]="cardPagination.showRowCountIndicator ? '':'none'">
+        {{constants.UIMessageConstants.STRING_Showing}}
+        {{
+           (
+            cardPagination.pageSize * cardPagination.currentPage+1 < cardPagination.totalItems ?
+            cardPagination.pageSize * cardPagination.currentPage+1 : cardPagination.totalItems
+           )  - cardPagination.currentPage
+        }} -
+        {{
+      (cardPagination.currentPage+1) * cardPagination.pageSize-1  <  cardPagination.totalItems ?
+        (
+          (cardPagination.currentPage+1) * cardPagination.pageSize-1
+        ) - cardPagination.currentPage
+        : cardPagination.totalItems
+        }} {{constants.UIMessageConstants.STRING_of}} {{cardPagination.totalItems}}
+        {{constants.UIMessageConstants.STRING_rows}}
+      </span>
+      <span>
+        <span class="marginLeft5">
+          <span [ngClass]="{'disabled':  !cardPagination.isPrev}"
+            class="text-black64 cursorPointer marginLeft2 pagination-arrow-title" (click)="previousClick()" smartTooltip [config]="previousTooltipConfig">&lsaquo;</span>
+          <span class="text-black64 fontSize14">
+            <span [ngClass]="{'disabled':  !cardPagination.isPrev}" class="cursorPointer"
+              (click)="previousClick()">{{cardPagination.currentPage+1}}</span>
+            <span style="padding-left: 1px;padding-right: 1px;">&#x2f;</span>
+            <span [ngClass]="{'disabled':  !cardPagination.isNext}" class="cursorPointer"
+              (click)="nextClick()">{{cardPagination.totalPages}}</span>
+          </span>
+        </span>
+        <span [ngClass]="{'disabled':  !cardPagination.isNext}"
+          class=" text-black64 cursorPointer marginRight25 pagination-arrow-title" (click)="nextClick()" smartTooltip
+          [config]="nextTooltipConfig">&rsaquo;
+        </span>
+      </span>
+    </div>
+  </div>
+</ng-template>
+
+
+<div class="footerIconContainer" [ngClass]="{'footerIconContainerOnFullscreen' : config.isFullscreen}">
+   <!--Commenting linked to dashboard icon as per UX suggestion-->
+    <!-- <span [hidden]="!config.config.isLinkedToDashboard">
+      <a class='dropdown-button waves-effect marginRight5' style="cursor: arrow !important;" smartTooltip
+               [config]="linkedToDashboardConfig">
+        <i class="icon iconSmall grey-text">
+          <svg>
+            <path
+                  d="M13 2v13h8V2h-8zm7 12h-6V3h6v11zM3 2v7h8V2H3zm1 1h6v5H4V3zM11 10v5h-1v-4H4v10h3v1H3V10z M8 18.5c0 1.4 1.1 2.5 2.5 2.5h1c1.2 0 2.2-.9 2.4-2H15c.2 1.1 1.2 2 2.4 2h1c1.4 0 2.5-1.1 2.5-2.5S19.8 16 18.3 16h-1c-1.2 0-2.2.9-2.4 2h-1.1c-.2-1.1-1.2-2-2.4-2h-1C9 16 8 17.1 8 18.5zm9.9 0c0-.3-.2-.5-.5-.5H16c.2-.6.7-1 1.4-1h1c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5h-1c-.6 0-1.2-.4-1.4-1h1.4c.3 0 .5-.2.5-.5zm-9 0c0-.8.7-1.5 1.5-1.5h1c.6 0 1.2.4 1.4 1h-1.4c-.3 0-.5.2-.5.5s.2.5.5.5h1.4c-.2.6-.7 1-1.4 1h-1c-.8 0-1.5-.7-1.5-1.5z" />
+          </svg>
+          </i>
+          </a>
+    </span> -->
+
+  <!-- link to report icon -->
+  <div class="LinkCardIcon marginRight7"
+    [style.display]="config.config.WidgetDataRecordLength && config.config.isLinkReport && config.config.isOwn && _appConstants.userPreferences.moduleSettings.showUnlinkLinkReportOption ? 'inline': 'none' ">
+    <a class='waves-effect' smartTooltip [config]="linkedReportConfig">
+      <i class="icon iconSmall grey-text">
+        <svg class="dashboardCardFooterIcons">
+          <use xmlns:xlink="http: //www.w3.org/1999/xlink" xlink:href="#icon_Link"> </use>
+        </svg>
+      </i>
+    </a>
+  </div>
+
+  <!-- dashboard card title info icon -->
+  <ng-template [ngIf]="config.graphTitle?.length">
+    <div class="cardGraphTitle" [style.display]="config.config.WidgetDataRecordLength  ? 'inline': 'none' ">
+      <smart-infotip [config]="graphTitleConfig">
+        <a class='waves-effect'>
+          <i class="icon iconSmall">
+            <svg class="dashboardCardFooterIcons">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_dashboardCardInfo"></use>
+            </svg>
+          </i>
+        </a>
+      </smart-infotip>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template [ngIf]="breadCrumbList.length > 0 && uiConfig.showCurrentlyViewing">
+  <div class="breadCrumbContainer" id="breadCrumb-container-{{config.config.cardId}}"
+    [ngClass]="{'breadCrumbContainerOnFullscreen' : config.isFullscreen , 'breadcrumbLeftOnNoLinkReport' : !config.config.isLinkReport}">
+
+    <!-- breadcrumb list container -->
+    <div class="breadCrumbListWrapper">
+      <span class="cardIconSeperator" [style.display]="config.config.WidgetDataRecordLength && config.graphTitle?.length ? 'inline-block': 'none' "> | </span>
+      <div class="currentlyViewing fontSize12 displayInlineBlock" *ngIf="config.config.WidgetDataRecordLength">
+        Currently Viewing:
+      </div>
+
+      <ng-template [ngIf]="breadCrumbUIConfig.slicedBreadcrumbList.length > 0">
+
+        <div class="text-black64" style="display: inline;">
+          <smart-dropdown position="top">
+            <span class="dd_activator dropdown-button white-text waves-effect">
+              <span class="breadcrumbDropdown">... </span>
+              <span class="breadcrumbSeperator">/</span>
+            </span>
+
+            <ul class='dd_data dropdown-content'>
+              <li *ngFor="let slicedbreadcrumb of breadCrumbUIConfig.slicedBreadcrumbList;let _breIndex = index;trackBy : _breIndex">
+                <a class="cursorPointer truncate" (click)="onBreadcrumbSelect(slicedbreadcrumb)"
+                  title="{{slicedbreadcrumb.ro_data}}">
+                  {{slicedbreadcrumb.ro_data}}
+                </a>
+              </li>
+            </ul>
+          </smart-dropdown>
+        </div>
+      </ng-template>
+
+      <div class="breadcrumbListContainer" *ngIf="config.config.WidgetDataRecordLength" id="breadcrumb-list-container-{{config.config.cardId}}">
+
+        <!-- <div style="height: 16px;" *ngFor="let obj of breadCrumbUIConfig.activeBreadCrumbList; let index=index;trackBy : index;"> -->
+        <div class="text-black64 fontSize12 truncate breadcrumbListItem cursorPointer " *ngFor="let obj of breadCrumbUIConfig.activeBreadCrumbList; let index=index;trackBy : index;">
+          <a class="breadcrumb truncate displayInlineBlock" (click)="onBreadcrumbSelect(obj)"
+            title="{{obj.ro_data}}"  [ngClass]="{'plain-breadcrum':breadCrumbUIConfig.activeBreadCrumbList.length-1==index}">{{obj.ro_data}}</a>
+          <div *ngIf="breadCrumbUIConfig.activeBreadCrumbList.length-1!=index" class="text-black64 breadcumbItemSeperator">/
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+
+    </div>
+
+    <div class="drillUpContainer" *ngIf="breadCrumbList.length > 1" smartTooltip [config]="drillUpToolTipConfig">
+      <i class="icon iconSmall blue-text" (click)="onDrillUp()">
+        <svg class="dashboardCardFooterIcons">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Drillup"></use>
+        </svg>
+      </i>
+
+    </div>
+  </div>
+</ng-template>

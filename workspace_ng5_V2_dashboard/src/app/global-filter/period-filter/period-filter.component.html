@@ -1,0 +1,474 @@
+<div class="row marginBtm0 height-auto PeriodFilterWrapper"
+  [ngClass]="{'addedToSlicer': periodFilterObj.FilterIdentifier == 3}">
+  <div class="col s12 marginTop10">
+    <!-- <div class="left marginRight30 redio-chanel">
+            <smart-radio class="col marginTop15" [config]="FilterByConfig" [(modelData)]="periodFilterObj.filterByModel"
+                (onChange)="onChangeFilterBy(periodFilterObj,filterByModel.field)"></smart-radio>
+        </div> -->
+    <div class="left marginRight30 redio-chanel">
+      <input id="filterBySel" type="radio" class="with-gap" [(ngModel)]="periodFilterObj.FilterBy" [value]="1"
+        (change)="onChangeFilterBy(periodFilterObj,1)" />
+      <label for="filterBySel">Filter by Dynamic Period</label>
+    </div>
+    <div class="left marginRight30 redio-chanel">
+      <input id="filterByCnd" type="radio" class="with-gap" [(ngModel)]="periodFilterObj.FilterBy" [value]="2"
+        (change)="onChangeFilterBy(periodFilterObj,2)" />
+      <label for="filterByCnd">Filter by Condition</label>
+    </div>
+  </div>
+
+  <!-- Date Filter Start -->
+  <div *ngIf="periodFilterObj.FilterType == constants.FilterType.Date">
+
+    <div class="dynamic-date-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterBySelection">
+
+      <smart-radio style="margin-left: 11px;" class="col marginTop15" [config]="periodDate"
+        [(modelData)]="periodFilterObj.FilterRadioOperator"
+        (onChange)="dateRadioChange(periodFilterObj,periodFilterObj.FilterRadioOperator.field)"></smart-radio>
+
+      <smart-numeric style="width: 10%;margin-top: 87px;margin-left: -62px;"
+        [config]="{ label:'', attributes: {maxLength: 3}, data: 'rollingDateValue' }"
+        class="col s6 line-height-manager rolling-date"
+        (change)="onValueKeypress(periodFilterObj,periodFilterObj.RollingDateModel.rollingDateValue)"
+        [(modelData)]="periodFilterObj.RollingDateModel"
+        *ngIf="(periodFilterObj.FilterRadioOperator.field.op == constants.ReportObjectOperators.Rolling_Days)">
+      </smart-numeric>
+
+      <smart-numeric style="width: 10%; margin-top: 109px;margin-left: -70px;"
+        [config]="{ label:'', attributes: {maxLength: 3}, data: 'nextDateValue' }"
+        class="col s6 line-height-manager next-date"
+        (change)="onValueKeypress(periodFilterObj,periodFilterObj.NextDateModel.nextDateValue, index)"
+        [(modelData)]="periodFilterObj.NextDateModel"
+        *ngIf="(periodFilterObj.FilterRadioOperator.field.op == constants.ReportObjectOperators.Next_Days)">
+      </smart-numeric>
+
+      <smart-date style="width: 11%;margin-top: 139px;margin-left: -13px;"
+        class="col s6 line-height-manager current-date"
+        *ngIf="(periodFilterObj.FilterRadioOperator.field.op == constants.ReportObjectOperators.From_DateTillToday)"
+        [config]='DateRadioConfig' [(modelData)]="periodFilterObj.DateRadioModel"
+        (onChange)='onchangeDateFilter(periodFilterObj,periodFilterObj.FilterRadioOperator.field.op)'>
+      </smart-date>
+
+    </div>
+
+
+    <div class="row date-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterByCondition">
+      <div class="col s3 line-height-manager date-filter-select"
+        style="padding-left: 26px; margin-top: 6px;height: 200px;">
+        <!-- <smart-select [config]="filterByDateOpts" [(ngModel)]="periodFilterObj.FilterConditionOperator" (onChange)="onChangeFilterByOp(periodFilterObj,periodFilterObj.FilterConditionOperator.op, index)"></smart-select> -->
+        <smart-select id="resize-caret" [config]="filterByDateOpts" [(modelData)]="periodFilterObj"
+          (onChange)="onChangeFilterByOp(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+        </smart-select>
+      </div>
+
+      <div class="col s3 line-height-manager" *ngIf="periodFilterObj.FilterConditionOperator.op == constants.ReportObjectOperators.Is ||
+                       periodFilterObj.FilterConditionOperator.op == constants.ReportObjectOperators.IsNot ||
+                       periodFilterObj.FilterConditionOperator.op == constants.ReportObjectOperators.Before ||
+                       periodFilterObj.FilterConditionOperator.op == constants.ReportObjectOperators.After">
+        <smart-date class="col s6 line-height-manager" [config]='DateConfig' [(modelData)]="periodFilterObj.DateModel"
+          (onChange)='onchangeDateFilter(periodFilterObj,periodFilterObj.FilterConditionOperator.op)'>
+        </smart-date>
+      </div>
+
+      <div class="col s3 line-height-manager"
+        *ngIf="periodFilterObj.FilterConditionOperator.op == constants.ReportObjectOperators.Between">
+        <!-- <div class="row">
+                    <smart-date class="line-height-manager" [config]='DateConfig'
+                        [(modelData)]="periodFilterObj.currentdateModel"
+                        (onChange)='onchangeDateFilter(periodFilterObj.FilterConditionOperator.op,index)'></smart-date>
+                    <smart-date class="line-height-manager" [config]='DateConfig'
+                        [(modelData)]="periodFilterObj.currentdateModel"
+                        (onChange)='onchangeDateFilter(periodFilterObj.FilterConditionOperator.op,index)'></smart-date>
+                </div> -->
+        <div class="FromLabel"> From</div>
+        <smart-date class="col s6 line-height-manager" [config]='FromDateConfig'
+          [(modelData)]="periodFilterObj.FromDateModel"
+           (onChange)='onchangeDateFilter(periodFilterObj,periodFilterObj.FilterConditionOperator.op)'>
+        </smart-date>
+        <div class="ToLabel">To</div>
+        <smart-date class="col s6 line-height-manager" [config]='ToDateConfig'
+          [(modelData)]="periodFilterObj.ToDateModel"
+           (onChange)='onchangeDateFilter(periodFilterObj,periodFilterObj.FilterConditionOperator.op)'>
+        </smart-date>
+      </div>
+    </div>
+  </div>
+  <!-- Date Filter End -->
+  <!-- Year Filter start -->
+
+  <div class="row reportDate year-filter" *ngIf="periodFilterObj.FilterType == constants.FilterType.Year">
+
+    <div class="dynamic-year-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterBySelection">
+      <!-- <smart-radio class="col marginTop15 year-radio" [config]="YearRadioConfig"
+                [(modelData)]="periodFilterObj.FilterRadioOperator"
+                (onChange)="dateRadioChange(periodFilterObj,periodFilterObj.FilterRadioOperator.field)"></smart-radio> -->
+
+      <smart-radio class="col marginTop15 year-radio" [config]="YearRadioConfig"
+        [(modelData)]="periodFilterObj.YearModel" (onChange)="dateRadioChange(periodFilterObj)"></smart-radio>
+
+      <smart-numeric [config]="periodFilterObj.RollingYear" class="col s1 line-height-manager rolling-year"
+        (change)="onValueKeypress(periodFilterObj,periodFilterObj.RollingYearsModel.rollingYearValue)"
+        [(modelData)]="periodFilterObj.RollingYearsModel"
+        *ngIf="(periodFilterObj.YearModel.field.op == constants.ReportObjectOperators.Rolling_Years)">
+      </smart-numeric>
+
+      <smart-numeric [config]="periodFilterObj.NextYears" class="col s1 line-height-manager next-year"
+        (change)="onValueKeypress(periodFilterObj,periodFilterObj.NextYearsModel.nextYearValue)"
+        [(modelData)]="periodFilterObj.NextYearsModel"
+        *ngIf="(periodFilterObj.YearModel.field.op == constants.ReportObjectOperators.Next_Years)">
+      </smart-numeric>
+
+
+      <!-- <smart-select id="resize-caret" class="col s2 line-height-manager current-year"
+                [config]="periodFilterObj.BeginningOfTheYear"
+                *ngIf="(periodFilterObj.YearModel.field.op ==  constants.ReportObjectOperators.From_YearTillToday)"
+                [(ngModel)]="periodFilterObj.BeginningOfTheYear.selectedOption"
+                (change)="updateYearDropdown(periodFilterObj)">
+            </smart-select> -->
+    </div>
+
+    <div class="row condition-year-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterByCondition">
+      <div class="col s3 line-height-manager year-filter-select">
+        <smart-select id="resize-caret" [config]="filterByYearOpts" [(modelData)]="periodFilterObj"
+          (onChange)="onChangeFilterByOp(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+        </smart-select>
+      </div>
+
+      <!-- select year popup start -->
+      <div *ngIf="periodFilterObj.FilterConditionOperator.op == 2 || periodFilterObj.FilterConditionOperator.op == 3"
+        class="col s6 m4 marginBtm15 input-field select-year">
+        <div class="select-year-label" *ngIf='periodFilterObj.showLabel'>Select Year</div>
+        <div class="selected-year-list"
+          [ngClass]="{'margin0':periodFilterObj.showLabel ,'marginTop20': !periodFilterObj.showLabel} "> <a
+            href="javascript:void(0)" (click)="openSelectYearPopup()"> {{periodFilterObj.SelectedYear}} </a>
+        </div>
+      </div>
+      <!-- select year popup end-->
+
+      <div class="col s4 line-height-manager"
+        *ngIf="periodFilterObj.FilterConditionOperator.op == 20 || periodFilterObj.FilterConditionOperator.op == 21">
+        <smart-select id="resize-caret" class="col s6 line-height-manager" [config]="periodFilterObj.yearDropdown"
+          [(modelData)]="periodFilterObj.yearDropdown" (onChange)="updateYearDropdown(periodFilterObj)">
+        </smart-select>
+      </div>
+      <div class="col s4 line-height-manager" *ngIf="periodFilterObj.FilterConditionOperator.op == 14">
+        <smart-select id="resize-caret" class="col s6 line-height-manager" [config]="periodFilterObj.FromyearDropdown"
+          [(modelData)]="periodFilterObj.FromyearDropdown.selectedRangeOptions"
+          (onChange)="updateYearDropdown(periodFilterObj,'from')">
+        </smart-select>
+        <smart-select id="resize-caret" class="col s6 line-height-manager" [config]="periodFilterObj.ToyearDropdown"
+          [(modelData)]="periodFilterObj.ToyearDropdown.selectedRangeOptions"
+          (onChange)="updateYearDropdown(periodFilterObj,'to')">
+        </smart-select>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Year Filter end -->
+
+  <ng-container #periodFilterContainer></ng-container>
+
+
+  <ng-template #quarterYearFilterTemplate>
+
+    <!-- Quarter Year Filter start-->
+    <div class="row reportDate year-filter">
+
+      <div class="dynamic-year-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterBySelection">
+        <!-- <smart-radio class="col marginTop15 year-radio" [config]="QuarterYearRadioConfig"
+        [(modelData)]="periodFilterObj.FilterRadioOperator"
+        (onChange)="dateRadioChange(periodFilterObj,periodFilterObj.FilterRadioOperator.field)"></smart-radio> -->
+
+        <smart-radio class="col marginTop15 year-radio" [config]="QuarterYearRadioConfig"
+          [(modelData)]="periodFilterObj.QuarterYearModel" (onChange)="dateRadioChange(periodFilterObj)"></smart-radio>
+
+        <smart-numeric [config]="periodFilterObj.RollingQuarterYear" class="col s1 line-height-manager rolling-year"
+          (change)="onValueKeypress(periodFilterObj,periodFilterObj.RollingQuarterYearsModel.rollingQuarterYearValue)"
+          [(modelData)]="periodFilterObj.RollingQuarterYearsModel"
+          *ngIf="(periodFilterObj.QuarterYearModel.field.op == constants.ReportObjectOperators.Rolling_Quarters)">
+        </smart-numeric>
+
+        <smart-numeric [config]="periodFilterObj.NextQuarterYears" class="col s1 line-height-manager next-year"
+          (change)="onValueKeypress(periodFilterObj,periodFilterObj.NextQuarterYearsModel.nextQuarterYearValue)"
+          [(modelData)]="periodFilterObj.NextQuarterYearsModel"
+          *ngIf="(periodFilterObj.QuarterYearModel.field.op == constants.ReportObjectOperators.Next_Quarters)">
+        </smart-numeric>
+
+        <smart-numeric [config]="periodFilterObj.PreviousQuarterYear"
+          class="col s1 line-height-manager previous-quarter"
+          (change)="onValueKeypress(periodFilterObj,periodFilterObj.PreviousQuarterYearsModel.previousQuarterYearValue)"
+          [(modelData)]="periodFilterObj.PreviousQuarterYearsModel"
+          *ngIf="(periodFilterObj.QuarterYearModel.field.op == constants.ReportObjectOperators.Previous_Quarter)">
+        </smart-numeric>
+
+        <smart-select id="resize-caret" class="col s2 line-height-manager current-year"
+          [config]="periodFilterObj.BeginningOfTheQuarter"
+          *ngIf="(periodFilterObj.QuarterYearModel.field.op ==  constants.ReportObjectOperators.From_QuarterTillToday)"
+          [(modelData)]="periodFilterObj.BeginningOfTheQuarter"
+          (onChange)="updateYearDropdown(periodFilterObj,'from_quarter')">
+        </smart-select>
+
+        <smart-select id="resize-caret" class="col s2 line-height-manager current-year"
+          [config]="periodFilterObj.BeginningOfTheQuarterYear"
+          *ngIf="(periodFilterObj.QuarterYearModel.field.op ==  constants.ReportObjectOperators.From_QuarterTillToday)"
+          [(modelData)]="periodFilterObj.BeginningOfTheQuarterYear"
+          (onChange)="updateYearDropdown(periodFilterObj,'from_quarter')">
+        </smart-select>
+      </div>
+
+
+
+      <!--Filter By Condition-->
+      <div class="row condition-year-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterByCondition">
+        <div class="col s3 line-height-manager year-filter-select">
+          <smart-select id="resize-caret" [config]="filterByQuarterYearOpts" [(modelData)]="periodFilterObj"
+            (onChange)="onChangeFilterByOp(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+          </smart-select>
+        </div>
+        <div *ngIf="(periodFilterObj.FilterConditionOperator.op != 14) && 
+            periodFilterObj.sourceQuarterDropDown.options.length > 0"
+          class="col s3 m2 marginBtm15 input-field select-year">
+          <smart-select id="resize-caret" [config]="periodFilterObj.sourceQuarterDropDown"
+            [(modelData)]="periodFilterObj.sourceQuarterDropDown"
+            (onChange)="updateQuarterDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+          </smart-select>
+        </div>
+        <div *ngIf="(periodFilterObj.FilterConditionOperator.op != 14) && 
+            periodFilterObj.sourceQuarterDropDown.options.length > 0"
+          class="col s3 m2 marginBtm15 input-field select-year">
+          <smart-select id="resize-caret" [config]="periodFilterObj.QuarteryearDropdown"
+            [(modelData)]="periodFilterObj.QuarteryearDropdown"
+            (onChange)="updateQuarterDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+          </smart-select>
+        </div>
+
+        <div class="col s8 line-height-manager" *ngIf="periodFilterObj.FilterConditionOperator.op == 14">
+          <smart-select id="resize-caret" class="col s2 line-height-manager"
+            [config]="periodFilterObj.FromQuarterDropdown"
+            [(modelData)]="periodFilterObj.FromQuarterDropdown.selectedRangeOptions"
+            (onChange)="updateQuarterDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+          </smart-select>
+          <smart-select id="resize-caret" class="col s2 line-height-manager"
+            [config]="periodFilterObj.FromQuarteryearDropdown"
+            [(modelData)]="periodFilterObj.FromQuarteryearDropdown.selectedRangeOptions"
+            (onChange)="updateQuarterDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+          </smart-select>
+          <smart-select id="resize-caret" class="col s2 line-height-manager"
+            [config]="periodFilterObj.ToQuarterDropdown"
+            [(modelData)]="periodFilterObj.ToQuarterDropdown.selectedRangeOptions"
+            (onChange)="updateQuarterDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+          </smart-select>
+          <smart-select id="resize-caret" class="col s2 line-height-manager"
+            [config]="periodFilterObj.ToQuarteryearDropdown"
+            [(modelData)]="periodFilterObj.ToQuarteryearDropdown.selectedRangeOptions"
+            (onChange)="updateQuarterDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+          </smart-select>
+        </div>
+      </div>
+
+    </div>
+    <!-- Quarter Year Filter end-->
+  </ng-template>
+
+
+  <ng-template #quarterFilterTemplate>
+    <!-- Quarter Filter start-->
+    <div class="row reportDate year-filter">
+
+      <div class="dynamic-year-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterBySelection">
+
+        <smart-radio class="col marginTop15 year-radio" [config]="QuarterYearRadioConfig"
+          [(modelData)]="periodFilterObj.QuarterYearModel" (onChange)="dateRadioChange(periodFilterObj)"></smart-radio>
+
+        <smart-numeric [config]="periodFilterObj.NextQuarterYears" class="col s1 line-height-manager next-quarter"
+          (change)="onValueKeypress(periodFilterObj,periodFilterObj.NextQuarterYearsModel.nextQuarterYearValue)"
+          [(modelData)]="periodFilterObj.NextQuarterYearsModel"
+          *ngIf="(periodFilterObj.QuarterYearModel.field.op == constants.ReportObjectOperators.Next_Quarters)">
+        </smart-numeric>
+
+      </div>
+
+
+
+      <!--Filter By Condition-->
+
+      <div class="row condition-year-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterByCondition">
+        <div class="col s3 line-height-manager year-filter-select">
+          <smart-select id="resize-caret" [config]="filterByQuarterYearOpts" [(modelData)]="periodFilterObj"
+            (onChange)="onChangeFilterByOp(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+          </smart-select>
+        </div>
+
+        <!-- select quarter popup start -->
+        <div *ngIf="(periodFilterObj.FilterConditionOperator.op == 2 || periodFilterObj.FilterConditionOperator.op == 3) &&
+      periodFilterObj.sourceQuarterDropDown.options.length > 0" class="col s6 m4 marginBtm15 input-field select-year">
+          <div class="select-year-label" *ngIf='periodFilterObj.showLabel'>Select Quarter</div>
+          <div class="selected-year-list"
+            [ngClass]="{'margin0':periodFilterObj.showLabel ,'marginTop20': !periodFilterObj.showLabel} "> <a
+              href="javascript:void(0)" (click)="openSelectQuarterPopup()"> {{periodFilterObj.SelectedYear}} </a>
+          </div>
+        </div>
+        <!-- select quarter popup end-->
+
+
+      </div>
+
+    </div>
+    <!-- Quarter Filter end-->
+  </ng-template>
+
+
+  <ng-template #monthYearFilterTemplate>
+      <!-- Month Year Filter start-->
+      <div class="row reportDate year-filter">
+  
+        <div class="dynamic-year-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterBySelection">
+          <!-- <smart-radio class="col marginTop15 year-radio" [config]="QuarterYearRadioConfig"
+          [(modelData)]="periodFilterObj.FilterRadioOperator"
+          (onChange)="dateRadioChange(periodFilterObj,periodFilterObj.FilterRadioOperator.field)"></smart-radio> -->
+  
+          <smart-radio class="col marginTop15 year-radio" [config]="QuarterYearRadioConfig"
+            [(modelData)]="periodFilterObj.QuarterYearModel" (onChange)="dateRadioChange(periodFilterObj)"></smart-radio>
+  
+          <smart-numeric [config]="periodFilterObj.RollingQuarterYear" class="col s1 line-height-manager rolling-year"
+            (change)="onValueKeypress(periodFilterObj,periodFilterObj.RollingQuarterYearsModel.rollingQuarterYearValue)"
+            [(modelData)]="periodFilterObj.RollingQuarterYearsModel"
+            *ngIf="(periodFilterObj.QuarterYearModel.field.op == constants.ReportObjectOperators.Rolling_Months)">
+          </smart-numeric>
+  
+          <smart-numeric [config]="periodFilterObj.NextQuarterYears" class="col s1 line-height-manager next-year"
+            (change)="onValueKeypress(periodFilterObj,periodFilterObj.NextQuarterYearsModel.nextQuarterYearValue)"
+            [(modelData)]="periodFilterObj.NextQuarterYearsModel"
+            *ngIf="(periodFilterObj.QuarterYearModel.field.op == constants.ReportObjectOperators.Next_Months)">
+          </smart-numeric>
+  
+          <smart-numeric [config]="periodFilterObj.PreviousQuarterYear"
+            class="col s1 line-height-manager previous-quarter"
+            (change)="onValueKeypress(periodFilterObj,periodFilterObj.PreviousQuarterYearsModel.previousQuarterYearValue)"
+            [(modelData)]="periodFilterObj.PreviousQuarterYearsModel"
+            *ngIf="(periodFilterObj.QuarterYearModel.field.op == constants.ReportObjectOperators.Previous_Month)">
+          </smart-numeric>
+  
+          <smart-select id="resize-caret" class="col s2 line-height-manager current-year"
+            [config]="periodFilterObj.BeginningOfTheQuarter"
+            *ngIf="(periodFilterObj.QuarterYearModel.field.op ==  constants.ReportObjectOperators.From_MonthTillToday)"
+            [(modelData)]="periodFilterObj.BeginningOfTheQuarter"
+            (onChange)="updateYearDropdown(periodFilterObj,'from_month')">
+          </smart-select>
+  
+          <smart-select id="resize-caret" class="col s2 line-height-manager current-year"
+            [config]="periodFilterObj.BeginningOfTheQuarterYear"
+            *ngIf="(periodFilterObj.QuarterYearModel.field.op ==  constants.ReportObjectOperators.From_MonthTillToday)"
+            [(modelData)]="periodFilterObj.BeginningOfTheQuarterYear"
+            (onChange)="updateYearDropdown(periodFilterObj,'from_month')">
+          </smart-select>
+        </div>
+  
+  
+  
+        <!--Filter By Condition-->
+        <div class="row condition-year-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterByCondition">
+          <div class="col s3 line-height-manager year-filter-select">
+            <smart-select id="resize-caret" [config]="filterByQuarterYearOpts" [(modelData)]="periodFilterObj"
+              (onChange)="onChangeFilterByOp(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+            </smart-select>
+          </div>
+          <div *ngIf="(periodFilterObj.FilterConditionOperator.op != 14) && 
+              periodFilterObj.sourceQuarterDropDown.options.length > 0"
+            class="col s3 m2 marginBtm15 input-field select-year">
+            <smart-select id="resize-caret" [config]="periodFilterObj.sourceQuarterDropDown"
+              [(modelData)]="periodFilterObj.sourceQuarterDropDown"
+              (onChange)="updateMonthYearDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+            </smart-select>
+          </div>
+          <div *ngIf="(periodFilterObj.FilterConditionOperator.op != 14) && 
+              periodFilterObj.sourceQuarterDropDown.options.length > 0"
+            class="col s3 m2 marginBtm15 input-field select-year">
+            <smart-select id="resize-caret" [config]="periodFilterObj.QuarteryearDropdown"
+              [(modelData)]="periodFilterObj.QuarteryearDropdown"
+              (onChange)="updateMonthYearDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+            </smart-select>
+          </div>
+  
+          <div class="col s8 line-height-manager" *ngIf="periodFilterObj.FilterConditionOperator.op == 14">
+            <smart-select id="resize-caret" class="col s2 line-height-manager"
+              [config]="periodFilterObj.FromQuarterDropdown"
+              [(modelData)]="periodFilterObj.FromQuarterDropdown.selectedRangeOptions"
+              (onChange)="updateMonthYearDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+            </smart-select>
+            <smart-select id="resize-caret" class="col s2 line-height-manager"
+              [config]="periodFilterObj.FromQuarteryearDropdown"
+              [(modelData)]="periodFilterObj.FromQuarteryearDropdown.selectedRangeOptions"
+              (onChange)="updateMonthYearDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+            </smart-select>
+            <smart-select id="resize-caret" class="col s2 line-height-manager"
+              [config]="periodFilterObj.ToQuarterDropdown"
+              [(modelData)]="periodFilterObj.ToQuarterDropdown.selectedRangeOptions"
+              (onChange)="updateMonthYearDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+            </smart-select>
+            <smart-select id="resize-caret" class="col s2 line-height-manager"
+              [config]="periodFilterObj.ToQuarteryearDropdown"
+              [(modelData)]="periodFilterObj.ToQuarteryearDropdown.selectedRangeOptions"
+              (onChange)="updateMonthYearDropdown(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+            </smart-select>
+          </div>
+        </div>
+  
+      </div>
+      <!-- Month Year Filter end-->
+  </ng-template>
+  
+
+
+  <ng-template #monthFilterTemplate>
+    <!-- Month Filter start-->
+    <div class="row reportDate year-filter">
+
+      <div class="dynamic-year-filter"  *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterBySelection">
+
+        <smart-radio class="col marginTop15 year-radio" [config]="QuarterYearRadioConfig"
+          [(modelData)]="periodFilterObj.QuarterYearModel" (onChange)="dateRadioChange(periodFilterObj)"></smart-radio>
+
+        <smart-numeric [config]="periodFilterObj.NextQuarterYears" class="col s1 line-height-manager next-quarter"
+          (change)="onValueKeypress(periodFilterObj,periodFilterObj.NextQuarterYearsModel.nextQuarterYearValue)"
+          [(modelData)]="periodFilterObj.NextQuarterYearsModel"
+          *ngIf="(periodFilterObj.QuarterYearModel.field.op == constants.ReportObjectOperators.Next_Months)">
+        </smart-numeric>
+
+      </div>
+
+
+
+      <!--Filter By Condition-->
+
+      <div class="row condition-year-filter" *ngIf="periodFilterObj.FilterBy == constants.FilterBy.FilterByCondition">
+        <div class="col s3 line-height-manager year-filter-select">
+          <smart-select id="resize-caret" [config]="filterByQuarterYearOpts" [(modelData)]="periodFilterObj"
+            (onChange)="onChangeFilterByOp(periodFilterObj,periodFilterObj.FilterConditionOperator.op)">
+          </smart-select>
+        </div>
+
+        <!-- select quarter popup start -->
+        <div *ngIf="(periodFilterObj.FilterConditionOperator.op == 2 || periodFilterObj.FilterConditionOperator.op == 3) &&
+      periodFilterObj.sourceQuarterDropDown.options.length > 0" class="col s6 m4 marginBtm15 input-field select-year">
+          <div class="select-year-label" *ngIf='periodFilterObj.showLabel'>Select Month</div>
+          <div class="selected-year-list"
+            [ngClass]="{'margin0':periodFilterObj.showLabel ,'marginTop20': !periodFilterObj.showLabel} "> <a
+              href="javascript:void(0)" (click)="openSelectQuarterPopup()"> {{periodFilterObj.SelectedYear}} </a>
+          </div>
+        </div>
+        <!-- select quarter popup end-->
+
+
+      </div>
+
+    </div>
+    <!-- Month Filter end-->
+  </ng-template>
+
+  <ng-container #selectYearPoup></ng-container>
+  <ng-template #outletTemplate let-manifestPath="manifestPath" let-config="config">
+    <smart-outlet [path]="manifestPath" [childConfig]="config"></smart-outlet>
+  </ng-template>
+</div>

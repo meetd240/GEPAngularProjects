@@ -1,0 +1,50 @@
+<div class="row marginTop10 common-popup-container">
+    <div class="col s4 marginTop10" *ngFor="let config of config.fields; let idx = index" [ngSwitch]="config.type">
+        <div *ngSwitchCase="'text'" class="common-text-field">
+            <smart-textfield [cssClass]="'line-height-manager'" class="marginTop0" [config]="config.Config" [(modelData)]="config.modalData"
+                (blur)="onBlur(config, idx)">
+            </smart-textfield>
+        </div>
+        <div *ngSwitchCase="'number'">
+            <smart-numeric class="marginTop0 " [config]="config.Config" [(modelData)]="config.modalData" (keyup)="onKeyUp()">
+            </smart-numeric>
+        </div>
+        <div *ngSwitchCase="'select'">
+            <smart-select [(modelData)]="config.selectedConfig" [config]="config.Config"
+                (onChange)="onChange(selectedView, idx)"></smart-select>
+        </div>
+        <div class="marginTop10" *ngSwitchCase="'checkbox'">
+            <smart-checkbox  [(modelData)]="config.modalData"  [config]="config.Config" (onChange)="checkboxSelection(idx)"  >
+            </smart-checkbox>
+        </div>
+        <div *ngSwitchCase="'radio'">
+            <smart-radio  [config]="config.Config" [(modelData)]="config.modalData"
+                (onChange)="onChangeRadio(idx)"></smart-radio>
+        </div>
+        <div class="marginTop10" *ngSwitchCase="'read-only'">
+            <div class="label-header">{{config.header}}</div>
+            <span class="label-header-name" title="{{config.data}}">{{config.data}}</span>
+        </div>
+
+    </div>
+
+    <div *ngIf="showCapital" class="row paddingLeft12" id="costOfCapital">
+        <div class="col s5" style="height: 100%;margin-left: -25px;margin-top: 3%;">
+          <div class="col s5 roundedBorder">
+            <span class="assignWidth">Saving %</span>
+            <div class="row" >
+              <div >
+                <div class="col s10 alignRight">
+                  <smart-numeric   [config]="smartNumericConfig" [(modelData)]="costOfCapital"
+                    (keyup)="onKeyUp()">
+                  </smart-numeric>
+                </div>             
+              </div>
+            </div>         
+          </div>
+          <div class="col s3 paddingTop32 paddingLeft10">
+            <a (click)="onCostOfCapitalClick(costOfCapital.Value)" >Apply</a>
+          </div>
+        </div> 
+        </div>
+</div>

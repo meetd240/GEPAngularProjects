@@ -1,0 +1,214 @@
+<div class="filter-panel-wrapper left width100P height100P">
+    <div class="relative applied-filter-panel-section left width100P height100P">
+        <div class="left" style="position: absolute;width:100%;height:100%" id="filterListContainer">
+            <div class="filters-panel-search">
+                <div class="filters-panel-search-cont">
+                    <i class="icon grey-text search-icon" smart-tooltip position="bottom" message="Search">
+                        <svg>
+                            <use xlink:href="#icon_Search"></use>
+                        </svg>
+                    </i>
+                    <smart-textfield class="filter-search-input marginTop0" [config]="searchListConfig"
+                        (keyup)="onFilterSearch()" [(modelData)]="searchKeyText"></smart-textfield>
+                </div>
+            </div>
+
+            <div class="filterWrapperContainer">
+            <ng-container #filterPanelContainer></ng-container>
+        </div>
+
+        <div class="left filter-panel-footer">
+            <smart-button (callback)="onCancelFilterPanelChanges($event)" [config]="cancelFilterBtnConfig"
+                class="left modal-close">
+            </smart-button>
+
+            <smart-button (callback)="onApplyFilterPanel($event)" [config]="applyFilterBtnConfig"
+                class="left modal-close">
+            </smart-button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<ng-template #appliedFiltersTemplate>
+    <div class="filter-panel-list-container">
+        <div class="filters-panel-list">
+            <div style=" padding: 15px 5px 15px 12px !important;background: #efefef;border: 1px solid #c2c2c2;">
+                <span>Filters on this Tab</span>
+                <a href="javascript:void(0)" style="float: right;right: 0;border-radius:2px;background:#0067b0;"
+                    (click)="openTabFilter(undefined)"
+                    [ngClass] = "{'disabled':disableTabFilter}">
+                    <i class="icon iconSmall"
+                        style="color: white;font-weight: bold;text-align: center;display: block;height: 24px;">
+                        <svg style="height: 18px;">
+                            <use xlink:href="#icon_Plus"></use>
+                        </svg>
+                    </i>
+                </a>
+            </div>
+            <div style="padding: 5px 15px;" [ngStyle]="{'display': _dashboardCommService.showNoTabFilterMsg ?  'block' : 'none' }">
+                <span class="displayInlineBlock" style="padding: 5px 0;color: #a2a2a2;">
+                    No Filter has been applied on this tab
+                </span>
+                <span class="displayInlineBlock" style="padding: 5px 0;color: #a2a2a2;">
+                    Start Adding Filters using icon above
+                </span>
+            </div>
+            <ul class="panel-content-iteamList filter-panel-main-list clearfix">
+                <li class="truncate"
+                    *ngFor="let filter of config.tabFilter | filter : { term: searchKeyText.value, key:'DisplayName',isSelectAll:'true'};let index=index;trackBy:ReportObjectId"
+                    id="selected-filter-{{filter.ReportObjectId}}">
+                    <div *ngIf="filter.FilterIdentifier != slicerFilterTypedashboardConstant">
+                        <div class="panel-content-iteamList-item">
+                            <a href="javascript:void(0)" (click)="filterItemClick(filter,filter.ReportObjectId, $event)">
+                                <i class="icon iconSmall cursorPointer dirArrow grey-text">
+                                    <svg>
+                                        <use xlink:href="#icon_DownChevron"></use>
+                                    </svg>
+                                </i>
+                            </a>
+                            <strong class="truncate displayNameTitleWidth" title="{{filter.DisplayName}}"
+                                (click)="filterItemClick(filter,filter.ReportObjectId, $event)">{{filter.DisplayName}}</strong>
+                            <a href="javascript:void(0)" class="filter-close-icon"
+                                (click)="removeFilter(filter,filter.ReportObjectId,false,$event,true)">
+                                <i class="icon iconSmall">
+                                    <svg>
+                                        <use xlink:href="#icon_Close"></use>
+                                    </svg>
+                                </i>
+                            </a>
+                            <a href="javascript:void(0)" class="filter-edit-icon"
+                                (click)="openTabFilter(filter,true,index)">
+                                <i class="icon iconSmall">
+                                    <svg>
+                                        <use xlink:href="#icon_editPen"></use>
+                                    </svg>
+                                </i>
+                            </a>
+                            <a href="javascript:void(0)" *ngIf="filter.FilterConditionOperator.op == 14 || filter.FilterConditionOperator.op == 15" class="filter-info-icon">
+                                <i class="icon iconSmall blue-text" smartTooltip [config]="sliderTooltipConfig">
+                                    <svg>
+                                        <use xlink:href="#icon_Info"></use>
+                                    </svg>
+                                </i>
+                            </a>
+                        </div>
+
+                        <ul class="panel-content-iteamList filter-child-group">
+                            <li class="panel-content-iteamList-item truncate"
+                                [ngClass]="{'displayFilterChildList': childindex >= 10}"
+                                id="selected-filter-list-{{filter.ReportObjectId}}-{{childindex}}"
+                                title="{{item.title}}" *ngFor="let item of filter.filterPanelList;let childindex=index">
+                                <span *ngIf="filter.FilterConditionOperator.op != 14 && filter.FilterConditionOperator.op != 15" title="{{item.title}}">{{item.title}}</span>
+                                <!-- <span *ngIf="filter.FilterType != 1"
+                                title="{{filter.filterTabInfo}}">{{filter.filterTabInfo}}</span> -->
+                                <a href="javascript:void(0)" class="filter-close-icon"
+                                    (click)="removefilterList(filter,childindex,false,$event, true)" *ngIf="filter.FilterConditionOperator.op != 14 && filter.FilterConditionOperator.op != 15">
+                                    <i class="icon iconSmall">
+                                        <svg>
+                                            <use xlink:href="#icon_Close"></use>
+                                        </svg>
+                                    </i>
+                                </a>
+                                <GlobalSliderWidget *ngIf= "filter.sliderFilterPanelObject != undefined" [config]="filter.sliderFilterPanelObject"></GlobalSliderWidget>
+                                </li>
+                            <li *ngIf="filter.filterPanelList.length >= 10" class="panel-content-iteamList-item">
+                                <a (click)="openTabFilter(filter)" class="fontSize12 cursorPointer">View All </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</ng-template>
+
+
+<ng-template #appliedFiltersOnAllTabsTemplate>
+    <div class="filter-panel-list-container">
+        <div class="filters-panel-list">
+            <div>
+                <div style=" padding: 15px 5px 15px 12px !important;background: #efefef;border: 1px solid #c2c2c2;" [style.display]="showFilterOnAllTab ? '': 'none'">
+                    <span>Filters on all Tabs</span>
+                    <a href="javascript:void(0)" style="float: right;right: 0;border-radius:2px;background:#0067b0;"
+                        (click)="openGlobalFilter(undefined)">
+                        <i class="icon iconSmall"
+                            style="color: white;font-weight: bold;text-align: center;display: block;height: 24px;">
+                            <svg style="height: 18px;">
+                                <use xlink:href="#icon_Plus"></use>
+                            </svg>
+                        </i>
+                    </a>
+                </div>
+                <ul class="panel-content-iteamList filter-panel-main-list clearfix">
+                    <li class="truncate"
+                        *ngFor="let filter of config.config | filter : { term: searchKeyText.value, key:'DisplayName',isSelectAll:'true'};let index=index;trackBy:ReportObjectId"
+                        id="selected-filter-{{filter.ReportObjectId}}">
+                        <div *ngIf="filter.FilterIdentifier != slicerFilterTypedashboardConstant">
+                            <div class="panel-content-iteamList-item">
+                                <a href="javascript:void(0)" (click)="filterItemClick(filter,filter.ReportObjectId, $event)">
+                                    <i class="icon iconSmall cursorPointer dirArrow grey-text">
+                                        <svg>
+                                            <use xlink:href="#icon_DownChevron"></use>
+                                        </svg>
+                                    </i>
+                                </a>
+                                <strong class="truncate displayNameTitleWidth" title="{{filter.DisplayName}}"
+                                    (click)="filterItemClick(filter,filter.ReportObjectId, $event)">{{filter.DisplayName}}</strong>
+                                <a href="javascript:void(0)" class="filter-close-icon"
+                                    (click)="removeFilter(filter,filter.ReportObjectId,false, $event)">
+                                    <i class="icon iconSmall">
+                                        <svg>
+                                            <use xlink:href="#icon_Close"></use>
+                                        </svg>
+                                    </i>
+                                </a>
+                                <a href="javascript:void(0)" class="filter-edit-icon"
+                                    (click)="openGlobalFilter(filter,true,index)">
+                                    <i class="icon iconSmall">
+                                        <svg>
+                                            <use xlink:href="#icon_editPen"></use>
+                                        </svg>
+                                    </i>
+                                </a>
+                                <a href="javascript:void(0)" *ngIf="filter.FilterConditionOperator.op == 14 || filter.FilterConditionOperator.op == 15" class="filter-info-icon">
+                                    <i class="icon iconSmall blue-text" smartTooltip [config]="sliderTooltipConfig">
+                                        <svg>
+                                            <use xlink:href="#icon_Info"></use>
+                                        </svg>
+                                    </i>
+                                </a>    
+                            </div>
+
+                            <ul class="panel-content-iteamList filter-child-group">
+                                <li class="panel-content-iteamList-item truncate"
+                                    [ngClass]="{'displayFilterChildList': childindex >= 10}"
+                                    id="selected-filter-list-{{filter.ReportObjectId}}-{{childindex}}"
+                                    title="{{item.title}}"
+                                    *ngFor="let item of filter.filterPanelList;let childindex=index">
+                                    <span title="{{item.title}}" *ngIf="filter.FilterConditionOperator.op != 14 && filter.FilterConditionOperator.op != 15">{{item.title}}</span>
+                                    <a href="javascript:void(0)" class="filter-close-icon"
+                                        (click)="removefilterList(filter,childindex,false,$event)" *ngIf="filter.FilterConditionOperator.op != 14 && filter.FilterConditionOperator.op != 15">
+                                        <i class="icon iconSmall">
+                                            <svg>
+                                                <use xlink:href="#icon_Close"></use>
+                                            </svg>
+                                        </i>
+                                    </a>
+                                    <GlobalSliderWidget *ngIf= "filter.sliderFilterPanelObject != undefined" [config]="filter.sliderFilterPanelObject"></GlobalSliderWidget>
+                                </li>
+                                <li *ngIf="filter.filterPanelList.length >= 10" class="panel-content-iteamList-item">
+                                    <a (click)="openGlobalFilter(filter)" class="fontSize12 cursorPointer">View All
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ng-template>

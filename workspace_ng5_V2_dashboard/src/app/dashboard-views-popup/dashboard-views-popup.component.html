@@ -1,0 +1,190 @@
+<div class="scrollableModel modal-popup panelBox-content dashboard-views-popup">
+    <div class="panelBox-body padding0 dashboard-views-popup-wrapper">
+        <div class="row margin0 dashboard-views-popup-body">
+            <div class="panelBox-content margin0 dashboard-views-popup-container">
+                <div class="panelBox-header">
+                    <div class="header-title">
+                        <span class="title marginLeft10 dashboard-views-title"
+                            [innerHTML]="constants.UIMessageConstants.STRING_VIEWS"></span>
+                    </div>
+                </div>
+                <div class="col s12 padding0 dashboard-views-container">
+                    <div class="tabs-vertical">
+                        <div class="col s12 tabparent-container dashboard-views-tab-list">
+                            <div class="tabparent">
+                                <ul class="tab-list">
+                                    <li class="tab"
+                                        *ngFor="let view of dashboardViews;let i = index; trackBy:trackByViewName "
+                                        (click)="onViewTabChange(view)">
+                                        <div [ngClass]="{'active': view.isActive}">
+                                            <a class="relative paddingRight40" [title]="view.title">
+                                                {{view.title}}
+                                                <span
+                                                    *ngIf="view.title == dashboardViewsTypes.MY_VIEWS">({{myViews.length}})</span>
+                                                <span
+                                                    *ngIf="view.title == dashboardViewsTypes.STANDARD_VIEW">({{standardViews.length}})</span>
+                            
+                                                 <span
+                                                 [style.display]="view.title==dashboardViewsTypes.SHARED_VIEW?'':'none'">({{sharedViews.length}})</span>
+                                            </a>
+
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-views-list">
+
+                            <ng-container #dashboardViewContainer>
+                            </ng-container>
+
+                            <ng-template #dashboardViewsListTemplate>
+                                <div class="col s12 paddingLeft0 marginBtm0 marginTop10 searchStringSection">
+                                    <div class="filterSection sub-header-filter-main clearfix">
+                                        <i class="icon filterSearchIcon grey-text">
+                                            <svg>
+                                                <use xlink:href="#icon_Search"></use>
+                                            </svg>
+                                        </i>
+
+                                        <smart-textfield [config]="searchListConfig" [(modelData)]="searchKeyText"
+                                            [cssClass]="'line-height-manager'"
+                                            (keyup)="onSearchKeypress(searchKeyText)">
+                                        </smart-textfield>
+                                        <a (click)="clearSearch(searchKeyText)">
+                                            <i
+                                                class="icon iconFix iconSmall filterCloseIcon marginTop0 cursorPointer fontsize-1rem">
+                                                <svg>
+                                                    <use xlink:href="#icon_Close"></use>
+                                                </svg>
+                                            </i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div *ngIf="currentViewCollection.length !== 0">
+                                    <ul class="list-group col dashboard-views-wrapper width100P">
+                                        <li class=" list-group-item dashboard-views-radio width100P"
+                                            *ngFor="let item of currentViewCollection;let i = index;trackBy : trackByCollection"
+                                            [title]="item.viewName">
+                                            <input type="radio" class="with-gap" [(ngModel)]="ViewID"
+                                                [name]="item.viewName" [value]="item.viewId" [id]="item.viewId"
+                                                (change)="onViewChange(item)" />
+
+                                            <!-- <label
+                                                [style.text-overflow]="!(item.isOwn && item.isStandard) ? '' : 'ellipsis'"
+                                                [style.overflow]="!(item.isOwn && item.isStandard) ? '' : 'hidden'"
+                                                [style.white-space]="!(item.isOwn && item.isStandard) ? '' : 'nowrap'"
+                                                [style.max-width.px]="(item.isOwn && item.isStandard) ? 220 : 280"
+                                                class="truncate-view-name" for="{{item.viewId}}">{{item.viewName}}
+
+
+                                            </label> -->
+                                            <label
+                                            [style.text-overflow]="'ellipsis'"
+                                            [style.overflow]="'hidden'"
+                                            [style.white-space]="'nowrap'"
+                                            [style.max-width.px]="(item.isOwn && item.isStandard) ? 220 : 280"
+                                            class="truncate-view-name" for="{{item.viewId}}">{{item.viewName}}
+
+
+                                        </label>
+
+                                            <span class="black-text fontSize12 standard-view-text"
+                                                *ngIf="item.isOwn && item.isStandard">{{standardViewText}}</span>
+
+                                            <span class="right shareRighticon" *ngIf="(item.isOwn==true && item.ShareUserCount!=null && item.ShareUserCount!=0 &&  (!item.isStandard))">
+                                                <p class="counter_circle"> <label>{{item.ShareUserCount}}</label></p>
+                                                <a>
+                                                    <i class="icon filterSearchIcon blue-text">
+
+                                                        <svg>
+                                                            <use xlink:href="#icon_Share"></use>
+                                                        </svg>
+
+                                                    </i>
+                                                </a>
+                                            </span>
+                                            <!-- //<span *ngif="item.isOwn !== true && item.isStandard !== true">{{sharedViewText}}</span> -->
+
+                                            <div class="black-text fontSize12 shared-view-text"  [title]="(sharedViewText +' '+ item.UserName)"
+                                                *ngIf="item.isOwn == false && item.isStandard == false" [style.text-overflow]="'ellipsis'"
+                                                [style.overflow]="'hidden'"
+                                                [style.white-space]="'nowrap'"
+                                                [style.max-width.px]="280"  >( {{sharedViewText }} {{item.UserName}} )                                               
+                                        </div>
+                                            <span (click)="unShareViewFromList(item)" class="right cursorPointer" title="" 
+                                            *ngIf="(item.isOwn == false && item.isStandard == false)" style="margin-top: -49px;">
+                                            <a smartTooltip [config] = "shareDashBoardUnShareTooltipConfig">
+                                                <i class="icon filterSearchIcon blue-text">
+
+                                                    <!-- <svg>
+                                                        <use xlink:href="#icon_unShare"></use>
+                                                    </svg> -->
+                                                    <svg>
+                                                        <path
+                                                        d="M9 12.5c0-.4-.1-.8-.2-1.2l6.8-3.1c.5.8 1.4 1.3 2.4 1.3 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .3.1.5.1.8l-6.9 3.2c-.5-.6-1.3-1-2.2-1-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.6-.4 2.1-.9l5.7 2.6c0-.3.1-.7.3-1l-5.4-2.5c.2-.4.3-.8.3-1.2zm9-8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-12 10c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z M21.1 13.3h-1.3l-2.5 2.5-2.5-2.5h-1.4l3.2 3.2-3 3H15l2.3-2.3 2.3 2.3H21l-3-3 3.1-3.2" />
+                                                    </svg>
+
+                                                </i>
+                                            </a>
+                                        </span>
+                       
+                                                        
+                                            <!-- <a >
+                                                        <i class="icon filterSearchIcon grey-text" >
+    
+                                                            <svg>
+                                                                <use xlink:href="#icon_unShare"></use>
+                                                            </svg>
+                                                            
+                                                        </i>
+                                                    </a>
+                                                 -->
+
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div *ngIf="currentViewCollection.length == 0">
+                                    <span class="center-align displayBlock grey-text padding130"
+                                        [innerHTML]="constants.UIMessageConstants.STRING_No_Records_Found"></span>
+                                </div>
+
+
+                            </ng-template>
+
+                            <ng-template #dashboardViewsListEmptyTemplate>
+                                <div class="center-align displayBlock grey-text padding130"><span
+                                        [innerHTML]="constants.UIMessageConstants.STRING_No_Views_Available"></span>
+                                </div>
+                            </ng-template>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <span class="left marginTop3" *ngIf="config.showDrillDownViewCheckbox" style="width: 234px;">
+                            <smart-checkbox
+                                [config]="{ label:constants.UIMessageConstants.STRING_SHOW_DRILLED_DOWN_VIEWS, disable:'!config.isDrilledViewEnabled',data:'isDrillDownViewEnabled' }"
+                                [(modelData)]="config"
+                                (onChange)="showDrillDownViewChecboxCallback(config.isDrillDownViewEnabled);"
+                                [ngStyle]="{'visibility': config.showDrillDownViewCheckbox ? 'visible' : 'hidden'}">
+                            </smart-checkbox>
+                        </span>
+                        <span class="right">
+                            <smart-button (callback)="onCancel()" [config]="cancelBtnConfig" class="left modal-close">
+                            </smart-button>
+                            <smart-button *ngIf="!config.isLinkToDashboard" (callback)="onDone()"
+                                [config]="doneBtnConfig" class="left modal-close">
+                            </smart-button>
+                            <smart-button *ngIf="config.isLinkToDashboard" (callback)="onDone()"
+                                [config]="linkBtnConfig" class="left modal-close">
+                            </smart-button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="lean-overlay" (click)="onCancel()"></div>

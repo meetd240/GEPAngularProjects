@@ -1,0 +1,72 @@
+.tabparent-container{
+    background: #fff !important;
+    .tabparent{
+      .dashboard-tab-wrapper{
+        max-height: 100%; 
+        width: 100%; 
+        margin-bottom: 0px; 
+        margin-right: 0px;
+
+        .dashboard-tab-container{
+          max-height: 100%;
+           max-width: 100%;
+
+           .dashboard-tab-list{
+            // width: 100%; 
+            // height: 63px;
+            width: calc(100% - 173px);
+            overflow-x: auto;
+            margin-right: 16px;
+
+            .dashboard-tab{
+              max-width: 220px;
+              // border: 1px solid #000;
+              // border-bottom: none;
+              // border-left: none;
+              // background: #e5e5e5;
+            }
+           }
+
+           .manage-tabs-container{
+            display: inline;
+
+            .manage-tabs{
+              float: right;
+              cursor: pointer;
+              a{
+                color: #0177d6;
+              }
+            }
+           }
+        }
+      }
+    }
+  }
+
+  
+.activeTab{
+border-bottom: 2px solid #0177d6 !important;
+color:  #0177d6 !important;
+}
+
+.dashboard-tabs-container-on-expand{
+  padding-right: 225px;
+  transition: all 0.5s ease !important;
+}
+.dashboard-tabs-container-on-collapse{
+  padding-right: 15px;
+  transition: all 0.5s ease !important;
+}
+
+.dashboard-tabs-container-on-slicer-expand{
+  padding-left: 225px;
+  transition: all 0.5s ease !important;
+}
+.dashboard-tabs-container-on-slicer-collapse{
+  padding-left: 25px;
+  transition: all 0.5s ease !important;
+}
+.dashboard-tabs-container-on-collapse-no-slicerFilter{
+  padding-left: 0px;
+  transition: all 0.5s ease !important;
+}

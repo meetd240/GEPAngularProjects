@@ -1,0 +1,113 @@
+<!-- <div class="filter-chip-wrapper alert-bar--fixed filter-alert-bar alert-bar--warning alert-bar--with-button alert-bar"
+  *ngIf="_dashboardCommService.appliedFilters && showChipBar">
+  <span class="filter-chip-header">Applied Filters:</span>
+  <span *ngFor="let filter of _dashboardCommService.appliedFilters;let index=index" class="filter-chip-container">
+    <div class="fontSize12 filter-chip-title" title="{{filter.DisplayName}}">
+      {{filter.DisplayName}}</div>
+    <div class="chip chips-link hoverable selected-list-chip-container">
+      <span (mouseenter)="onMouseEnterChip($event,filter,index)" (click)="openGlobalFilter(filter)"
+        (mouseleave)="onMouseLeaveChip(index)"> <a class="chips-link filter-chip-truncate"
+          title="{{filter.filterchipName}}">{{filter.filterchipName}}</a></span>
+      <span class="removeChipIcon right">
+        <i class="icon iconXsmall grey-text" title="remove" (click)="removeCurrentChip($event,filter,index)">
+          <svg>
+            <use xlink:href="#icon_ChipRemove"></use>
+          </svg>
+        </i>
+      </span>
+    </div>
+
+    <div class="fiters-upfront-wrapper" (mouseenter)="onMouseEnterChip($event,filter,index)"
+      (mouseleave)="onMouseLeaveChip(index)" id="filteredChip{{index}}">
+      <div class="borderBtmGray">
+        <div class="marginLeft4 fontSize16 padding5">{{filter.DisplayName | uppercase}}</div>
+      </div>
+
+      <ul class="fiters-upfront-wrapper-list">
+        <span *ngIf="filter.FilterType==dashboardConstant && filter.selectedFilterList.length> 20" class="fontSize12
+          marginLeft10">Showing 20 of {{filter.selectedFilterList.length}}</span>
+        <span *ngIf="filter.FilterType==dashboardConstant &&
+          filter.selectedFilterList.length <=20" class="fontSize12 marginLeft10">Showing all selected</span>
+        <span *ngIf="filter.selectedFilterList.length >= 20" class="right marginRight20 fontSize14 cursorPointer"
+          style="cursor: pointer" (click)="openGlobalFilter(filter,true,index)"><a>View All</a></span>
+        <li *ngFor="let list of filter.selectedFilterList  let i=index " class="cursorDefault marginLeft10">
+          <span *ngIf="i < 20" class="truncate" title="{{list.title}}"> {{list.title}} </span>
+        </li>
+      </ul>
+    </div>
+  </span>
+</div> -->
+<!-- <div *ngIf="_dashboardCommService.listofDistinctWidgetDataSource.length == 1"
+  class="clearfix alert-bar--fixed relative zIndex2 white is-scrolled"
+  [ngClass]="{'hide-header-notificationbar':hideHeaderNotification}">
+  <div class="alert-bar enter-from-top info-bar paddingLeft15 paddingRight15 eventBar" style="height:auto !important">
+    <span class="left marginTop2 paddingRight5" style="width:3%">
+      <i class="icon small gray-text">
+        <svg>
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Info"></use>
+        </svg>
+      </i>
+    </span>
+    <span class="left paddingTop9 paddingBtm9" style="width:94%">{{infoBarText}}</span>
+    <span class="right marginTop2 paddingRight5 cursorPointer" title="Remove" style="width:3%">
+      <i class="icon small gray-text" (click)="hideHeaderNotification=true">
+        <svg>
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_ChipRemove"></use>
+        </svg>
+      </i>
+    </span>
+
+  </div>
+</div> -->
+<div class="filter-panel-container">
+  <a href="javascript:void(0)" class="filter-sidebar-btn white-text "(click)="filterSidebarCallback()" >
+       <i class="icon iconSmall" [ngClass]="{'rotateFilterSideBarIcon': !isFilterSidebarExpand}">
+           <svg>
+               <use xlink:href="#icon_RightChevro"></use>
+           </svg>
+       </i>
+   </a>
+   <div class="filters-panel-header row marginBottom0">
+    <div class="col s6">
+      <div class="col s2 filter-panel-icon">
+        <a href="javascript:void(0)" (click)="filterSidebarCallback()" *ngIf="!_dashboardCommService.appliedFilters.length">
+          <i class="icon iconSmall">
+              <svg>
+                  <use xlink:href="#icon_Filter"></use>
+              </svg>
+          </i>
+      </a>
+      <a href="javascript:void(0)" (click)="filterSidebarCallback()" *ngIf="_dashboardCommService.appliedFilters.length">
+        <i class="icon iconSmall">
+            <svg>
+                <use xlink:href="#icon_FilterAppli"></use>
+            </svg>
+        </i>
+    </a>
+    </div>
+        <div class="marginLeft10 col s4" [ngClass]="{'toggleFilterHeader': !isFilterSidebarExpand}" [innerHTML]="constants.UIMessageConstants.STRING_FILTERS">
+        </div>
+    </div>
+    <div class="col s2 right marginRight18 clear-all-filter">
+        <a href="javascript:void(0)" (click)="openGlobalFilter(undefined)">
+            <i class="icon iconSmall">
+                <svg>
+                    <use xlink:href="#icon_CirclePlus"></use>
+                </svg>
+            </i>
+        </a>
+    </div>
+
+</div>
+     <ng-container #globalFilterContainer>
+  </ng-container>
+</div>
+<div class="dashboard-container marginTop15">
+  <ng-container #oppfinderContainer></ng-container>
+  <ng-container #purchasePricePopupRef></ng-container>
+  <ng-container #investigateModeRef></ng-container>
+  <ng-container #globalSliderWidget></ng-container>
+</div>
+<ng-template #outletTemplate let-manifestPath="manifestPath" let-config="config">
+           <smart-outlet [path]="manifestPath" [childConfig]="config"></smart-outlet>
+</ng-template>

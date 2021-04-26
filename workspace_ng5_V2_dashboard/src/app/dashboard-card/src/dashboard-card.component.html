@@ -1,0 +1,148 @@
+<smart-block-loader [config]="cardLoaderConfig"></smart-block-loader>
+<div [id]="config.cardId" class="dashboard-card-container height100">
+  <div class="slider-widget-container left" [style.display]="!config.isAccessibleReport ? 'none' : 'block'"
+    [ngClass]="{'toggleSliderWidget':config.isExpandedGraph===false , 'fade-in-slider':config.layoutItemConfig.gridstackPosition.width !== 2 && config.isExpandedGraph===true}">
+    <smart-block-loader [config]="sliderLoaderConfig"></smart-block-loader>
+    <div class="no-result-slider" *ngIf="config.sliderFilterArray.length==0">
+      <span [innerHTML]="constants.UIMessageConstants.STRING_No_data_returned_for_slider"></span>
+    </div>
+    <ng-container #sliderContainer></ng-container>
+  </div>
+  <a [style.display]="!config.isAccessibleReport ? 'none' : 'block'" class='slidebar-btn white-text'
+    (click)="expandCollapseClick(index)" *ngIf="config.showSliderWidget"
+    [ngClass]="{'toggle-slider-btn':config.isExpandedGraph===false}">
+    <i class="icon iconSmall" [ngClass]="{'rotate180':config.isExpandedGraph===false}">
+      <svg>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_LeftChevron"></use>
+      </svg>
+    </i>
+  </a>
+  <div class="center drag-handle-wrapper">
+    <a>
+      <i class="icon iconSmall drag-handle gray-text">
+        <svg [style.display]="!_dashboardCommService.oppFinderState.oppFinderFlag ? '' : 'none'">
+          <use xlink:href="#icon_Drag"></use>
+        </svg>
+      </i>
+    </a>
+  </div>
+  <ng-container #cardTypeContainer></ng-container>
+  <ng-container #popupContainer></ng-container>
+  <ng-template #widgetCardTemplate>
+    <div class="chart-widget-container height100 right "
+      [ngClass]="{'toggleChartWidget':config.isExpandedGraph===false , 'fade-out-chart':  config.isExpandedGraph===true , 'padding0': config.isExpandedGraph === false}">
+
+      <!-- <div class="editmode-container">
+      <div class="textfieldWrapper">
+          <smart-textfield class="marginTop0" [config]="smartTextFieldConfig" [(modelData)]="graphTitle" [hidden]="!widget.showEdit"></smart-textfield>
+      </div>
+      <div class="action-buttons right">
+          <a href class="blue-text marginRight10" (click)="cancelChanges($event,index)">
+              <i class="icon iconSmall">
+                  <svg>
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Close"></use>
+                  </svg>
+
+              </i>
+          </a>
+          <a class="blue-text " (click)="updateTitle(index)">
+              <i class="icon iconSmall">
+                  <svg>
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Check"></use>
+                  </svg>
+
+              </i>
+          </a>
+      </div>
+  </div> -->
+
+
+      <div class="dashboard-card-wrapper">
+        <!-- <div class="slider-widget-container left">
+        <div class="slider-widget-container left"  [ngClass]="{'toggleSliderWidget':dashboardconfig.isExpandedGraph===false , 'fade-in-slider':widget.width !== 2 && dashboardconfig.isExpandedGraph===true}"></div>
+        <ng-container #sliderContainer></ng-container>
+        <a class='slidebar-btn white-text' (click)="expandCollapseClick(index)">
+            <i class="icon iconSmall">
+                <svg>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_LeftChevron"></use>
+                </svg>
+            </i>
+        </a>
+    </div> -->
+        <!-- <div [style.display]="!config.isAccessibleReport ? 'none' : 'block' "
+             class="left fontSize14 bold truncateCardTitle" title="{{config?.cardTitle}}" CardsConfigBinder>
+          {{config?.cardTitle}}
+        </div> -->
+
+        <div [style.display]="!config.isAccessibleReport ? 'none' : 'block' ">
+          <div *ngIf="!config.isLinkedToDashboard" id="dashboard-card-title-{{config?.cardId}}" [style.display]="!config.isAccessibleReport ? 'none' : 'block' "
+            report-identifier [config]="config" class="left fontSize14 bold truncateCardTitle"
+            title="{{config?.cardTitle}}" CardsConfigBinder>
+            {{config?.cardTitle}}
+          </div>
+          <div *ngIf="config.isLinkedToDashboard" id="dashboard-card-title-{{config?.cardId}}" [style.display]="!config.isAccessibleReport ? 'none' : 'block' "
+            report-identifier [config]="config"
+            class="blue-text cursorPointer left fontSize14 bold linkedCard truncateCardTitle"
+            (click)="headerClickedLinkedWidget()" title="{{config?.cardTitle}}" CardsConfigBinder>{{config?.cardTitle}}
+          </div>
+          <!-- <ng-container #autoSuggestContainerRef></ng-container>
+          <ng-template #autoSuggestTemplateRef let-config>
+            <div class="autocopmplete-wrapper" style="display: inline-block">
+              <smart-autocomplete class="search-field auto-complete" id="autocomplete"
+                [config]="config.autoCompleteConfig" [(modelData)]="config.autocompleteModalData"
+                (keyup)="onKeyupAutocomplete($event)" (onSelect)="onSelectAutocomplete($event)">
+              </smart-autocomplete>
+            </div>
+          </ng-template> -->
+        </div>
+        <ng-container #dashboardCardHeader></ng-container>
+        
+
+      </div>
+      <!-- <div class="widgetTopBar">
+    <div class="floatL">
+      <span *ngIf="config.isLinkReport && config.isOwn" class="text-black64 fontSize12">Linked</span>
+      <span [style.display]="config.isLinkReport && config.isOwn && appliedFilter.length > 0 ? '' : 'none'">|</span>
+      <span [style.display]="appliedFilter.length > 0 ? '' : 'none'"
+        class="text-black64 fontSize12 cursorPointer">
+        <a (click)="openViewAppliedFilter(config)">
+          View Filter(s)
+        </a>
+      </span>
+    </div>
+  </div> -->
+      <div class="widget-wrapper" [ngClass]="{'margin2Per' :  config.driveConfig.driveConfigDescription != '' ,'overflowAuto': config.isAccessibleReport && 
+         ( !isFullscreen || config.reportDetails.reportViewType==5) && config.config.widgetDataType==='flex'}">
+        <ng-container #widgetContainer>
+        </ng-container>
+
+        <ng-template #chartTemplate let-config>
+          <!-- Chart directive goes here -->
+          <div chartWidget [config]="config" (eventHandler)="eventHandler($event)"></div>
+        </ng-template>
+
+        <ng-template #flexGridTemplate let-config>
+          <div flex-grid [config]="config" (flexEvents)="flexEvents($event)"></div>
+        </ng-template>
+
+        <ng-template #olapGridTemplate let-config>
+          <div style="height: 100%;" olap-grid [config]="config"></div>
+        </ng-template>
+
+        <ng-template #mapChartTemplate let-config>
+          <div style='height: 86%;' map-chart-widget [config]="config" (mapChartEvents)="mapChartEvents($event)"></div>
+        </ng-template>
+
+        <ng-template #widgetMessage let-message>
+          <div class="noChart" [innerHTML]="message">
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </ng-template>
+  <ng-container #dashboardCardFooter></ng-container>
+</div>
+<ng-template #outletTemplate let-manifestPath="manifestPath" let-config="config">
+  <smart-outlet [path]="manifestPath" [childConfig]="config" (onInitialize)="onInitialize($event)"
+      (onDeinitialize)="onDeinitialize($event)"  (onActivate)="onActivate($event,config)"></smart-outlet>
+</ng-template>

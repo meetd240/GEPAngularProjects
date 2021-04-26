@@ -1,0 +1,21 @@
+<sub-header [subheaderConfig]="subheaderConfig" (viewInfo)="getSubheaderCompInfo($event)" id="mainContent" tabindex="-1"></sub-header>
+
+<div [style.display]="cardTypeOpportunity ? '' : 'none'" class="dashboard-wrapper paddingBtm25"
+  id="oppfinder-container-id">
+
+  <ng-container #gridContainer>
+  </ng-container>
+
+  <ng-template #gridTemplate let-config>
+    <oppfinder-grid [config]="config.config" (cardEvents)="cardEvents($event)" id="dashboard-container-id">
+    </oppfinder-grid>
+  </ng-template>
+
+</div>
+<div *ngIf="showOppContainer"  id="dashboard-container-id" class="full-height">
+  <ng-container #oppFinderViewContainer>
+  </ng-container>
+</div>
+<ng-template #outletTemplate let-manifestPath="manifestPath" let-config="config">
+  <smart-outlet [path]="manifestPath" [childConfig]="config"></smart-outlet>
+</ng-template>

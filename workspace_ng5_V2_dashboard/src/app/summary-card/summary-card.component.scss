@@ -1,0 +1,257 @@
+.summary-card {
+  .driven-class {
+    position: absolute;
+    top: 8px;
+    margin-left: -11px;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .card-messages {
+    /* margin-top: -10px !important; */
+    /* width: 80%; */
+    /* max-width: 50%; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    /* display: inline-block; */
+    /* font-size: 12px; */
+  }
+  .driven-title {
+    // margin-top: -10px !important;
+    // /* width: 80%; */
+    // max-width: 50%;
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    // white-space: nowrap;
+    // display: inline-block;
+    // font-size: 12px;
+    // // font-weight: bold;
+
+    margin-top: 2px !important;
+    max-width: 50%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    font-size: 11px;
+    margin-left: 9px;
+    color: #5c5c5c;
+  }
+  .summery-card-container {
+    display: inline-block;
+    width: 80%;
+    text-align: center;
+    margin: 10px 0px;
+    position: absolute;
+    left: 47%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    .summary-card-title {
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .summery-card-value {
+      color: #0073dc;
+      font-weight: bold;
+      clear: both;
+    }
+    .summary-card-percentage-value {
+      color: #000000;
+      font-weight: normal;
+      clear: both;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .summary-card-description {
+      display: block;
+      display: -webkit-box;
+      max-width: 100%;
+      height: 28px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    // .summary-card-description::after{
+    //   letter-spacing: .10em;
+    //   content:"...";
+    //   position:absolute;
+    //   bottom:0;
+    //   right:0;
+
+    // }
+    .linkedSummaryCardValue {
+      border-bottom: 2px solid #0177d6;
+      cursor: pointer;
+    }
+    .linkedSummaryCardDiv {
+      font-size: 18px !important;
+      margin-bottom: 4px;
+    }
+    .textfieldWrapper {
+      width: calc(100% - 70px);
+      margin-top: -13px;
+    }
+    .action-buttons {
+    }
+    .edit-description-container {
+      .description-textfield-wrapper {
+        width: calc(100% - 52px);
+        margin-top: -12px;
+      }
+    }
+  }
+  .small-summary-card-class {
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    left: 47%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0px !important;
+    width: 90%;
+    .summary-card-title {
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      float: left;
+      font-size: 16px !important;
+      }
+    .summery-card-value {
+        color: #0073dc;
+        font-weight: bold;
+        float: right;
+        // padding-top: 5px !important;
+        margin-right: -15px !important;
+        clear: none;
+        font-size: 1rem!important;
+        margin-top: 0px !important;
+      }
+      .summary-card-percentage-value {
+        color: #000000;
+        font-weight: normal;
+        clear: both;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .summary-card-description {
+        display: block;
+        display: -webkit-box;
+        max-width: 100%;
+        height: 28px;
+        margin: 0 auto;
+        // font-size: 14px;
+        line-height: 1;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      // .summary-card-description::after{
+      //   letter-spacing: .10em;
+      //   content:"...";
+      //   position:absolute;
+      //   bottom:0;
+      //   right:0;
+  
+      // }
+      .linkedSummaryCardValue {
+        border-bottom: 2px solid #0177d6;
+        cursor: pointer;
+      }
+      .linkedSummaryCardDiv {
+        font-size: 18px !important;
+        margin-bottom: 4px;
+      }
+      .textfieldWrapper {
+        width: calc(100% - 70px);
+        margin-top: -13px;
+      }
+      .action-buttons {
+      }
+      .edit-description-container {
+        .description-textfield-wrapper {
+          width: calc(100% - 52px);
+          margin-top: -12px;
+        }
+      }  
+  }
+.small-summary-card-drive-class{
+  position: absolute;
+  top:0px;
+  margin-left:-7px;
+}
+  .dropdown-content {
+    // top: 10px !important;
+    height: auto;
+  }
+
+  .noChart {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+
+  .grid-stack {
+    & > .grid-stack-item[data-gs-height="3"] {
+      .summery-card-container {
+        .summary-card-description {
+          height: 56px;
+          -webkit-line-clamp: 4;
+        }
+      }
+    }
+    & > .grid-stack-item[data-gs-height="4"] {
+      .summery-card-container {
+        .summary-card-description {
+          height: 98px;
+          -webkit-line-clamp: 7;
+        }
+      }
+    }
+    & > .grid-stack-item[data-gs-height="5"] {
+      .summery-card-container {
+        .summary-card-description {
+          height: 154px;
+          -webkit-line-clamp: 11;
+        }
+      }
+    }
+  }
+  .dashboard-card-content {
+    .dashboard-kabab-menu {
+      .dropdown-content {
+        .transform-90 {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+}
+
+ul.dd_data.dropdown-content.dashboard-kebab-DD.bottom.left.active {
+  height: auto !important;
+}
+
+.marginNTop30 {
+  margin-top: -30px;
+}
+
+.marginZero {
+  margin: 0px !important;
+}

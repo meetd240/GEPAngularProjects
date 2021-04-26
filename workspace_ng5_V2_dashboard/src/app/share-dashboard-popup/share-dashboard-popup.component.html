@@ -1,0 +1,258 @@
+<div class="scrollableModel modal-popup panelBox-content share-dashboard-popup">
+    <div class="panelBox-body padding0 share-dashboard-popup-wrapper">
+        <div class="row margin0 share-dashboard-popup-body">
+            <div class="panelBox-content margin0 share-dashboard-popup-container">
+                <div class="modal-header">
+                    <div class="searchSlideMain searchSlideMain--inputBdrBNone"
+                        [ngClass]="{'hide': currentViewType != 'ALL' }">
+                        <div class="searchWithHiddenTextField" [ngClass]="{'active':isActiveSearch}">
+                            <a href="javascript:void(0)" class="search-icon btn-flat black-text" (click)="showSearch()"
+                                smartTooltip [config]="shareDashBoardSearchTooltipConfig">
+                                <i class="icon iconSmall center grey-text">
+                                    <svg>
+                                        <use xlink:href="#icon_Search"></use>
+                                    </svg>
+                                </i>
+                            </a>
+                            <smart-textfield class="input-field" [config]="searchListConfig"
+                                [(modelData)]="searchKeyText" (keyup)="onSearchKeypress(searchKeyText)">
+                            </smart-textfield>
+                            <a href="javascript:void(0)" [ngClass]="{'hide':!showMe}"
+                                (click)="searchKeyText.value='';hideSearch();clearSearch()"
+                                class="waves-circle waves-effect cancel-icon btn-flat black-text" smartTooltip
+                                [config]="shareDashBoardCloseTooltipConfig">
+                                <i class="icon iconSmall center grey-text">
+                                    <svg>
+                                        <use xlink:href="#icon_Close"></use>
+                                    </svg>
+                                </i>
+                            </a>
+
+                        </div>
+                    </div>
+                    <span>
+                        <i class="icon iconSmall" style="color:#c2c2c2">
+                            <svg>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Share"></use>
+                            </svg>
+                        </i>
+                    </span>
+                    <span
+                        class="title marginLeft10 dashboard-views-title">{{ this.shareDashboardPopupConfig.title}}</span>
+                    <!-- <span class="title marginLeft10 dashboard-views-title {{addNewMemberList}}">Select
+                        Member(0/5)</span> -->
+
+
+                </div>
+                <div class="col s12 padding0 share-dashboard-container">
+                    <div style="height: 300px;">
+                        <ng-container #shareDashboardContainer>
+                        </ng-container>
+                    </div>
+
+                    <ng-template #addMemberTemplate>
+                        <div class="row borderBtmGray padding20 marginBtm0 paddingTop10 paddingBtm10">
+                            <div class="col s12 padding0">
+                                <div class="col s8 padding0">
+
+                                    <!--  <span class="title fixedShareReportPopuTitleFontSize">Shared with 0 Member(s)</span> -->
+                                    <span class="title fixedShareReportPopuTitleFontSize"
+                                        [innerHTML]="constants.UIMessageConstants.STRING_Share_Dashboard_Share_With_0_Member"></span>
+                                </div>
+
+                                <!-- <div class="col s4 padding0">
+                                    <div class="col right">
+                                        <a href="javascript:void(0)"
+                                            [class.disabled]="this.shareDashboardPopupConfig.allUserDetailList.length == 0"
+                                            (click)="addNewShare()" smartTooltip
+                                            [config]="shareDashBoardUnShareTooltipConfig">
+                                            <i class="icon iconSmall center blue-text"><svg focusable="false">
+                                                    <use xlink:href="#icon_unShare"></use>
+                                                </svg></i>
+                                        </a>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="row marginBtm0">
+                            <div class="center padding55 fixedAddMembersDivHeight">
+                                <a (click)="addNewShareDashboard()" class="action-block-cont">
+                                    <span class="action-block-cont-icon">
+                                        <i class="icon icon--xLarge">
+                                            <svg>
+                                                <use xlink:href="#icon_CirclePlus"></use>
+                                            </svg>
+                                        </i>
+                                    </span>
+                                    <!-- <span class="action-block-cont-lbl">ADD Members</span> -->
+                                    <span class="action-block-cont-lbl"
+                                        [innerHTML]="constants.UIMessageConstants.STRING_Share_Dashboard_Add_Member"></span>
+
+
+                                </a>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <ng-template #allUserTemplate>
+                        <div style="max-height: 305px;">
+                            <div class="scroll-inner-wrapp listview-details" style="max-height: 305px;">
+                                <ul class="collection filter-list noBorder tmpCollection" id="filterlist">
+                                    <li class="collection-item col s12 padding15"
+                                        *ngFor="let user of shareDashboardPopupConfig.allUserDetailList | filter : { term: searchKeyText.value, key:['fullName','emailAddress'],isSelectAll:'true'};let i = index; trackBy:trackByContactCode">
+                                        <span class="left">
+                                            <!-- <smart-checkbox  [(modelData)]="user.IsCheckModel"
+                                                 [config]="userListConfig" (change)="setCloseButtonTitle()">
+                                            </smart-checkbox> -->
+                                                                                        <!-- <smart-checkbox  [(ngModel)]="user.isChecked"  [config]="userListConfig" (change)="onChangeUserAvaibleList($event, user.isChecked, user)" ></smart-checkbox> -->
+                                            <!-- <input type="checkbox" id="repoChk_{{user.fullName}}" class="filled-in" ng-model="n.isSelected" ng-change="checkShareReportData(n, n.isSelected)" />
+                                            <label for="repoChk_{{user.fullName}}"></label> -->
+                                        </span>
+                                        <span class="left shareDashboardCheckbox">
+                                            <input type="checkbox" id="AllUser_{{i}}" class="filled-in"
+                                            [(ngModel)]="user.IsCheckModel.checked"                                           
+                                            (change)="setCloseButtonTitle(user)" />   
+                                            <label for="AllUser_{{i}}"></label> 
+
+                                        </span>
+
+                                        <div class="left marginLeft7" >
+                                            <span class="truncate" title="{{user.userName}}">{{user.fullName}}</span>
+                                            <span class="truncate" title="{{user.email}}">{{user.emailAddress}}</span>
+                                        </div>
+                                    </li>
+                                    <!-- <li class="marginTop40 colorError alignErrorMsg blank-section-message" ng-if="searchinList.length >= 1 && ( allUserDetailList | filter: searchinList).length == 0">
+                                        <span class="marginTop50 displayBlock center-align">
+                                            {{'noRecordsFound' | translate }}
+                                        </span>
+                                    </li> -->
+                                    <span class="center-align displayBlock grey-text padding130"  [style.display]="shareDashboardPopupConfig.allUserDetailList.length==0?'':'none'"
+                                    [innerHTML]="constants.UIMessageConstants.STRING_No_Records_Found">                               
+                                    </span>
+
+                                   
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </ng-template>
+                    <ng-template #emptyUserTempalte>
+                      <span class="center-align displayBlock grey-text padding130"
+                                        [innerHTML]="constants.UIMessageConstants.STRING_No_Records_Found">                               
+                     </span>
+                       
+                    </ng-template>
+                    <ng-template #sharedWithUserTemplate>
+                        <div
+                            class="modal-header borderBtmGray padding20 marginBtm0 paddingTop10 paddingBtm10 heightAuto share-dashboard-popup-share-list">
+                            <div class="searchSlideMain searchSlideMain--inputBdrBNone">
+                                <div class="searchWithHiddenTextField" [ngClass]="{'active':isActiveSearch}">
+                                    <a href="javascript:void(0)" class="search-icon btn-flat black-text"
+                                        (click)="showSearch()" smartTooltip
+                                        [config]="shareDashBoardSearchTooltipConfig">
+                                        <i class="icon iconSmall center grey-text">
+                                            <svg>
+                                                <use xlink:href="#icon_Search"></use>
+                                            </svg>
+                                        </i>
+                                    </a>
+                                    <smart-textfield class="input-field" [config]="searchListConfig"
+                                        [(modelData)]="searchKeyText"  >
+                                    </smart-textfield>
+                                    <a href="javascript:void(0)" [ngClass]="{'hide':!showMe}"
+                                        (click)="searchKeyText.value='';hideSearch()"
+                                        class="waves-circle waves-effect cancel-icon btn-flat black-text" smartTooltip
+                                        [config]="shareDashBoardCloseTooltipConfig">
+                                        <i class="icon iconSmall center grey-text"> 
+                                            <svg>
+                                                <use xlink:href="#icon_Close"></use>
+                                            </svg>
+                                        </i>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                         <span class="title fixedShareReportPopuTitleFontSize" >{{sharedwithTitle}}</span>
+                            <span class="right">
+                                <a href="javascript:void(0)" class="paddingRight10 left"
+                                    [class.disabled]="!isShareUserSelecated" smartTooltip
+                                    [config]="shareDashBoardUnShareTooltipConfig" (click)="removeUser();">
+                                    <i class="icon iconSmall blue-text">
+                                        <svg>
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_unShare"></use>
+                                        </svg>
+                                        <!-- <svg>
+                                            <path
+                                            d="M9 12.5c0-.4-.1-.8-.2-1.2l6.8-3.1c.5.8 1.4 1.3 2.4 1.3 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .3.1.5.1.8l-6.9 3.2c-.5-.6-1.3-1-2.2-1-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.6-.4 2.1-.9l5.7 2.6c0-.3.1-.7.3-1l-5.4-2.5c.2-.4.3-.8.3-1.2zm9-8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-12 10c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z M21.1 13.3h-1.3l-2.5 2.5-2.5-2.5h-1.4l3.2 3.2-3 3H15l2.3-2.3 2.3 2.3H21l-3-3 3.1-3.2" />
+                                        </svg> -->
+                                    </i>
+                                </a>
+                                <a href="javascript:void(0)" class="left" smartTooltip
+                                    [config]="shareDashBoardAddTooltipConfig" (click)="backWith()">
+                                    <i class="icon iconSmall blue-text">
+                                        <svg>
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                xlink:href="#icon_CirclePlus"></use>
+                                        </svg>
+                                    </i>
+                                </a>
+
+                            </span>
+                            <!-- <button name="unshare"  style="color: blue;" text="unshare" value="UnShare"   [disabled]="!isShareUserSelecated" (click)="removeUser()" >UnShare</button> -->
+                        </div>
+
+                        <div class="scroll-inner-wrapp listview-details" style="max-height: 257px;">
+
+                            <ul class="collection filter-list noBorder" *ngIf="(shareDashboardPopupConfig.sharedUserDetailList | filter : { term: searchKeyText.value, key:['fullName','emailAddress'],isSelectAll:true}) as result">
+                                <li class="collection-item col s12 padding15"
+                                    *ngFor="let user of result;let i = index; trackBy:trackByContactCode">
+                                    <span class="left shareDashboardCheckbox">
+                                            <input type="checkbox" id="shareUser_{{i}}" class="filled-in"
+                                            [(ngModel)]="user.IsCheckModel.checked"                                           
+                                            (change)="setCloseButtonTitle()" />   
+                                            <label for="shareUser_{{i}}"></label>
+
+                                    </span>
+                                    <div class="left marginLeft7">
+                                        <span class="truncate" title="{{user.FirstName}}">{{user.fullName}}</span>
+                                        <span class="truncate" title="{{user.UserEmail}}">{{user.emailAddress}}</span>
+                                    </div>
+                                    
+                                </li>
+
+                                <li>
+                                    <span class="center-align displayBlock grey-text padding130" [style.display]="!result || result.length==0?'':'none'"
+                                    [innerHTML]="constants.UIMessageConstants.STRING_No_Records_Found">    
+                                                             
+                                    </span>
+                                </li>
+                                
+                            </ul>
+                           
+                        </div>        
+                    </ng-template>
+
+
+                    <div class="modal-footer">
+                        <span class="right">
+                           
+                            <smart-button [config]="btnBackConfig"
+                                [ngClass]="{'hide': currentViewType != 'ALL' || isAnyUserSelected}"
+                                (callback)="backShareDashboard()"></smart-button>
+
+                                <smart-button [config]="btnCloseConfig"
+                                (callback)="onCloseDashboard()"></smart-button>
+
+                                <smart-button [config]="btnShareConfig"
+                                [ngClass]="{'hide': currentViewType != 'ALL' || !isAnyUserSelected}"
+                                (callback)="onShareClick()"></smart-button>
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="lean-overlay"></div>

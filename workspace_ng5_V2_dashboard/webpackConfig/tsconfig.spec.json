@@ -1,0 +1,35 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "module": "commonjs",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "files": [ 
+    "./test.ts",
+    "./polyfills.ts",   
+    "../node_modules/smart-autocomplete/index.ts",
+    "../node_modules/smart-lite-table/index.ts",
+    "../node_modules/smart-section/index.ts",
+    "../node_modules/smart-checkbox/index.ts",
+    "../node_modules/smart-date/index.ts",
+    "../node_modules/smart-element/index.ts",
+    "../node_modules/smart-platform-services/index.ts",
+    "../node_modules/smart-select/index.ts",
+    "../node_modules/smart-textfield/index.ts",
+    "../node_modules/smart-numeric/index.ts",
+    "../node_modules/smart-toast/index.ts"
+  ],
+  "include": [
+    "**/*.spec.ts",
+    "**/*.d.ts" 
+  ], 
+ 
+  "exclude": [  
+    "../node_modules/smart-notification/**/*.css",  
+    "../node_modules/smart-notification/src/smart-notification.component.scss"    
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "module": "commonjs",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "files": [
+    "test.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "**/*.spec.ts",
+    "**/*.d.ts",
+    "./../node_modules/browserslist/index.js",
+    "./../node_modules/smart-platform-services/index.ts",
+    "./../node_modules/smart-platform-services/src",
+    "**/*.component.scss",
+    "./../node_modules/smart-card2/src",
+    "./../node_modules/smart-card2/index.ts",
+    "./../node_modules/smart-card3/src",
+    "./../node_modules/smart-card3/index.ts",
+    "./../node_modules/smart-cards-manager/src",
+    "./../node_modules/smart-cards-manager/index.ts",
+    "./../node_modules/smart-cards-placeholder/src",
+    "./../node_modules/smart-cards-placeholder/index.ts",
+    "./../node_modules/smart-cards-shared/src",
+    "./../node_modules/smart-cards-shared/index.ts",
+    "./../node_modules/smart-carousel-layout/src",
+    "./../node_modules/smart-carousel-layout/index.ts",
+    "./../node_modules/smart-gridstack-layout/src",
+    "./../node_modules/smart-gridstack-layout/index.ts",
+    "./../modules-manifest.ts",
+    "./../node_modules/smart-button/index.ts",
+    "./../node_modules/smart-checkbox/index.ts",
+    "./../node_modules/smart-date/index.ts",
+    "./../node_modules/smart-dropdown/index.ts",
+    "./../node_modules/smart-global-loader/index.ts",
+    "./../node_modules/smart-infotip/index.ts",
+    "./../node_modules/smart-module-loader/index.ts",
+    "./../node_modules/smart-numeric/index.ts",
+    "./../node_modules/smart-radio/index.ts",
+    "./../node_modules/smart-select/index.ts",
+    "./app/dashboard-card/index.ts",
+    "./../node_modules/smart-textfield/index.ts",
+    "./../node_modules/smart-toast/index.ts",
+    "./../node_modules/smart-tooltip/index.ts",
+    "./../node_modules/smart-autocomplete/index.ts",
+    "./../node_modules/smart-lookup/index.ts",
+    "./../node_modules/smart-native-scroll/index.ts",
+    "./../node_modules/smart-search/index.ts",
+    "./../node_modules/smart-validation/index.ts",
+    "./app/dashboard-views-popup/dashboard-views-popup.module.ts",
+    "./app/global-filter/global-filter.module.ts",
+    "./app/global-filter/measures-filter/measures-filter.module.ts",
+    "./app/global-filter/number-filter/number-filter.module.ts",
+    "./app/global-filter/period-filter/period-filter.module.ts",
+    "./app/global-filter/period-filter/select-year-popup/select-year-poup.module.ts",
+    "./app/global-filter/string-filter/string-filter.module.ts",
+    "./app/purchase-price-popup/purchase-price-popup.module.ts",
+    "./app/slider-widget/slider-widget.module.ts",
+    "./app/summary-card/summary-card.module.ts",
+    "./app/oppfinder-card/oppfinder-card.module.ts",
+    "./app/default-widget/default-widget.module.ts",
+    "./app/view-applied-filter-popup/view-applied-filter-popup.module.ts",
+    "./app/view-rename-popup/view-rename-popup.module.ts",
+    //
+    // "./../node_modules/smart-platform-services/src/**.**.ts"
+    // ,"./../node_modules/smart-platform-services/src/"
+    // ,"./../node_modules/smart-platform-services/src/"
+    // ,"./../node_modules/smart-platform-services/src/"
+    // ,"./../node_modules/smart-platform-services/src/"
+    // ,"./../node_modules/smart-platform-services/src/"
+    // ,"./../node_modules/smart-platform-services/src/"
+    // ,"./../node_modules/smart-platform-services/src/"
+    // ,"./../node_modules/smart-platform-services/src/"
+    // ,"./../node_modules/smart-platform-services/src/"
+  ],
+  "exclude": [
+    // "./../node_modules/**/**/*.spec.ts"
+    "../node_modules/smart-cards-manager/src/unit-tests/specs/smart-cards-container.component.spec.ts",
+    "../node_modules/smart-cards-placeholder/src/unit-tests/specs/smart-cards-placeholder.component.spec.ts",
+    "../node_modules/smart-cards-shared/src/unit-tests/specs/smart-cards-container.component.spec.ts",
+    "../node_modules/smart-gridstack-layout/src/unit-tests/specs/smart-gridstack-item.component.spec.ts",
+    "../node_modules/smart-module-loader/src/unit-tests/specs/static-module-loader.service.spec.ts",
+    "../node_modules/smart-button/src/smart-button.component.spec.ts",
+    "../node_modules/smart-numeric/src/smart-numeric.service.spec.ts",
+    "../node_modules/smart-numeric/src/smart-textfield.service.spec.ts",
+    "../node_modules/smart-popup/src/smart-popup.component.spec.ts",
+    "../node_modules/smart-date/src/smart-date.component.spec.ts",
+    "../node_modules/smart-tooltip/src/smart-tooltip.directive.spec.ts"
+    // "./../node_modules/smart-dropdown/src/smart-dropdown.component.spec.ts"
+  ]
+}

@@ -1,0 +1,65 @@
+<div [id]="config.sliderFilterArray[0].enabledAsGlobalSlider?config.cardId:0" class="dashboard-card-container height100 drag-handle">
+    <div class="center drag-handle-wrapper height0px" *ngIf="config.sliderFilterArray[0].enabledAsGlobalSlider">
+        <a>
+            <i class="icon iconSmall drag-handle gray-text">
+                <svg [style.display]="!_dashboardCommService.oppFinderState.oppFinderFlag ? '' : 'none'">
+                    <use xlink:href="#icon_Drag"></use>
+                </svg>
+            </i>
+        </a>
+    </div>
+    <div class="clearfix global-slider-widget" [ngClass]="{'paddingTop20':config.sliderFilterArray[0].enabledAsGlobalSlider,'paddingTop0':!config.sliderFilterArray[0].enabledAsGlobalSlider}" [id]="config.sliderFilterArray.reportObjectId" *ngFor="let slider of config.sliderFilterArray; let index = index">
+        <!-- <div class="clearfix slider-widget"> -->
+        <span *ngIf="slider.enabledAsGlobalSlider">{{slider.reportObjectName}}</span>
+        <a *ngIf="slider.enabledAsGlobalSlider" style="float:right;" href="javascript:void(0)" class="filter-edit-icon" (click)="openFilterPanel(slider,slider.isTabFilter)">
+            <i class="icon iconSmall" smartTooltip [config]="sliderOpenGlobalFilterConfig">
+                <svg>
+                    <use xlink:href="#icon_editPen"></use>
+                </svg>
+            </i>
+        </a>
+        <i class="icon iconSmall blue-text"  *ngIf="slider.enabledAsGlobalSlider" smartTooltip [config]="slider.sliderTooltipConfig">
+            <svg>
+                <use xlink:href="#icon_Info"></use>
+            </svg>
+        </i>
+
+        <!-- <span class="right paddingTop5" *ngIf="slider.enabledAsGlobalSlider">
+            <a class="reset-btn cursor" (click)="resetSlide(index)"
+                [innerHTML]="constants.UIMessageConstants.STRING_Reset"></a>
+        </span> -->
+        <ion-range-slider #sliderElement type="double" [min]="slider.min" [max]="slider.max" [from]="slider.range.from"
+            keyboard="true" [to]="slider.range.to" grid_num="10" decorate_both="false"
+            (onUpdate)="rangeOnUpdate($event,index)" (onChange)="rangeOnChange($event,index)"
+            (onFinish)="onFinish($event,index)">
+        </ion-range-slider>
+        <!-- <div *ngIf="slider.name=== 'Category Spend'" class="left slider-unit">$</div> -->
+
+        <smart-numeric class="marginTop0 left slider-input" #sliderFrom [config]="slider.ConfigFrom"
+            [ngClass]="{'redBorder': slider.min > slider.range.from}" [(modelData)]="slider.range"
+            (keyup)="onFromRangeBlur(index,slider.range.from)"></smart-numeric>
+        <div class="left slider-seperator paddingRight10">-</div>
+
+        <!-- <div *ngIf="slider.name=== 'Category Spend'" class="left slider-range">MM</div>
+    <div class="left slider-seperator">-</div>
+    <div *ngIf="slider.name=== 'Category Spend'" class="left slider-unit">$</div>
+     -->
+        <smart-numeric class="marginTop0 left slider-input" #sliderTo
+            [ngClass]="{'redBorder': slider.max < slider.range.to }" [config]="slider.ConfigTo"
+            [(modelData)]="slider.range" (keyup)="onToRangeBlur(index,slider.range.to)">
+        </smart-numeric>
+
+        <!-- <div *ngIf="slider.name=== 'Category Spend'" class="left slider-range">MM</div> -->
+        <div class="slider-apply-btn">
+            <smart-button class="apply-btn" [config]="btnRangeApplyConfig"
+                (callback)="onApplySliderFilterRange(slider,$event)">
+            </smart-button>
+        </div>
+
+    </div>
+    <!-- <div *ngIf="config.sliderFilterArray.length>0" class="slider-apply-btn">
+        <smart-button class="apply-btn" [config]="btnRangeApplyConfig"
+            (callback)="onApplySliderFilterRange(config.sliderFilterArray,$event)">
+        </smart-button>
+    </div> -->
+</div>

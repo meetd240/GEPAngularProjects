@@ -1,0 +1,97 @@
+<div class="model_body panelBox--filter setHeight globalFilterWrapper "
+  [ngClass]="{'top-to-bottom-slide':!isFilterOpen,'bottom-to-top-slide':isFilterOpen}">
+  <div class="panelBox-body padding0">
+    <div class="row margin0">
+      <div class="panelBox-content margin0">
+        <div class="panelBox-header">
+          <div class="header-title">
+            <span class="title" [innerHTML]="this.msgDatasourceDisplay.filterLevel"></span>
+
+            <a class="waves-circle waves-effect waves-light" (click)="openNonStandardFilterPopup()"
+              [style.display]="(config.nonStandardFilterList.length > 0) && !config.isTabFilter ? '':'none'">
+              <i class="icon iconSmall"><svg>
+                  <use xlink:href="#icon_CirclePlus"></use>
+                </svg></i>
+            </a>
+            <span class="title right">
+              {{msgDatasourceDisplay.datasourceDisplayMessage}}
+              <smart-infotip [config]="msgDatasourceDisplay.sliderTooltipConfig">
+                <a class='waves-effect'>
+                  <i class="icon iconSmall">
+                    <svg>
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Info"></use>
+                    </svg>
+                  </i>
+                </a>
+              </smart-infotip>
+            </span>
+          </div>
+          <div class="saved-filter-link" *ngIf="false">
+            <a class="blue-text" (click)="openSavedFilters()">
+              Saved Filters
+            </a>
+          </div>
+        </div>
+        <div class="col s12 padding0" style="background-color: #fff;">
+          <div class="row tabs-vertical">
+            <div class="col s12 borderBtmGray tabparent-container">
+              <div class="tabparent">
+                <ul class="tab-list">
+                  <li class="tab" *ngFor="let tab of reportingObjects let i = index;trackBy:trackByReportObject"
+                    (click)="onTabChange(tab)">
+                    <div [ngClass]="{'active': tab.active, 'ScrollEle': tab.active}">
+                      <a class="relative paddingRight40 truncate" title="{{tab.FilterTabInfo}}"
+                        [ngClass]="{'paddingTop14 paddingBtm13': !tab.FilterTabInfo || tab.FilterIdentifier == 3, 'paddingTop5 paddingBtm5': tab.FilterTabInfo && tab.FilterIdentifier != 3  }">
+                        <span class="truncate" style="max-width: 180px;">{{tab.DisplayName}}</span>
+                        <span class="tab-filter-info truncate width170"  *ngIf="tab.FilterTabInfo &&tab.FilterIdentifier != 3 ">
+                          {{tab.FilterTabInfo}}
+                        </span>
+                        <span class="right slicerInfoTip" [style.display]="tab.FilterIdentifier === 3 ? '':'none'">
+                          <smart-infotip [config]="tooltipconfig">
+                            <a class='waves-effect blue-text'>
+                              <i class="icon iconSmall">
+                                <svg>
+                                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Info"></use>
+                                </svg>
+                              </i>
+                            </a>
+                          </smart-infotip>
+                        </span>
+                        <span class="waves-circle waves-effect waves-light marginRight8 absolute clear-filter"
+                          [ngClass]="{'blue-text': tab.FilterTabInfo,'grey-text': !tab.FilterTabInfo}"
+                          (click)="clearAllSelections(tab)">
+                          <i class="icon iconSmall" smartTooltip [config]="{ message: 'Clear', position: 'top' }">
+                            <svg>
+                              <use xlink:href="#icon_FilterReset"></use>
+                            </svg>
+                          </i>
+                        </span>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="filter-body">
+              <ng-container #filterTypeContainer></ng-container>
+              <ng-container #addToStandardFilter></ng-container>
+            </div>
+          </div>
+          <div class="modal-footer is-scrolled">
+            <div class="right">
+              <smart-button (callback)="onCancel($event)" [config]="cancelButtonConfig" class="left modal-close">
+              </smart-button>
+              <smart-button (callback)="applyFilter($event)" [config]="applyButtonConfig" class="left modal-close">
+              </smart-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #outletTemplate let-manifestPath="manifestPath" let-config="config">
+  <smart-outlet [path]="manifestPath" [childConfig]="config" (onInitialize)="onInitialize($event)"
+                    (onDeinitialize)="onDeinitialize($event)"  (onActivate)="onActivate($event)"></smart-outlet>
+</ng-template>

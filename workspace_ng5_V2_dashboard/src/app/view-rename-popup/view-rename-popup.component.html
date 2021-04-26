@@ -1,0 +1,33 @@
+<div class="scrollableModel modal-popup">
+    <div class="header-title-container modal-header scrollableModel ">
+        <span>
+            <i class="icon iconSmall" style="color:#c2c2c2">
+                <svg>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_editPen"></use>
+                </svg>
+            </i>
+        </span>
+
+        <span class="paddingLeft10">
+            <b>{{constants.UIMessageConstants.STRING_Rename_View}}</b>
+        </span>
+    </div>
+    <div class="content-container paddingTop20 ">
+        <div class="textfieldWrapper">
+          <label for="View Name">{{constants.UIMessageConstants.STRING_View_Name}}</label>
+            <smart-textfield class="marginTop0" [config]="smartTextFieldConfig" [(modelData)]="graphTitle">
+            </smart-textfield>
+            <div class="remaining-text-indcator">
+                {{graphTitle.value.length}}/{{smartTextFieldConfig.attributes.maxLength}}
+            </div>
+        </div>
+
+    </div>
+    <div class="footer modal-footer modal-footer-normalScroll">
+        <div class="right">
+            <smart-button [config]="btnSaveConfig" (callback)="manageColumnbtnDone()"></smart-button>
+            <smart-button [config]="btnCancelConfig" (callback)="manageColumnbtnCancel()"></smart-button>
+        </div>
+    </div>
+</div>
+<div class="lean-overlay" (click)="onCancel()"></div>

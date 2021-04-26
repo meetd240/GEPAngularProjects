@@ -1,0 +1,180 @@
+<div class="scrollableModel manage-views-popup">
+    <div class="header-title-container modal-header scrollableModel ">
+        <div class="searchSlideMain searchSlideMain--inputBdrBNone">
+            <div class="searchWithHiddenTextField" [ngClass]="{'active':isActiveSearch}">
+                <a class="search-icon btn-flat waves-circle waves-effect" (click)="showSearch()" smartTooltip [config]="searchTooltipConfig">
+                    <i class="icon iconSmall center grey-text">
+                        <svg>
+                            <use xlink:href="#icon_Search"></use>
+                        </svg>
+                    </i>
+                </a>
+                <smart-textfield class="input-field" [config]="searchListConfig" [(modelData)]="searchKeyText"></smart-textfield>
+                <a *ngIf="closeSearch" class="waves-circle waves-effect cancel-icon btn-flat " (click)="hideSearch()" smartTooltip [config]="closeTooltipConfig">
+                    <i class="icon iconSmall center grey-text">
+                        <svg>
+                            <use xlink:href="#icon_Close"></use>
+                        </svg>
+                    </i>
+                </a>
+            </div>
+        </div> 
+        <span>
+            <i class="icon iconSmall" style="color:#c2c2c2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M2 3v11h8V3H2zm7 10H3V4h6v9zM11 3v4h10V3H11zm9 3h-8V4h8v2zM12 11V9h8v2h1V8H11v3zM2 15v6h8v-6H2zm7 5H3v-4h6v4zM21.9 17.7c.1-.4.1-.8.1-1.2s0-.8-.1-1.2l-1.3-.2c-.1-.2-.2-.5-.3-.6l.8-1c-.5-.6-1-1.2-1.6-1.6l-1 .8-.6-.3-.2-1.3c-.5-.1-.8-.1-1.2-.1s-.8 0-1.2.1l-.2 1.3c-.2.1-.5.2-.6.3l-1-.7c-.6.5-1.2 1-1.6 1.6l.8 1-.3.6-1.3.2c-.1.3-.1.6-.1 1.1 0 .4 0 .8.1 1.2l1.3.2c.1.2.2.5.3.6l-.8 1c.5.6 1 1.2 1.6 1.6l1-.8c.2.1.5.2.6.3l.2 1.3c.4.1.7.1 1.2.1.4 0 .7 0 1.2-.1l.2-1.3c.2-.1.5-.2.6-.3l1 .8c.6-.5 1.2-1 1.6-1.6l-.8-1 .3-.6 1.3-.2zM20 19.5c-.2.2-.3.4-.5.5l-.9-.7-1.6.6-.3 1.2H16l-.2-1.2-1.4-.6-.8.7c-.2-.2-.4-.3-.5-.5l.7-.9-.6-1.6-1.3-.2v-.7l1.2-.2.6-1.6-.7-.8c.2-.2.3-.4.5-.5l.9.7 1.6-.6.2-1.2h.7l.2 1.2 1.6.6.9-.7c.2.2.4.3.5.5l-.7.9.6 1.6 1.2.2v.7l-1.3.1-.6 1.6.7.9zm-3.5-4.8c-1 0-1.8.8-1.8 1.8s.8 1.8 1.8 1.8 1.8-.8 1.8-1.8-.8-1.8-1.8-1.8zm0 2.7c-.6 0-.9-.5-.9-.9 0-.6.5-.9.9-.9.6 0 .9.5.9.9 0 .5-.3.9-.9.9z"
+                    />
+                </svg>
+            </i>
+        </span>
+
+        <span class="paddingLeft10">
+            MANAGE VIEWS
+        </span>
+    </div>
+    <div class="content-container  ">
+
+        <!-- <div class="createNew " style="height:60px" *ngIf="(manageviewsdata|filter:{term:searchKeyText.value, key:'title'}).length!==0">
+            <div class="paddingTop20 paddingLeft24 paddingRight24" *ngIf="createNewEditFlg===false">
+                <a class='waves-effect white-text' (click)="openCreateNewEdit()">
+                    <i class="icon iconSmall blue-text">
+                        <svg>
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_CirclePlus"></use>
+                        </svg>
+                    </i>
+                    <span class="blue-text">Create New View</span>
+                </a>
+
+            </div>
+            <div class="createNewEdit paddingTop14 paddingRight24 paddingLeft24" *ngIf="createNewEditFlg===true">
+                <div class="textfieldWrapper left">
+                    <smart-textfield class="input-field marginTop0" [config]="smartTextFieldConfig" [(modelData)]="createNewText"></smart-textfield>
+                </div>
+                <div class="action-buttons right  marginTop20 ">
+                    <a href class="blue-text paddingRight10 " (click)="closeCreateNew($event)">
+                        <i class="icon iconSmall">
+                            <svg>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Close"></use>
+                            </svg>
+
+                        </i>
+                    </a>
+                    <a class="blue-text" [ngClass]="{'disabled':createNewText.value.trim().length===0}"  (click)="updateCreateNew()">
+                        <i class="icon iconSmall">
+                            <svg>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Check"></use>
+                            </svg>
+
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="viewsDataList" style="height:300px;overflow-y:auto">
+            <div class="view-items paddingTop10 " *ngFor="let copy of manageviewsdata;let index = index;">
+                <div  *ngIf="copy.titleViewFlg===true" class="marginLeft25 marginRight25" style="height:60px">
+                    <div class="paddingBtm10 left" style="width:70%">
+                        <span class="fontSize14 truncateTitle" title="{{copy.title}}">{{copy.title}}</span>
+                        <br>
+                        <span *ngIf="copy.isOwn===false" class="fontSize12 notAvailable-status-text">Shared with {{copy.user}}</span>
+                        <span *ngIf="copy.isOwn===true" class="fontSize12 notAvailable-status-text shared-users"> My View
+                        
+                            <span [hidden]="copy.user.length===0">
+                                <span class="notAvailable-status-text">|</span>
+                                <span class="fontSize12 notAvailable-status-text "> Shared with {{copy.user.length}} users</span>
+                                <!-- <smart-dropdown>
+                                    <a class='dd_activator dropdown-button waves-effect gray-text'>
+                                        Shared with {{copy.user.length}} users
+                                    </a>
+                                    <ul class='dd_data dropdown-content' style="min-width:180px;">
+                                        <li *ngFor="let user of copy.user;let childindex=index">
+                                            <a class=" fontSize14 paddingBtm0">{{user.name}}
+                                                <span class="right blue-text" (click)=removeUser(index,childindex) smartTooltip [config]="unshareTooltipConfig">
+                                                    <i class="icon iconSmall">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+
+                                                            <path d="M9 12.5c0-.4-.1-.8-.2-1.2l6.8-3.1c.5.8 1.4 1.3 2.4 1.3 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .3.1.5.1.8l-6.9 3.2c-.5-.6-1.3-1-2.2-1-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.6-.4 2.1-.9l5.7 2.6c0-.3.1-.7.3-1l-5.4-2.5c.2-.4.3-.8.3-1.2zm9-8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-12 10c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z M21.1 13.3h-1.3l-2.5 2.5-2.5-2.5h-1.4l3.2 3.2-3 3H15l2.3-2.3 2.3 2.3H21l-3-3 3.1-3.2"
+                                                            />
+
+                                                        </svg>
+                                                    </i>
+                                                </span>
+                                            </a>
+                                            <span class="fontSize12 paddingTop0">{{user.email}}</span>
+
+                                        </li>
+                                    </ul>
+                                </smart-dropdown> -->
+                            </span>
+                            
+                        </span>
+                        <span class="notAvailable-status-text">|</span>
+                        <span class="fontSize12 notAvailable-status-text"> Created On: {{copy.createdOn}}</span>
+                        <span class="notAvailable-status-text">|</span>
+                        <span class="fontSize12 notAvailable-status-text"> Modified On: {{copy.modifiedOn}}</span>
+                    </div>
+                    <div class="iconWrapper right">
+                        <a *ngIf="copy.isOwn===true" class='waves-effect marginRight10' smartTooltip [config]="editTooltipConfig">
+                            <i class="icon iconSmall blue-text" (click)="editClick(index)">
+                                <svg>
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_editPen"></use>
+                                </svg>
+                            </i>
+                        </a>
+                        <a *ngIf="copy.isOwn===true" class='waves-effect marginRight10' (click)="confirmDelete(index)" smartTooltip [config]="deleteTooltipConfig">
+                            <i class="icon iconSmall blue-text">
+                                <svg>
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_TrashCan"></use>
+                                </svg>
+                            </i>
+                        </a>
+                        <a class='waves-effect ' (click)="copyClick(index)" smartTooltip [config]="duplicateTooltipConfig">
+                            <i class="icon iconSmall blue-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                    <path d="M12 21v-4h1v3l6.89-.077L20 12h-2v-2h-4V9h4l3 3v9h-9zm1-13v6h-3v-1.056l1.89-.02L12 5h-2V3H5v10l2-.022V14H4V2h6l3 3v3zm-4 7h6.706l-2.13-2.112.9-.893L18 15.49l-3.542 3.512-.9-.892L15.686 16H8V8h1v7z"
+                                    />
+                                </svg>
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="editCopy paddingLeft25 paddingTop10" *ngIf="copy.editViewFlg===true">
+
+                    <div class="textfieldWrapper left">
+                        <smart-textfield class="input-field marginTop0" [config]="smartTextFieldEditConfig" [(modelData)]="editTitleText"></smart-textfield>
+                    </div>
+                    <div class="action-buttons right  marginTop20 marginRight25">
+                        <a href class="blue-text paddingRight10 " (click)="closeEditTitle($event,index)">
+                            <i class="icon iconSmall">
+                                <svg>
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Close"></use>
+                                </svg>
+
+                            </i>
+                        </a>
+                        <a class="blue-text cursor-pointer" [ngClass]="{'disabled':editTitleText.value.trim().length===0}" (click)="updateEditTitle($event,index)">
+                            <i class="icon iconSmall">
+                                <svg>
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Check"></use>
+                                </svg>
+
+                            </i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- If no records found -->
+            <!-- <div class="no-records" *ngIf="(manageviewsdata|filter:{term:searchKeyText.value, key:'title'}).length===0">No records found</div> -->
+       
+        </div>
+    </div>
+    <div class="footer modal-footer modal-footer-normalScroll">
+        <div class="right">
+            <smart-button [config]="btnDoneConfig" (callback)="manageViewDone()"></smart-button>
+            <smart-button [config]="btnCancelConfig" (callback)="manageViewCancel()"></smart-button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,233 @@
+<div class="filter-chip-wrapper filter-alert-bar alert-bar--warning alert-bar--with-button alert-bar"
+  *ngIf="_appConstants.userPreferences.moduleSettings.showFilterIconOption && _dashboardCommService.appliedFilters && showChipBar">
+  <span class="filter-chip-header">Applied Filters:</span>
+  <span *ngFor="let filter of _dashboardCommService.appliedFilters;let index=index" class="filter-chip-container">
+    <div class="fontSize12 filter-chip-title" title="{{filter.DisplayName}}">
+      {{filter.DisplayName}}</div>
+    <div class="chip chips-link hoverable selected-list-chip-container">
+      <span (mouseenter)="onMouseEnterChip($event,filter,index)" (click)="openGlobalFilter(filter,index)"
+        (mouseleave)="onMouseLeaveChip(index)"> <a class="chips-link filter-chip-truncate"
+          title="{{filter.filterchipName}}">{{filter.filterchipName}}</a></span>
+      <span class="removeChipIcon right">
+        <i class="icon iconXsmall grey-text" title="remove" (click)="removeCurrentChip($event,filter,filter.ReportObjectId)">
+          <svg>
+            <use xlink:href="#icon_ChipRemove"></use>
+          </svg>
+        </i>
+      </span>
+    </div>
+
+    <!-- filter upfront div open -->
+    <div class="fiters-upfront-wrapper" (mouseenter)="onMouseEnterChip($event,filter,index)"
+      (mouseleave)="onMouseLeaveChip(index)" id="filteredChip{{index}}">
+      <div class="borderBtmGray">
+        <div class="marginLeft4 fontSize16 padding5">{{filter.DisplayName | uppercase}}</div>
+      </div>
+
+      <ul class="fiters-upfront-wrapper-list">
+        <span *ngIf="filter.FilterType == dashboardConstant" class="fontSize12 marginLeft10">{{showSelectedText}}</span>
+        <span class="right marginRight20 fontSize14 cursorPointer" style="cursor: pointer"
+          (click)="openGlobalFilter(filter,index)"><a>View All</a></span>
+        <li *ngFor="let list of filter.filteredList" class="cursorDefault marginLeft10">
+          <span *ngIf="list.IsSelected" class="truncate" title="{{list.title}}"> {{list.title}} </span>
+        </li>
+      </ul>
+    </div>
+    <!-- filter upfront div closed -->
+  </span>
+</div>
+<div class="alert-bar clearfix alert-bar--fixed relative zIndex2 white is-scrolled">
+  <strong><span [innerHTML]="constants.UIMessageConstants.STRING_ESTIMATED_SAVINGS_GRID"></span></strong>
+  Define Penalty(%), Cost Of Capital(%)
+</div>
+
+
+<div class="grid-container auto-payment-term-container best-payment-term-container">
+  <div class="row marginBtm0">
+    <div class="col s7 left">
+      <div
+        [style.display]="_dashboardCommService.oppFinderState.extraProps.currentState!='opportunityDetailsView'?'':'none'"
+        class="input-parent-container">
+        <span class="cost-capital-title" [innerHTML]="constants.UIMessageConstants.STRING_COST_OF_CAPITAL"></span>
+        <div class="slider-container">
+          <ion-range-slider
+            [ngClass]="{'disabled': _dashboardCommService.oppFinderState.extraProps.currentState =='createOpportunityView' }"
+            #sliderElement type="single" [min]="sliderConfig.min" [max]="sliderConfig.max" [from]="sliderConfig.from"
+            keyboard="true" (onUpdate)="rangeOnUpdate($event)" (onChange)="rangeOnChange($event)"
+            (onFinish)="onFinish($event)">
+          </ion-range-slider>
+          <!-- <div *ngIf="slider.name=== 'Category Spend'" class="left slider-unit">$</div> -->
+        </div>
+        <div class="left marginLeft30 auto-payment-value">
+          <smart-numeric
+            [ngClass]="{'disabled': _dashboardCommService.oppFinderState.extraProps.currentState =='createOpportunityView' }"
+            [config]="{ label:'', attributes: {maxLength: 5}, data: 'from' }"
+            class="col s12 line-height-manager next-date" (change)="onValueKeypress()" [(modelData)]="sliderConfig">
+          </smart-numeric>
+          <span class="auto-payment-percent">%</span>
+        </div>
+        <div class="left auto-payment-infotip">
+          <a class='waves-effect' (click)="openOppfinderFormulaPopup()">
+            <i class="icon iconSmall">
+              <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Info"></use>
+              </svg>
+            </i>
+          </a>
+        </div>
+        <div class="left">
+          <smart-button [config]="btnApplyConfig" (callback)="onApply()"
+            [ngClass]="{'disabled': (sliderConfig.from > sliderConfig.max || sliderConfig.min > sliderConfig.from) || _dashboardCommService.oppFinderState.extraProps.currentState =='createOpportunityView'}">
+          </smart-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s2 left"
+      [style.display]="_dashboardCommService.oppFinderState.extraProps.currentState == 'gridDetailsView' && _dashboardCommService.oppFinderState.strategy.shortName == 'BPDC' ? '' : 'none'">
+      <!-- <smart-select id="resize-caret"  [config]="filterByNumberOpts" [(ngModel)]="numberFilterObj" (change)="categorychange($event);">
+      </smart-select> -->
+       
+    </div>
+    <div class="col s3 right"><smart-button [config]="btnFinderOverViewConfig" (click)="openOppfinderFormulaOverviewPopup();">
+    </smart-button></div>
+  </div>
+  <div class="clearfix"></div>
+  <div
+    [style.display]="_dashboardCommService.oppFinderState.extraProps.currentState == 'createOpportunityView' && _dashboardCommService.oppFinderState.strategy.shortName == 'BPDS' ? '' : 'none'">
+    Supplier Name: {{supplierNameForEdit}}
+  </div>
+  <div class="row" [style.display]="_dashboardCommService.oppFinderState.extraProps.currentState=='createOpportunityView'
+    && _dashboardCommService.oppFinderState.strategy.shortName=='BPDC' ? '' : 'none'">
+        <div class=" col s5">
+    Category Level: {{categorylevel}}
+      </div>
+    <div class="col s5"> Category: {{supplierNameForEdit}}</div>
+</div>
+
+<div class="editable-div" [hidden]="editTextfield">
+  <div class="textfield-wrapper left">
+    <smart-numeric class="marginTop0" [config]="smartNumericConfig" [(modelData)]="penaltyPercentage" (keyup)="onKeyUp()">
+    </smart-numeric>
+  </div>
+  <div class="separator">
+    <span>|</span>
+    <a (click)="applyToAll()" [innerHTML]="constants.UIMessageConstants.STRING_Apply_to_all"></a>
+  </div>
+</div>
+<div
+  [style.display]="_dashboardCommService.oppFinderState.extraProps && _dashboardCommService.oppFinderState.extraProps.currentState == 'createOpportunityView' ? 'none' : ''">
+  <ng-container #cardTypeContainer>
+  </ng-container>
+</div>
+
+<!-- <div *ngIf="_dashboardCommService.oppFinderState.extraProps && _dashboardCommService.oppFinderState.extraProps.currentState == 'gridDetailsView'" class="marginTop10 overflowAuto grid-container"> -->
+<div *ngIf="_dashboardCommService.oppFinderState.extraProps.currentState=='gridDetailsView'"
+  class="marginTop10 overflowAuto gridHeightAuto"
+  [ngClass]="{'gridHeightFilter':_appConstants.userPreferences.moduleSettings.showFilterIconOption && _dashboardCommService.appliedFilters && showChipBar}">
+  <div flex-grid [config]="gridData.gridDetailsView" (flexEvents)="flexEvents($event)">
+  </div>
+</div>
+
+<ng-template
+  [ngIf]="gridData.gridDetailsView.showPagination && _dashboardCommService.oppFinderState.extraProps.currentState=='gridDetailsView'">
+  <div class="floatL fontSize12  footer pagination-container paddingTop0 paddingLeft0 marginBtm10"
+    [style.display]="block" [ngClass]="{'marginLeft30Per':config.isExpandedGraph}">
+    <div class="text-black64 pagination-title right">
+      {{constants.UIMessageConstants.STRING_Showing}}
+      {{
+      (
+        gridData.gridDetailsView.pageSize * gridData.gridDetailsView.currentPage+1 < gridData.gridDetailsView.totalItems ?
+        gridData.gridDetailsView.pageSize * gridData.gridDetailsView.currentPage+1 : gridData.gridDetailsView.totalItems
+        )  - gridData.gridDetailsView.currentPage
+      }} -
+      {{
+    (gridData.gridDetailsView.currentPage+1) * gridData.gridDetailsView.pageSize-1  <  gridData.gridDetailsView.totalItems ?
+      (
+        (gridData.gridDetailsView.currentPage+1) * gridData.gridDetailsView.pageSize-1
+        ) - gridData.gridDetailsView.currentPage
+      : gridData.gridDetailsView.totalItems
+      }} {{constants.UIMessageConstants.STRING_of}} {{gridData.gridDetailsView.totalItems}}
+      {{constants.UIMessageConstants.STRING_rows}}
+      <span [hidden]="gridData.gridDetailsView.totalItems<=gridData.gridDetailsView.pageSize">
+        <span class=" marginLeft10">
+          <span [ngClass]="{'disabled':  !gridData.gridDetailsView.isPrev}"
+            class="text-black64 cursorPointer marginLeft5 pagination-arrow-title"
+            (click)="previousClick()">&lsaquo;</span>
+          <span class="text-black64 padding10 fontSize14">
+            {{gridData.gridDetailsView.currentPage+1}}&nbsp; &#x2f; &nbsp;{{gridData.gridDetailsView.totalPages}}
+          </span>
+        </span>
+        <span [ngClass]="{'disabled':  !gridData.gridDetailsView.isNext}"
+          class=" text-black64 cursorPointer marginLeft5 pagination-arrow-title" (click)="nextClickPagination()">
+          &rsaquo;
+        </span>
+      </span>
+    </div>
+  </div>
+
+</ng-template>
+
+<div *ngIf="_dashboardCommService.oppFinderState.extraProps.currentState=='createOpportunityView'">
+  <div flex-grid [config]="gridData.createOpportunityView" (flexEvents)="flexEvents($event)">
+  </div>
+</div>
+<div *ngIf="_dashboardCommService.oppFinderState.extraProps.currentState=='opportunityDetailsView'"
+  class="marginTop10 overflowAuto gridHeightAuto">
+  <div flex-grid [config]="gridData.opportunityDetailsView" (flexEvents)="flexEvents($event)">
+  </div>
+</div>
+<!-- -----------------------------------------save new popup starts-------------------------------------------- -->
+
+<div class="clearfix"></div>
+
+</div>
+
+<div class="scrollableModel modal-popup" [style.display]="showSavePopup?'':'none'">
+  <div class="header-title-container modal-header scrollableModel ">
+    <span class="paddingLeft10">
+      <strong>
+        {{this.popupHeaderText}}
+      </strong>
+    </span>
+  </div>
+  <div class="content-container overflowHidden">
+
+    <div class="paddingLeft17 overflowAuto common-container">
+      <ng-container #autoPaymentTermPopupRef></ng-container>      
+    </div>
+  </div>
+  <div class="footer modal-footer modal-footer-normalScroll paddingBtm10 marginRight10">
+    <div class="right">
+      <smart-button [config]="btnFooterCancelConfig" (callback)="onCancel()"></smart-button>
+      <smart-button [config]="btnPopupSaveConfig" (callback)="onSaveClick()"></smart-button>
+    </div>
+  </div>
+
+
+
+</div>
+<div class="lean-overlay" (click)="onCancel()" [style.display]="showSavePopup?'':'none'"></div>
+<!-- ------------------------------------------save new popup end------------------------------------------- -->
+
+<footer
+  [style.display]="_dashboardCommService.oppFinderState.extraProps && _dashboardCommService.oppFinderState.extraProps.currentState == 'createOpportunityView' ? '' : 'none'"
+  class="page-footer">
+  <div class="right  paddingBtm16">
+    <smart-button class="marginRight8" [config]="btnFooterCancelConfig" (callback)="footerCancelClick()">
+    </smart-button>
+    <smart-button class="marginRight8" [config]="btnFooterSaveConfig" (click)="footerSaveClick()">
+    </smart-button>
+  </div>
+</footer>
+<footer
+  [style.display]="_dashboardCommService.oppFinderState.extraProps && _dashboardCommService.oppFinderState.extraProps.currentState == 'opportunityDetailsView' ? '' : 'none'"
+  class="page-footer">
+  <div class="right  paddingBtm16">
+    <smart-button class="marginRight8" [config]="btnFooterCloseConfig" (callback)="footerCancelClick()">
+    </smart-button>
+  </div>
+</footer>
+<ng-template #CommonTemplate let-config="config" let-manifestPath="manifestPath">         
+  <smart-outlet [path]="manifestPath" [childConfig]="config"></smart-outlet>
+</ng-template>

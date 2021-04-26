@@ -1,0 +1,394 @@
+﻿@charset "UTF-8";
+
+/*  PLACE-HOLDER CSS  */
+
+.smart-ph-label {
+  float: left;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.64);
+  position: absolute;
+  left: 0.75rem;
+  top: 16px;
+  font-size: 1rem;
+  cursor: text;
+  width: calc(100% - 2.25rem);
+  -moz-width: calc(100% - 2.25rem);
+  transition: 0.2s ease-out;
+}
+
+.smart-ph-label.active {
+	/*top: auto;*/
+    /*bottom: 38px;*/
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.64);
+	transition: 0.2s ease-out;
+}
+
+.smart-ph-label.active > span {
+	position: absolute;
+    top: -20px;
+}
+
+.smart-ph-value {
+  float: left;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0;
+  outline: none;
+  height: 2rem;
+  width: 100%;
+  font-size: 1rem;
+  margin: 0.8rem 0 0 0;
+  padding: 0;
+  box-shadow: none;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: border-box;
+  box-sizing: content-box;
+  cursor: text;
+}
+
+.smart-ph-value.disabled {
+  opacity: 1 !important;
+  color: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px dotted transparent;
+}
+
+.smart-ph-value.invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+
+.smart-ph-value > span {
+  position: absolute;
+  top: 15px;
+  width: calc( 100% - 23px);
+  white-space: nowrap; 
+  overflow: hidden;
+}
+
+.optionalField .smart-ph-value {
+  opacity: 0.99;
+  width: calc( 100% - 23px);
+}	
+
+.optionalField .smart-ph-value > span {
+  width: calc( 100% - 46px);
+}	
+
+.smart-ph-error {
+	float: left;
+    color: #F44336;
+    font-size: 0.8rem;
+}
+
+
+
+
+/*  SMATRT-TABLE CSS  */
+
+.smart-table {
+	width: auto !important;
+}
+
+.smart-table-header-cell {
+	border: 1px solid #d4d4d4;
+	height: auto;
+	padding: 10px 5px 10px 5px;
+}
+
+.smart-table-search-container-parent {
+    background: transparent;
+    height: 31px;
+    margin-top: 5px;
+}
+
+.smart-table-search-container {
+	background: #fff;
+    height: 31px;
+    border: 1px solid #d4d4d4;
+}
+
+.smart-table-search {
+	width: 100%;
+	height: 30px !important;
+	line-height: 30px !important;
+	background: #fff;
+	/*margin-bottom: 5px;*/
+	float: left;
+	border: 1px solid #d4d4d4;
+	font-size: 1rem;
+	color: #d4d4d4;
+}
+
+.smart-table-search-input-holder {
+	float: left;
+    width: calc(100% - 20px);
+    line-height: 30px;
+    position:relative;
+}
+
+.smart-table-search-input-holder:-ms-input-placeholder {
+    color: #d1d1d1 !important;
+}
+
+.smart-table-search-input-holder pre {
+    margin: 0 3px;
+    color: #d1d1d1 !important;
+    font-size: 1rem;
+}
+
+.smart-table-search-empty {
+	width: 100%;
+	height: 30px !important;
+	float: left;
+}
+
+.smart-table-search span {
+	margin-left: 3px;
+}
+
+.smart-table-search-remove-icon {
+    float: right;
+    padding: 0 5px 0 5px;
+    width: 20px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+input[type="text"].smart-table-search {
+	width: 94.5%;
+	border: 0px !important;
+	padding: 0 3px 0 3px;
+	height: 28px !important;
+	margin: 0px !important;
+	background: #fff;
+	color: #000 !important;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+}
+
+input[type="text"]:focus.smart-table-search {
+	border-bottom: 0px solid #d4d4d4 !important;
+	box-shadow: none !important;
+}
+
+.smart-table-pinned-column {
+	background: #efefef;
+	position: absolute;
+	left: 0;
+	width: 50px;
+}
+
+.smart-table-unpinned-column {
+	background: #fff;
+}
+
+.smart-table-header-cell-text-container {
+    overflow: hidden;
+}
+
+.smart-table-header-cell-text {
+    float: left;
+	white-space: nowrap;
+	width: calc(100% - 15px) !important;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.smart-table-sort-icon {
+    float: right;
+}
+
+.smart-table-row-cell-text {
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 30px;
+	line-height: 30px;
+	/*padding: 0 5px 0 5px;*/
+}
+
+.smart-table-row-cell {
+	border: 1px solid #d4d4d4;
+	padding: 0px !important;
+}
+
+.smart-table-row-cell-right .smart-table-cell-template > span {
+	float: right;
+	padding: 0 3px 0 3px;
+}
+
+.smart-table-row-cell-left .smart-table-cell-template > span {
+	float: left;
+	padding: 0 5px 0 5px;
+}
+
+.smart-table-row-cell-invalid {
+	background: #fdb1b1 !important;
+	border: 1px solid #d4d4d4 !important;
+	padding: 0px !important;
+}
+
+.smart-table-row-cell-disabled {
+	background: #e2e2e2 !important;
+	border: 1px solid #d4d4d4 !important;
+	padding: 0px !important;
+}
+
+.smart-table-row-cell-canceled .smart-table-cell-text {
+	text-decoration: line-through;
+}
+
+.smart-table-row-cell-valid {
+	background: #fff !important;
+	border: 1px solid #d4d4d4 !important;
+	padding: 0px !important;
+}
+
+.smart-table-row-cell-selected:not(.smart-table-row-cell-invalid):not(.smart-table-pinned-column) {
+	background-color: #e3f2fd !important;
+}
+
+.smart-table-pinned-column.smart-table-row-cell-selected:not(.smart-table-row-cell-invalid) {
+	background-color: #e5e5e5 !important;
+}
+
+.smart-table-cell-template select {
+	height: 30px !important;
+	margin: 0px !important;
+	padding: 0px !important;
+	background: transparent !important;
+	cursor: default;
+}
+
+.smart-table-cell-template > span {
+	padding: 5px;
+}
+
+.smart-table-cell-template a {
+	padding: 5px;
+	cursor: pointer;
+    text-transform: uppercase;
+}
+
+.smart-table-cell-template a.disabled {
+	color: #191919;
+	cursor: default;
+	opacity: 1 !important;
+}
+
+.smart-table-cell-template input {
+	height: 30px !important;
+	margin: 0px !important;
+	padding: 0 5px 0 5px !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 0px !important;
+    box-shadow: 0 !important;
+
+}
+
+.smart-table-cell-text {
+	white-space: nowrap;
+	width: 98%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-height: 30px;
+	float: left;
+}
+
+.smart-table-container {
+	width: 800px;
+	overflow-x: scroll;
+	margin-left: 50px;
+	overflow-y: visible;
+	padding-bottom: 1px;
+}
+
+.smart-table-frozen-column {
+	position: absolute;
+}
+
+
+.smart-table-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background: #ffffff;
+	border-right: 1px solid #d4d4d4;
+	margin-top: 10px;
+}
+
+.smart-table-unpinned-container {
+	overflow-x: scroll;
+	overflow-y: visible;
+}
+
+.smart-table-icon-holder {
+	width: 40px;
+	height: 30px;
+	font-weight: bold !important;
+	font-size: 14px !important;
+	border: 1px solid #d4d4d4;
+	text-align: center;
+	line-height: 0px;
+	padding-left: 0px !important;
+	cursor: pointer;
+}
+
+.icon-selection-row {
+    color: #d4d4d4;
+}
+
+.icon-tree-row {
+    color: #000;
+}
+
+.smart-table-icon-holder.smart-table-row-cell-selected:not(.icon-tree-row) {
+	color: #159dfc !important;
+}
+
+.smart-table-row-cell-inactiveDisabled {
+	background: #e2e2e2 !important;	
+}
+
+
+.smart-table-page-navigation {
+    font-family: cursive !important;
+    font-weight: normal !important;
+    font-size: 18px !important;
+}
+
+.smart-table-paginate-container {
+    float: right; margin-right: 10px;
+}
+
+.smart-table-paginate-container span {
+    float: left;
+    margin: 10px 0 0 10px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.smart-table-page-navigation-container {
+    margin: 0 !important;
+    height: 40px !important;
+    line-height: 45px !important;
+}
+
+.smart-table-rows-per-page-option {
+	height: 30px !important;
+	background: transparent !important;
+	cursor: default;
+    display: block !important;
+    opacity: 0.4;
+    pointer-events: none;
+}

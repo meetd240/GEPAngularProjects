@@ -1,0 +1,68 @@
+.modal-popup {
+    z-index: 2003;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 165px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 35%;
+    height: 410px;
+    background-color: #fff;
+    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+    .modal-header {
+      padding: 18px 20px;
+      height: 60px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      text-transform: uppercase;
+      .title {
+        font-size: 18px;
+      }
+    }
+    .modal-body {
+      padding: 24px;
+    }
+    .modal-footer {
+      padding: 10px 10px;
+      border-top: 1px solid #eee;
+      text-align: right;
+      height: 30px;
+      margin-top: 19px;
+    }
+    .content-container {
+        
+        .textfieldWrapper{
+          ::ng-deep {
+            .input-field label {
+              margin-left: -10px;
+          }
+          }
+            
+        }
+        .tabs-list-container{
+          overflow-y: scroll; 
+          height: 262px !important; 
+          .tab-info{
+            margin: 5px 20px 25px 14px;
+        }
+      }
+    }
+  }
+  
+  .lean-overlay {
+    position: fixed;
+    display: block;
+    opacity: 0.5;
+    top: -100px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 125%;
+    width: 100%;
+    background: #000;
+  }
+
+  .duplicate-title-error{
+    font-size: smaller;
+    color: red;
+  }

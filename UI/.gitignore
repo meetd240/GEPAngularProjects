@@ -1,0 +1,6 @@
+distribution/
+node_modules/
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+package-lock.json
+config-merge/smart-core-types

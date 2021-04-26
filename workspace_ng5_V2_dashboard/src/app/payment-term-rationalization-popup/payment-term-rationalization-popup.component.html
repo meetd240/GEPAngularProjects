@@ -1,0 +1,114 @@
+<div class="scrollableModel ptsn modal-popup1 overflowAuto">
+  <div class="header-title-container modal-header scrollableModel ">
+    <span>
+      <strong>
+        {{popUpHeader}}
+      </strong>
+    </span>
+  </div>
+
+  <div class="row marginTop10 marginBtm0 paddingLeft12">
+    <div class="col s3"><span class="assignWidth"> Supplier </span> </div>    
+    <div class="col s9">
+      <span class="assignWidth"> View </span>
+    </div>
+  </div>
+  <div class="row paddingLeft12">
+    <div class="col s3 paddingTop4"><span class="assignWidth"> {{config.SupplierName}} </span> </div>
+    <div class="col s9">
+      <smart-radio  [config]="radioSavingsConfig" [(modelData)]="radioSavingsModel"
+          (onChange)="onChangePaymentTermRadioOption()">
+      </smart-radio>
+    </div>
+  </div>
+  <div class="row paddingLeft12">      
+    <i class="icon iconSmall" style="color: blue;">
+      <svg>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Info"></use>
+      </svg>
+    </i>
+    <span>Apply Cost of Capital (if applicable), enter Addressable Spend and Select Target Payment Term to proceed</span>     
+  </div>
+	<div class="row paddingLeft12" id="costOfCapital">
+    <div class="col s5" style="height: 100%;">
+      <div class="col s5 roundedBorder">
+        <span class="assignWidth"> Cost of Capital</span>
+        <div class="row" >
+          <div >
+            <div class="col s10 alignRight">
+              <smart-numeric   [config]="smartNumericConfig" [(modelData)]="costOfCapital"
+                (keyup)="onKeyUp()">
+              </smart-numeric>
+            </div>          
+            <div class="paddingTop7"> 
+              <span> <b>%</b></span>
+            </div>          
+          </div>
+        </div>         
+      </div>
+      <div class="col s3 paddingTop32 paddingLeft10">
+        <a (click)="onCostOfCapitalClick(costOfCapital.Value)" >Apply</a>
+      </div>
+    </div> 
+    <div class="col s5" style="height: 100%;">
+      <div class="col s5 roundedBorder" >
+        <span class="assignWidth"> Net Payment Term</span>
+        <div class="row" >
+          <div >
+            <div class="col s10 alignRight">
+              <smart-numeric   [config]="smartNumericConfigForCustomColumn" [(modelData)]="customNetPaymentColumnValue"
+                (keyup)="onKeyUp()" placeholder="0-366">
+              </smart-numeric>
+            </div>                                
+          </div>
+        </div>         
+      </div>
+      <div class="col s3 paddingTop32 paddingLeft10">
+        <a (click)="onCustomInputColumnClick(customNetPaymentColumnValue.Value)" >Apply</a>
+      </div>
+    </div>
+  </div>
+  <div class="editable-div_addspend" [hidden]="editTextfieldadd" style="border-radius: 6px;" >
+    <div class="textfield-wrapper left">
+      <div class="paddingBottom5">
+        <span style="font-weight: bold;">Enter Value</span> 
+      </div>       
+      <div class="alignRight roundedBorder">
+        <smart-numeric class="marginTop0" [config]="smartNumericConfig" [(modelData)]="addSpend" (keyup)="onKeyUp()">
+        </smart-numeric>
+      </div> 
+      <div class="paddingTop10">      
+        <a  class="marginRight7 roundedBorderBlueColor paddingLeft2 paddingRight2"  (click)="applyCancel()">Cancel</a>
+        <a  class="marginRight7 roundedBorderBlueColor paddingLeft2 paddingRight2" (click)="applyToAll()">Apply to all</a>
+        <a  class="marginRight7 roundedBorderBlueColor paddingLeft2 paddingRight2" (click)="apply()">Apply</a>
+      </div>
+    </div>    
+  </div>
+  <div *ngIf="showGrid && refreshFlexGrid" class="row paddingLeft12 payment-term-grid-container">
+    <div class="grid-container">
+      <div  flex-grid [config]="gridData" (flexEvents)="flexEvents($event)"></div>
+    </div>
+  </div>
+  <div class="row paddingLeft12">
+    <div class="col s3 roundedBorder" >
+      <smart-select [(modelData)]="netPaymentTermSelected" [config]="netPaymntTermNames" (onChange)="onChangeOfNetPaymntTerm(netPaymentTermSelected.value)">
+      </smart-select>
+    </div>
+    <div class="col s3 paddingLeft30 paddingTop6" >
+      <span class="assignWidth"> Estimated Savings (USD)</span>
+      <div class="paddingTop6">
+        <span class="assignWidth"> {{selectedPaymentTermValue}} </span>
+      </div>
+      
+    </div>
+  </div>
+  <div class="footer modal-footer modal-footer-normalScroll paddingBtm10 marginRight10">
+    <div class="right">
+      <smart-button [config]="btnCreateOpportunityConfig" (callback)="createOppClick()"></smart-button>
+      <span class="separator"></span>
+      <smart-button [config]="btnDoneConfig" (callback)="doneClick()"></smart-button>
+
+    </div>
+  </div>
+</div>
+<div class="lean-overlay" (click)="onCancel()"></div>

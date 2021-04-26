@@ -1,0 +1,154 @@
+<div class="summary-card">
+  <!-- <span report-identifier [config]="config"></span> -->
+  <div class="driven-title" [innerHTML]="config.driveConfig.driveConfigDescription" id="driven-title-{{config.cardId}}"
+             [title]="config.driveConfig.driveConfigDescription" [style.display]="config.driveConfig.isDriven ? '':'none' ">
+</div>
+  <div style="height: 20px;margin-top: -10px !important;margin-right: -10px !important;"
+    class="right dashboard-card-content">
+    <span class="extra-nav-icon" [style.display]="!_dashboardCommService.oppFinderState.oppFinderFlag ? '' : 'none'">
+      <linked-view-filter [config]="config"></linked-view-filter>
+    </span>
+    <span *ngIf="!_dashboardCommService.oppFinderState.oppFinderFlag && !config.config.smallSummaryCard">
+      <smart-dropdown *ngIf="config.isAccessibleReport  && config.config.showKebabMenusOption" id="ddOptions"
+        class="action-dropdown-container dashboard-kabab-menu " [position]="'left'">
+        <a class='dd_activator dropdown-button waves-effect white-text' smartTooltip [config]="menuTooltipConfig"
+          style="float:right">
+          <i class="icon iconSmall blue-text">
+            <svg>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_MenuKebab"></use>
+            </svg>
+          </i>
+        </a>
+        <ul class='dd_data dropdown-content dashboard-kebab-DD'>
+          <li *ngFor="let menu of config.config.kebabMenuOptions;let i = index;trackBy:i"
+            (click)="onSUmmaryCardKebabclick(menu,$event)">
+            <a *ngIf="menu.showOption" class="cursorPointer rename">
+              {{menu.export}}
+            </a>
+          </li>
+        </ul>
+      </smart-dropdown>
+    </span>
+  </div>
+  <div
+    *ngIf="config.config.message === undefined || config.config.message === null || config.config.message === ''; else summaryMessage">
+    <div class="summery-card-container summaryCardChangesForExport-{{config.cardId}}" id="summaryCardChangesForExport">
+      <div class="fontSize14 bold summary-card-title"
+        [ngClass]="{'cursorPointer':_appConstants.userPreferences.moduleSettings.showRenameReportOption}"
+        id="summary-card-title-{{config.cardId}}" title="{{config.cardTitle}}" *ngIf="!config.config.showEdit && config.config.showTitle"
+        (click)="renameCard()">
+        {{config.cardTitle}}
+      </div>
+      <div id="summary-card-title-editor-container" *ngIf="config.config.showEdit">
+        <div class="textfieldWrapper left">
+          <smart-textfield class="marginTop0" id="textfield-title-{{config.cardId}}" [config]="SummarycardTitleConfig" [(modelData)]="graphTitle"
+            [hidden]="!config.config.showEdit"></smart-textfield>
+        </div>
+        <div class="action-buttons right marginRight15">
+          <a href [hidden]="!config.config.showEdit" class="blue-text" (click)="cancelChanges(config)">
+            <i class="icon iconSmall">
+              <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Close"></use>
+              </svg>
+
+            </i>
+          </a>
+          <a [hidden]="!config.config.showEdit" class="blue-text cursorPointer" (click)="updateTitle(config)"
+            [ngClass]="{'disabled':graphTitle.value.trim().length===0}">
+            <i class="icon iconSmall">
+              <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Check"></use>
+              </svg>
+
+            </i>
+          </a>
+        </div>
+      </div>
+      <div [title]="config.config.data.titleValue" class="summery-card-value fontSize20 marginTop5"
+        [ngClass]="{'blue-text': config.config.data.cardValueSign!=='-','red-text': config.config.data.cardValueSign==='-','linkedSummaryCardDiv':config.isLinkedToDashboard}">
+        <span>{{config.config.data.cardValueSign}}</span>
+        <span [ngClass]="{'linkedSummaryCardValue':config.isLinkedToDashboard}"
+          (click)="headerClickedLinkedWidget()">{{config.config.data.value}}</span>
+        <span class="fontSize14 summary-card-percentage-value marginTop5 displayBlock" id="summary-card-percentage-value-{{config.cardId}}"
+          *ngIf="config.config.showPercentageValue && !config.config.smallSummaryCard">{{config.config.data.percentage}} % of
+          {{config.config.data.percentageOutOfName}}</span>
+      </div>
+      <div class="summary-card-description" id="summary-card-description-{{config.cardId}}" [title]="config.config.data.description"
+        *ngIf="!config?.config.editDescription&&config.config.data.description.trim().length!=0 && !config.config.smallSummaryCard">
+        {{config.config.data.description}}
+      </div>
+      <div class="edit-description-container" *ngIf="config?.config.editDescription">
+        <div class="description-textfield-wrapper left">
+          <smart-textfield class="marginTop0" id="textfield-description-{{config.cardId}}" [config]="SummarycardDescriptionConfig" [(modelData)]="SCdescription"
+            [hidden]="!config?.config.editDescription"></smart-textfield>
+
+        </div>
+        <div class="action-buttons right">
+          <a href [hidden]="!config?.config.editDescription" class="blue-text"
+            (click)="cancelDescriptionChanges(config.config)">
+            <i class="icon iconSmall">
+              <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Close"></use>
+              </svg>
+
+            </i>
+          </a>
+          <a [hidden]="!config?.config.editDescription" class="blue-text cursorPointer"
+            (click)="updateDescription(config.config)">
+            <i class="icon iconSmall">
+              <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Check"></use>
+              </svg>
+
+            </i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #summaryMessage>
+    <div class="summery-card-container">
+      <ng-container *ngTemplateOutlet="summaryCardTitle;context:{addMargin:true}"></ng-container>
+      <div class="summery-card-container card-messages" id="summery-card-container card-messages-{{config.cardId}}" [ngClass]="{     
+        'marginZero':!config.isAccessibleReport,
+        'marginTop20':config.config.showEdit && config.config.showTitle,
+        'marginTop0':!config.config.showTitle}" [title]="config.config.message" [innerHTML]="config.config.message">
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #summaryCardTitle let-addN30Margin="addMargin">
+
+    <div class="fontSize14 bold summary-card-title"
+      [ngClass]="{
+        'cursorPointer':_appConstants.userPreferences.moduleSettings.showRenameReportOption,'marginNTop30':addN30Margin}" id="summary-card-title-{{config.cardId}}"
+      [title]="config.cardTitle" *ngIf="config.isAccessibleReport && !config.config.showEdit && config.config.showTitle"
+      (click)="renameCard()">
+      {{config.cardTitle}}
+    </div>
+    <div id="summary-card-title-editor-container" *ngIf="config.config.showEdit">
+      <div class="textfieldWrapper left">
+        <smart-textfield class="marginTop0" [config]="SummarycardTitleConfig" [(modelData)]="graphTitle"
+          [hidden]="!config.config.showEdit"></smart-textfield>
+      </div>
+      <div class="action-buttons right marginRight15">
+        <a href [hidden]="!config.config.showEdit" class="blue-text" (click)="cancelChanges(config)">
+          <i class="icon iconSmall">
+            <svg>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Close"></use>
+            </svg>
+
+          </i>
+        </a>
+        <a [hidden]="!config.config.showEdit" class="blue-text cursorPointer" (click)="updateTitle(config)"
+          [ngClass]="{'disabled':graphTitle.value.trim().length===0}">
+          <i class="icon iconSmall">
+            <svg>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Check"></use>
+            </svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+  </ng-template>

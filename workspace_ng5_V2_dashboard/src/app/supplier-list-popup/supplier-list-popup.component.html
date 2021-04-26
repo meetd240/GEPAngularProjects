@@ -1,0 +1,64 @@
+<div class="scrollableModel supplier-list-popup modal-popup">
+    <div class="header-title-container modal-header scrollableModel ">
+        <div class="searchSlideMain searchSlideMain--inputBdrBNone">
+            <div class="searchWithHiddenTextField" [ngClass]="{'active':showSearchInput}">
+                <a class="search-icon btn-flat waves-circle waves-effect" (click)="showSearch()" smartTooltip
+                    [config]="searchTooltipConfig">
+                    <i class="icon iconSmall center grey-text">
+                        <svg>
+                            <use xlink:href="#icon_Search"></use>
+                        </svg>
+                    </i>
+                </a>
+                <smart-textfield class="input-field" [config]="supplierListConfig" [(modelData)]="searchSupplierModel">
+                </smart-textfield>
+                <a *ngIf="showSearchInput" class="waves-circle waves-effect cancel-icon btn-flat "
+                    (click)="closeSearch()" smartTooltip [config]="closeTooltipConfig">
+                    <i class="icon iconSmall center grey-text">
+                        <svg>
+                            <use xlink:href="#icon_Close"></use>
+                        </svg>
+                    </i>
+                </a>
+            </div>
+        </div>
+
+        <span>
+            <i class="icon iconSmall" style="color:#c2c2c2">
+                <svg>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Supplier"></use>
+                </svg>
+            </i>
+        </span>
+
+        <span class="paddingLeft10 supplier-list-label">
+            SUPPLIERS LIST
+        </span>
+    </div>
+    <div class="supplier-name-title">
+        <div class="left">{{config.supplierName}}</div> <div class="right marginRight100">{{config.spendRO}}</div>
+    </div>
+    <div class="supplier-list-content"
+        *ngIf="((suppliersList|filter:{term:searchSupplierModel.SearchSupplierValue, key:'name'}).length)!=0">
+        <div class="supplier-list"
+            *ngFor="let supplier of suppliersList|filter:{term:searchSupplierModel.SearchSupplierValue, key:'name',isSelectAll : true};let index = index;">
+
+            <div class="supplier-name">
+                <div class="left">{{ supplier.name}}</div>   <div class="right marginRight75">{{ supplier.amount }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- no records found -->
+    <div class="no-records"
+        *ngIf="(suppliersList|filter:{term:searchSupplierModel.SearchSupplierValue, key:'name'}).length===0">No records
+        found</div>
+
+    <div class="supplier-list-footer footer modal-footer modal-footer-normalScroll paddingBtm10">
+        <div class="right marginRight10">
+            <smart-button [config]="btnCloseConfig" (callback)="supplierListPopupClose()"></smart-button>
+        </div>
+    </div>
+</div>
+
+<div class="lean-overlay" (click)="onCancel()"></div>

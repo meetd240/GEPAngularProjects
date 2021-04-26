@@ -1,0 +1,199 @@
+.dashboard-slicer-wrapper {
+  position: relative;
+  height: 100%;
+
+  .filter-panel-wrapper {
+    background: #eaeaea;
+    height: 100%;
+
+    .filters-panel-header {
+      padding: 10px;
+      border-bottom: 1px solid #e5e5e5;
+      margin-top: 0;
+
+      .toggleFilterHeader {
+        transform: rotate(90deg);
+        position: relative;
+        top: 50px;
+        right: 27px;
+      }
+
+      .preloader-wrapper.small {
+        width: 13px !important;
+        height: 13px !important;
+      }
+    }
+
+    .applied-filter-panel-section {
+      .drop-filter-icon {
+        position: absolute;
+        top: 187px;
+        left: 40px;
+      }
+
+      .filter-panel-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #fafafa;
+        z-index: 970;
+        border-top: 1px solid #e8e8e8;
+        padding-left: 15px;
+      }
+
+      .filter-panel-list-container {
+        .filters-panel-list {
+          .filter-panel-main-list {
+
+            // height: 355px;
+            // overflow-y: auto;
+            // max-height: 335px;
+            height: calc(100% - 160px);
+            
+            .pantel-content-item {
+              border-bottom: 1px solid #f0f0f0;
+              position: relative;
+              height: 30%;
+            }
+
+            .pantel-content-item:first-child {
+              height: 30%;
+            }
+
+            .pantel-content-item:nth-child(2) {
+              height: 30%;
+            }
+
+            .pantel-content-item:last-child {
+              height: 30%;
+            }
+
+            .panel-content-iteamList-item {
+              padding-left: 25px;
+              padding-right: 50px;
+              font-size: 12px;
+              position: relative;
+              cursor: pointer;
+              padding: 0px 20px 0px 24px !important;
+              border: none !important;
+
+              .searchInputBox {
+                width: 0;
+                position: absolute;
+                right: -24px;
+                background: #fff;
+              }
+
+              .filter-close-icon {
+                position: absolute;
+                top: 2px;
+                right: 2px;
+              }
+
+              .filter-edit-icon {
+                position: absolute;
+                top: 2px;
+                right: 26px;
+                transition: all .3s;
+              }
+
+              .dirArrow {
+                position: absolute;
+                left: 1px;
+                transition: all .5s;
+                transform: rotate(0deg);
+              }
+              &.slicerLazyLoading{
+                z-index: 9999 !important;
+              }
+            }
+
+            .filter-expand-view {
+              .filter-child-group {
+                display: none;
+              }
+
+              .dirArrow {
+                transform: rotate(-90deg);
+              }
+            }
+
+            .filter-child-group {
+              display: block;
+              height: 80%;
+              padding-bottom: 10px;
+              overflow: auto;
+
+              .panel-content-iteamList-item {
+                font-size: 12px;
+                position: relative;
+                cursor: default;
+                padding-right: 25px;
+                line-height: 25px;
+
+                .objectCheckbox {
+                  display: inline-block;
+                  vertical-align: middle;
+                }
+
+                .roObjectTitle {
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .filters-panel-search {
+      padding: 5px;
+      border-bottom: 1px solid #e5e5e5;
+
+      .filters-panel-search-cont {
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+        position: relative;
+
+        .search-icon {
+          position: absolute;
+          top: calc(50% - 12px);
+          left: 2px;
+        }
+
+        .filter-search-input {
+          margin-top: 0 !important;
+          box-sizing: border-box;
+          display: inline-block;
+          margin-left: 26px;
+          margin-bottom: 7px;
+        }
+      }
+    }
+  }
+
+  .searchWithHiddenTextField {
+    padding: 0;
+    position: absolute;
+    right: 23px;
+    width: 35px;
+    transition: .5s;
+    background: #FFF;
+    height: 30px;
+    top: 5px;
+  }
+
+  .active {
+    transition: .5s;
+    width: 100%;
+    right: 0 !important;
+  }
+}
+
+.truncateSlicer{
+  max-width: 125px;
+}
+
+.heightAuto{
+  height: auto !important; 
+}

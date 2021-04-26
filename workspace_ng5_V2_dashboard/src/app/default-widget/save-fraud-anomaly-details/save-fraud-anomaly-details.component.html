@@ -1,0 +1,30 @@
+<div class="saveAnomaly">
+  <div style=" padding: 18px 20px;
+  height: 60px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;" >
+    <span id="spanTitle">Action</span>
+  </div>
+  <div class="modal-body">
+    <div class='radioSection'>
+      <smart-radio   [config]="radioSavingsConfig" [(modelData)]="radioSavingsModel" (onChange)="onChange()"> </smart-radio>
+        <smart-textarea class="col s12 influencing-factors"
+       [config]="influencingFactorsConfig" [(modelData)]="influencingFactors"></smart-textarea>
+
+    </div>
+   </div>
+  <div class="modal-footer is-scrolled footer modal-footer modal-footer-normalScroll paddingBtm10">
+    <div class="row marginBottom0" >
+      <div div class="col s12">
+        <div class="right">
+          <smart-button (callback)="onSaveClick()" [config]="saveButtonConfig" >
+          </smart-button>
+          
+          <smart-button (callback)="onCancelClick()" [config]="cancelButtonConfig" >
+          </smart-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ <div class="lean-overlay"></div> 

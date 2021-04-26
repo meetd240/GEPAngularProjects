@@ -1,0 +1,62 @@
+<div class="scrollableModel modal-popup">
+<div class ="scroll">
+<div class="col s12">
+    <div class="main-div"> <span>home/anonamly detection/investigate</span>
+    </div>
+    <div>
+        <div class="extra-nav-title" style="padding:10px">
+            <i class="icon small">
+                <svg>
+                    <use xlink:href="#icon_Back"></use>
+                </svg>
+            </i>
+        </div>
+        <div class="extra-nav-title--text extra" >
+            <span [style.max-width.px]="550">
+                <h6>reports page is this</h6>
+            </span>
+        </div>
+    </div>
+    <div style="display: inline;">
+        <ul class="ul-style-main">
+            <li class="li-style">
+                <i class="icon small">
+                    <svg>
+                        <use xlink:href="#icon_Share"></use>
+                    </svg>
+                </i>
+                <i class="icon iconSmall">
+                    <svg>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_MenuKebab"></use>
+                    </svg>
+                </i>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="default-manager" [ngStyle]="{'background-color': changeDetector}">
+    <smart-widget-manager #manager></smart-widget-manager>
+    <ng-container #container></ng-container>
+    <ng-template #builderTemplate let-builderFieldConfig>
+        <smart-outlet [path]="builderManifestPath" [childConfig]="builderFieldConfig"
+            (onInitialize)="onInitialize($event)" (onActivate)="onActivate($event)"
+            (onDeinitialize)="onDeinitialize($event)"></smart-outlet>
+    </ng-template>
+</div>
+</div>
+
+<div class="default-footer investigateFooter">
+    <smart-button class="cancel" flat="true" [config]="cancelConfig" (click)="cancel()">
+    </smart-button>
+    <smart-button class="save" flat="true" [config]="saveConfig" (click)="save()">
+    </smart-button>
+</div>
+</div>
+<div class="lean-overlay"></div>
+<ng-container #popupContainer></ng-container>
+
+<ng-template #popupTemplate let-manifestPath="manifestPath" let-config="config">
+    <smart-outlet [path]="manifestPath" [childConfig]="config"></smart-outlet>
+</ng-template>

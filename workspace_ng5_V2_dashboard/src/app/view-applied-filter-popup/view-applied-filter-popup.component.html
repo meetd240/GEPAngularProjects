@@ -1,0 +1,48 @@
+<div class="scrollableModel modal-popup">
+    <div class="modal-header">
+        <i class="icon iconSmall left grey-text">
+            <svg>
+                <use xlink:href="#icon_FilterAppli"></use>
+            </svg>
+        </i>
+        <span class="title">
+            {{'Applied Filters' }} ({{appliedFilters.length}})
+        </span>
+    </div>
+    <div *ngIf="moduleType==='dashboard'" class="modal-content paddingTop5 paddingBottom0 paddingRight0 height215 overflowAuto" >
+        <div class="paddingTop5 paddingBottom5" style="height:100%">
+            <div class="chip adding-margin-chip hoverable" *ngFor="let filter of appliedFilters;let i=index;" >
+                <a class="chips-link paddingRight10 truncate" [title]="filter.reportObject.displayName">
+                    {{filter.reportObject.displayName}}
+                </a>
+                <!-- <i class="icon iconXsmall grey-text material-icons" smart-tooltip position="bottom" message="{{'Remove' | translate}}" ng-click="vm.removableChipsQueue.push($index)">
+                            <svg>
+                                <use xlink:href="#icon_ChipRemove"></use>
+                            </svg>
+                        </i> -->
+            </div>
+        </div>
+    </div>
+    <div class="scrollableModel" *ngIf="moduleType==='oppFinder'">
+        <div class="content-container paddingTop5 ">
+            <div class="items-container">
+                <div class="copy-items  paddingLeft10">
+                    <div class="oppfinder-filter" *ngFor="let filter of appliedFilters;let i=index">
+                        <b>{{filter.DisplayName}}</b>
+                        <div class="marginTop5 breakWord">
+                            {{getFilterDisplayString(filter,i)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer modal-footer modal-footer-normalScroll">
+        <div class="right">
+            <smart-button [config]="btnOkayConfig" (callback)="manageColumnbtnDone()"></smart-button>
+        </div>
+    </div>
+</div>
+
+<div class="lean-overlay" (click)="onCancel()"></div> 

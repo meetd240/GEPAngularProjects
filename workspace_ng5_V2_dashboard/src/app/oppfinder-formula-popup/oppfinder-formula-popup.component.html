@@ -1,0 +1,93 @@
+<div class="scrollableModel oppfinder-formula-popup modal-popup">
+    <div class="header-title-container modal-header scrollableModel ">
+        <span class="paddingLeft10 oppfinder-formula-label bold">
+            Opportunity Finder Formula
+        </span>
+    </div>
+    <div class="oppfinder-formula-content">
+        <div class="fontSize14 bold underline">For On-Time Payments: (Actual Invoice Clearing Date is ‘On’ or ‘Before’
+            the Invoice Due Date)</div>
+        <div class="fontSize14 underline marginTop10">For Payment Terms without Discounts: (NET60, NET 90, etc.)</div>
+        <ul>
+            <li class="fontSize12"><strong>Potential Savings if the User pays on Invoice Due Date </strong>= Cost of
+                Capital % * Invoice Amount * (Invoice Due Date - Actual Invoice Clearing Date) / 365 </li>
+            <li class="fontSize12 marginTop10"><strong>Best Payment Date </strong>= Invoice Due Date</li>
+        </ul>
+
+        <div class="fontSize14 underline marginTop10">For Payment Terms with Discounts: (2%10NET60, 3%NET30, etc.)</div>
+
+        <div class="fontSize12 bold marginTop10">Scenario 1 - When Actual Invoice Clearing Date is ‘After’ the Last Discount Date,
+            greater of the below two
+            Potential Savings is shown on the grid with the respective Best Payment Date:</div>
+        <div class="fontSize12 marginTop10"><strong>a) Potential Savings if the User pays on Last Discount Date</strong> =
+            ((Discount % * Invoice
+            Amount) + (Cost of Capital % * Invoice Amount * Discount Days / 365)) - (Cost of Capital % * Invoice Amount
+            * (Actual Invoice Clearing Date - Last Discount Date) / 365)</div>
+        <div class="fontSize12 marginTop10"><strong>Best Payment Date </strong>= Last Discount Date </div>
+        <div class="marginLeft200 fontSize14 marginTop10 marginBtm10">OR</div>
+        <div class="fontSize12 marginTop10"><strong>b) Potential Savings if the User pays on Invoice Due Date </strong> = (Cost of
+            Capital % * Invoice Amount * (Invoice Due Date - Actual Invoice Clearing Date) / 365) - (Discount % *
+            Invoice Amount)</div>
+        <div class="fontSize12 marginTop10"><strong>Best Payment Date </strong>= Invoice Due Date </div>
+
+        <div class="fontSize12 bold marginTop10">Scenario 2 - When Actual Invoice Clearing Date is ‘On’ or ‘Before’ the Last
+            Discount Date, greater of the below two Potential Savings is shown on the grid with the respective Best
+            Payment Date:</div>
+        <div class="fontSize12 marginTop10"><strong>a) Potential Savings if the User pays on Last Discount Date</strong> = Cost of
+            Capital % * Invoice Amount * (Last Discount Date - Actual Invoice Clearing Date) / 365</div>
+        <div class="fontSize12 marginTop10"><strong>Best Payment Date </strong>= Last Discount Date </div>
+        <div class="marginLeft200 fontSize14 marginTop10 marginBtm10">OR</div>
+        <div class="fontSize12"><strong>b) Potential Savings if the User pays on Invoice Due Date </strong>= (Cost of
+            Capital % * Invoice Amount * (Invoice Due Date - Actual Invoice Clearing Date) / 365) - (Discount % *
+            Invoice Amount)</div>
+        <div class="fontSize12 marginTop10"><strong>Best Payment Date </strong>= Invoice Due Date </div>
+        <ul>
+            <li class="fontSize12 marginTop10">if <strong>a) = b) </strong>in any of the above 2 scenarios, then the
+                <strong>Potential Savings and Best Payment Date </strong>corresponding to <strong>a) </strong>is shown
+                on the grid as early payments help in improving relationship with the Suppliers. </li>
+        </ul>
+
+        <div class="fontSize14 bold underline marginTop10">For Late Payments: (Actual Invoice Clearing Date is ‘After’
+            the Invoice Due Date)</div>
+        <div class="fontSize14 underline marginTop10">For Payment Terms without Discounts: (NET60, NET 90, etc.)</div>
+        <ul>
+            <li class="fontSize12 marginTop10"><strong>Potential Savings if the User pays on Invoice Due Date </strong>= (Penalty %
+                * Invoice Amount) - (Cost of Capital % * Invoice Amount * (Actual Invoice Clearing Date - Invoice Due
+                Date) / 365) </li>
+            <li class="fontSize12 marginTop10"><strong>Best Payment Date </strong>= Invoice Due Date</li>
+        </ul>
+
+        <div class="fontSize14 underline marginTop10">For Payment Terms with Discounts: (2%10NET60, 3%NET30, etc.)</div>
+
+        <div class="fontSize12 bold marginTop10">Greater of the below two Potential Savings is shown on the grid with
+            the respective Best Payment Date:</div>
+        <div class="fontSize12 marginTop10"><strong>a) Potential Savings if the User pays on Last Discount Date</strong> = (Discount
+            % * Invoice Amount) + (Penalty % * Invoice Amount) - (Cost of Capital % * Invoice Amount * (Actual Invoice
+            Clearing Date - Last Discount Date) / 365)</div>
+        <div class="fontSize12 marginTop10"><strong>Best Payment Date </strong>= Last Discount Date </div>
+        <div class="marginLeft200 fontSize14 marginTop10 marginBtm10">OR</div>
+        <div class="fontSize12 marginTop10"><strong>b) Potential Savings if the User pays on Invoice Due Date </strong>= (Penalty %
+            * Invoice Amount) - (Cost of Capital % * Invoice Amount * (Actual Invoice Clearing Date - Invoice Due Date)
+            / 365)</div>
+        <div class="fontSize12"><strong>Best Payment Date </strong>= Invoice Due Date </div>
+        <ul>
+            <li class="fontSize12 marginTop10">if <strong>a) = b) </strong>in any of the above 2 scenarios, then the
+                <strong>Potential Savings and Best Payment Date </strong>corresponding to <strong>a) </strong>is shown
+                on the grid as early payments help in improving relationship with the Suppliers</li>
+        </ul>
+    </div>
+    <!-- <ul >
+     
+            <li *ngFor = "let item of oppfinderOverviewList" class="fontSize14" >{{item}}</li>
+       
+    </ul> -->
+
+    <!-- no records found -->
+    <div class="oppfinder-formula-footer footer modal-footer modal-footer-normalScroll paddingBtm10">
+        <div class="right marginRight10">
+            <smart-button [config]="btnContinueConfig" (callback)="btnContinueClick()"></smart-button>
+        </div>
+    </div>
+</div>
+
+<div class="lean-overlay" (click)="onCancel()"></div>

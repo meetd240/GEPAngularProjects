@@ -1,0 +1,382 @@
+nav,
+.extra-nav-wrap,
+.extra-nav-wrap .subHeaderWithFilter,
+.login-wrapper,
+.side-out-bm-nf-ct .collection,
+.side-out-bm-nf-ct .collection-item,
+.side-out-bm-nf-ct > div:first-child,
+.side-nav li:hover,
+.side-nav li:active,
+.side-nav li.active
+{
+    background-color : #46555f;
+}
+
+::selection {
+    background-color: #46555f;
+}
+
+a:focus, a:active:focus, a:hover:focus, a:visited:focus {
+    outline-color: #46555f !important;
+}
+
+.extra-nav-wrap .global-search .searchWithHiddenTextField,
+.headersearch .searchWithHiddenTextField,
+.side-nav .smart-accordion-container .collection
+{
+    background-color : #46555f !important;
+}
+
+    .side-nav,
+    .side-nav .smart-accordion-container .collection li:hover,
+    .side-nav .smart-accordion-container .collection li:active,
+    .side-nav .smart-accordion-container .collection li.active 
+    {
+        background-color : #354048;
+    }
+
+.blueOverlay, .blue-overlay,
+.userConsentPopUp .modal-header 
+{
+    background : #46555f;
+}
+
+.nav-bottom-stick.copyrightBtmCont {
+    border-top-color: #354048;
+}
+
+.nav-right-buttons.nav-slide-active li:last-child a {
+    color : #FFF;
+}
+
+/* .blue-overlay {
+    background: #eceeef;
+} */
+.sideNavigation .sliding-menu{
+    background-color: #46555f !important;
+}
+
+.sideNavigation .collection {
+    background-color: #46555f !important;
+}
+
+.sideNavigation .sliding-menu  .nav-icon-row{
+    background-color: #354048 !important;
+}
+.sideNavigation li:hover, .sideNavigation li:active, .sideNavigation li.active{
+    background-color: #46555f !important;
+}
+.nav-wrapper .nav-right-buttons.activeMenuButtons li.navigationIcon.activeNavMenu a{
+    color:#fff !important;
+}
+/* =================================== Help Center =================================== */
+
+.help-center .title.support-title {
+    background : #46555f;
+}
+
+.help-center .collection li .support-li {
+    background-color : #46555f;
+}
+
+.support-title span {
+    color : #FFF;
+}
+
+/* =================================== Announcement =================================== */
+
+.announcement-tabs-container, .announcements-bottom-content {
+    background: #354048 !important;
+    color: #FFF !important;
+}
+
+.announcements-bottom-content {
+    border-top: 1px solid #46555f !important;
+}
+
+.announcementContainer .icons-container {
+    background: #354048 !important;
+}
+
+.announcementContainer .announcement-collection .announcement-collection-item {
+    background: #46555f !important;
+}
+
+/* =================================== Bookmark =================================== */
+.bookmark-tabs-container {
+    background: #354048 !important;
+    color: #FFF !important;
+}
+
+.bookmarkContainer .icons-container {
+    background: #354048 !important;
+}
+
+.bookmarkContainer .bookmark-collection {
+    background-color: #46555f !important;
+}
+
+    .bookmarkContainer .bookmark-collection .bookmark-collection-item {
+        background-color: #46555f !important;
+    }
+/* =================================== Fixed Button =================================== */
+.home-page a, .fixed-action-btn a,
+.home-page a:hover,
+.fixed-action-btn a:hover,
+.home-page a:focus,
+.fixed-action-btn a:focus 
+{
+    background-color : #46555f;
+}
+
+.fixed-action-btn .waves-effect.waves-light .waves-ripple{
+    background-color : #354048;
+}
+
+/* =================================== Message Container =================================== */
+
+/* =================================== Card Slider =================================== */
+
+.card-slider .slick-dots li.slick-active:after {
+    background : #46555f;
+}
+.slidebar-btn{
+    background-color : #46555f !important;
+}
+/* =================================== Buttons =================================== */
+
+.fixedBottom .sliderTitle {
+    color : #46555f;
+}
+
+.btn-flat,
+.whiteSecondaryBtn .btn,
+.whiteSecondaryBtn .btn:hover 
+{
+    color : #46555f !important;
+}
+
+    .btn-flat:hover, .btn-flat:focus{
+        color : #eceeef !important;
+    }
+
+.btn, .btn-large {
+    background-color : #46555f;
+}
+
+    .btn.blue-text {
+        color : #46555f !important;
+    }
+
+    .btn:hover,
+    .btn-large:hover,
+    .btn:focus,
+    .btn-large:focus 
+    {
+        background-color : #354048;
+    }
+
+/*new ui buttons*/
+.isNextGenView .btn{
+	background:#46555f;
+}
+
+.isNextGenView .btn:focus,
+.isNextGenView .btn:hover{
+background:#354048;
+}
+
+.isNextGenView .whiteSecondaryBtn .btn{
+color:#46555f;
+border:1px solid #46555f;
+}
+
+.isNextGenView .whiteSecondaryBtn .btn:not(.disabled):hover,
+.isNextGenView .whiteSecondaryBtn .btn:hover,
+.isNextGenView .whiteSecondaryBtn .btn:not(.disabled):focus,
+.isNextGenView .whiteSecondaryBtn .btn:focus,
+.isNextGenView .btn-flat:hover, .isNextGenView .btn-flat:focus
+{
+    color:#354048!important;
+}
+
+.isNextGenView .whiteSecondaryBtn .btn:not(.disabled):hover,
+.isNextGenView .whiteSecondaryBtn .btn:hover,
+.isNextGenView .whiteSecondaryBtn .btn:not(.disabled):focus,
+.isNextGenView .whiteSecondaryBtn .btn:focus,
+.isNextGenView .btn-flat:hover,
+.isNextGenView .btn-flat:focus{
+background:rgba(70, 85, 95, 0.16)!important;
+}
+/*end new ui buttons*/
+
+
+    .btn.waves-effect.waves-light .waves-ripple,
+    .btn-large.waves-effect.waves-light .waves-ripple 
+    {
+        background : #46555f;
+    }
+
+.card-slider .slick-prev,
+.card-slider .slick-next 
+{
+    background : #46555f !important;
+}
+
+.inverseButton a {
+    color : #46555f;
+    background-color : #fff;
+}
+
+    .inverseButton a:hover {
+        background-color : #46555f;
+    }
+
+.inverseButton .btn.waves-effect.waves-light .waves-ripple {
+    background : #354048;
+}
+/* =================================== Checkbox =================================== */
+[type="checkbox"].filled-in:checked + label:after {
+    border: 2px solid #46555f !important;
+    background-color : #46555f !important;
+}
+
+.filled-partial [type="checkbox"].filled-in:not(:checked) + label:after,
+.filled-partial [type="checkbox"].filled-in:checked + label:after {
+    background-color : #46555f !important;
+}
+
+.inverseCheckBox [type="checkbox"].filled-in:checked + label:after {
+    border: 2px solid #FFF !important;
+}
+
+.inverseCheckBox [type="checkbox"].filled-in:checked + label:before {
+    border-bottom-color: #46555f !important;
+    border-right-color: #46555f !important;
+}
+/* =================================== Radio Button =================================== */
+[type="radio"].with-gap:checked + label:after,
+[type="radio"]:checked + label:after,[type="radio"]:checked ~ .check:before {
+    border-color : #46555f !important;
+    background-color : #46555f !important;
+}
+
+[type="radio"].with-gap:checked + label:before,[type="radio"]:checked ~ .check{
+    border-color : #46555f !important;
+}
+
+.blue-overlay.cube-navigation-buttons [type="radio"].with-gap:checked + label:after,
+.blue-overlay.cube-navigation-buttons [type="radio"]:checked + label:after,[type="radio"]:checked ~ .check:before {
+    border-color : #ffffff !important;
+    background-color : #ffffff !important;
+}
+
+.blue-overlay.cube-navigation-buttons [type="radio"].with-gap:checked + label:before,[type="radio"]:checked ~ .check{
+    border-color : #ffffff !important;
+}
+.category-popup [type="radio"]:checked + label{
+    color: #46555f !important;
+}
+
+/* =================================== Scroll bar =================================== */
+
+
+/* =================================== Switch =================================== */
+.switch label input[type=checkbox]:checked + .lever {
+    background-color : #cccccc;
+}
+
+    .switch label input[type=checkbox]:checked + .lever:after {
+        background-color : #354048;
+    }
+
+/* =================================== Landing Page Filter =================================== */
+
+
+/* =================================== SecNav =================================== */
+
+/* =================================== Form Loader =================================== */
+.indeterminate-loader {
+    background-color: #46555f;
+}
+
+    .indeterminate-loader:after, .indeterminate-loader:before {
+        background-color: #6b7983;
+    }
+
+.spinner-layer {
+    border-color: #46555f !important;
+}
+
+    .spinner-layer:after, .spinner-layer:before {
+        background-color: #6b7983 !important;
+    }
+
+    /* ================================= Modal Footer ============================== */
+
+ .modal-footer .btn-flat:focus,.modal-footer .btn-flat:hover{
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color:#46555f !important;
+}
+
+ /* ================================== Page Footer ================================ */
+.page-footer .btn:not(.disabled):focus {
+    outline: none !important;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    background: #354048 !important;
+} 
+
+
+
+#subheader-element {
+	background-color: #46555f !important;
+  }
+  
+  #subheader-filterContainer {
+	background-color: #46555f !important;
+  }
+  
+  .announcementContainer .announcement-tabs-container {
+	 background: #46555f !important;
+  }
+  
+  .announcementContainer .announcement-collection .announcement-collection-item {
+	 background-color: #46555f !important;  
+  }
+  
+  .announcementContainer .announcement-tabs-container .announcement-list a.active {
+	 color: white !important;
+	 border-bottom: 2px solid yellow !important;
+  }
+  
+  .announcementContainer .announcement-collection .announcement-collection-item a.announce-title .title {
+	 color: white;   
+  }
+  
+  .announcementContainer .announcement-collection .announce-actions a i {
+	 color: white !important;  
+  }
+  
+  .bookmarkContainer .bookmark-tabs-container .bookmark-list .active {
+	 color: white !important;
+	 border-bottom: 2px solid yellow !important;
+  }
+  
+  
+  .bookmarkContainer .bookmark-tabs-container {
+	 background: #46555f !important;    
+  }
+  
+  .bookmarkContainer .bookmark-scroll-container .bookmark-collection .bookmark-collection-item {
+	 background-color: #46555f !important;     
+  }
+  
+.btn-flat {    
+    color: #46555f !important;     
+}
+
+.bookmarkContainer .bookmark-scroll-container .bookmark-collection .bookmark-collection-item a {
+    color: white !important;
+}

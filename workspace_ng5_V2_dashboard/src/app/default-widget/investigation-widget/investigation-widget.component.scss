@@ -1,0 +1,67 @@
+.investigation-widget-main {
+  width: 100%;
+ padding: 10px;
+  background-color: #87ceeb;
+  border : 2px solid #5bb1d4;
+}
+
+.dashboardCardFooterIcons{
+  padding-top: 3px;
+}
+
+.report-detail-card-section-main {
+  height: 100px;
+  width: 100%;
+  /* border: 2px solid gray; */
+  margin: 10px 5px 10px 5px;
+}
+.report-detail-card-section {
+  background-color: cornflowerblue;
+  display: inline;
+}
+.ul_top_hypers li {
+  display: inline;
+}
+.scroll{
+  overflow: auto;
+}
+.li-crad-details {
+    background: #e0e0e0;
+    height: 70px;
+    border: 1px solid #d8d3d3;
+    box-shadow: cornsilk;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 10px 15px;
+    /* margin: 0 10px 0; */
+    margin: 0 10px 0 0;
+}
+.report-detail-card-for-name {
+  display: block;
+}
+.report-detail-card-for-value {
+  font-weight: bold;
+}
+
+.filter-panel-container {
+  width: 30px;
+  position: fixed;
+  right: 0;
+  top: 114px;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  z-index: 2;
+  transition: all 0.5s ease !important;
+}
+.main-investigate
+{
+  width: 100%;height:30px;position: relative;
+}
+.close-icon
+{
+  display: inline;float:right
+}
+.static-message
+{
+  display: inline
+}

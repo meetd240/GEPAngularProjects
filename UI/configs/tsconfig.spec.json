@@ -1,0 +1,65 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "module": "commonjs",
+    "types": [
+      "jasmine",
+      "node"
+    ],
+    "allowJs": true
+  },
+  "files": [ 
+    "../src/test.ts",
+    "./polyfills.ts",  
+    "../node_modules/smart-platform-services/index.ts",
+    "../node_modules/smart-toast/index.ts",
+    "../node_modules/smart-button/index.ts",
+    "../node_modules/smart-dropdown/index.ts",
+    "../node_modules/smart-global-loader/index.ts",
+    "../node_modules/smart-header/index.ts",
+    "../node_modules/smart-notification/index.ts",
+    "../node_modules/smart-sliding-menu/index.ts",
+    "../node_modules/smart-sticky-header/index.ts",
+    "../node_modules/smart-category/index.ts",
+    "../node_modules/smart-core/index.ts",
+    "../node_modules/smart-module-injector/index.ts",
+    "../node_modules/smart-core-types/index.ts"
+   ],
+  "include": [
+    "../src/**/*.spec.ts",
+    "../node_modules/smart-comment/index.ts",
+    "../node_modules/smart-textarea/index.ts",
+    "../node_modules/smart-validation/index.ts",    
+    "../node_modules/smart-drag-drop-upload/index.ts",
+    "../node_modules/smart-platform-services/index.ts",
+    "../node_modules/smart-toast/index.ts",
+    "../node_modules/smart-button/index.ts",
+    "../node_modules/smart-dropdown/index.ts",
+    "../node_modules/smart-global-loader/index.ts",
+    "../node_modules/smart-header/index.ts",
+    "../node_modules/smart-sliding-menu/index.ts",
+    "../node_modules/smart-sticky-header/index.ts",
+    "../node_modules/smart-category/index.ts",
+    "../node_modules/smart-popup/index.ts",
+    "../node_modules/smart-checkbox/index.ts",
+    "../node_modules/smart-element/index.ts",
+    "../node_modules/smart-scroll/index.ts",
+    "../node_modules/smart-section/index.ts",
+    "../node_modules/smart-textfield/index.ts",
+    "../node_modules/smart-autocomplete/index.ts",
+    "../node_modules/smart-date/index.ts",
+    "../node_modules/smart-numeric/index.ts",
+    "../node_modules/smart-select/index.ts",
+    "../node_modules/smart-iframe-popup/index.ts",
+    "../node_modules/smart-core/index.ts",
+    "../node_modules/smart-module-injector/index.ts",
+    "../node_modules/smart-core-types/index.ts",
+    "**/*.d.ts"
+  ],
+
+  "exclude": [
+    "../node_modules/smart-notification/**/*.css",
+    "../node_modules/smart-notification/src/smart-notification.component.scss"
+  ]
+}

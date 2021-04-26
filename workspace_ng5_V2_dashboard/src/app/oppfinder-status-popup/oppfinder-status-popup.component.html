@@ -1,0 +1,43 @@
+<div class="scrollableModel modal-popup1 width500">
+  <div class="header-title-container modal-header scrollableModel ">
+    <span>
+      <strong>
+        {{constants.UIMessageConstants.STRING_INACTIVE_OPPORTUNITY_POPUP_HEADING}}
+      </strong>
+    </span>
+  </div>
+  <div class="row marginTop10 common-popup-container">
+    <div class="row margin0">
+      <div class="col s4">
+        <div class="label-header" style="margin-left: 11px;"><b>{{constants.UIMessageConstants.STRING_SELECT_PERIOD}}</b></div>
+      </div>
+    </div>
+    <div class="row marginTop14">
+      <div class="col s4">
+        <div class="marginTop5 oppfinderpopuptextinput">
+            <smart-numeric [config]="config.fields[0].Config" [(modelData)]="config.fields[0].modalData" class="line-height-manager" (keyup)="onKeyUp()"></smart-numeric>
+        </div>
+      </div>
+      <div class="col s4 oppfinderpopupselect">
+        <smart-select  [(modelData)]="ddlPeriodSelected" [config]="ddlPeriod">
+        </smart-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s8 oppfinderpopuptextfield" style="margin-left: 8px !important;">
+        <smart-textfield [cssClass]="'line-height-manager'" class="marginTop0 " [config]="config.fields[1].Config"
+          [(modelData)]="config.fields[1]">
+          {{config.fields[1].modelData}}
+        </smart-textfield>
+      </div>
+    </div>
+  </div>
+  <div class="footer modal-footer1 modal-footer-normalScroll paddingBtm10 marginRight10">
+    <div class="right">
+      <smart-button [config]="btnCancelConfig" (callback)="onCancel()"></smart-button>
+      <smart-button [config]="btnDoneConfig" (callback)="btnDoneClick()"
+        [ngClass]="{'disabled': config.fields[0].modalData.value <= 0}"></smart-button>
+    </div>
+  </div>
+</div>
+<div class="lean-overlay" (click)="onCancel()"></div>

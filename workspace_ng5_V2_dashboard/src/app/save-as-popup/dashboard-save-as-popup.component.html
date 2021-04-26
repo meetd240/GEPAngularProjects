@@ -1,0 +1,41 @@
+<div class="scrollableModel modal-popup panelBox-content dashboard-saveAs-popup">
+        <div class="panelBox-body padding0 dashboard-saveAs-popup-wrapper">
+            <div class="row margin0 dashboard-saveAs-popup-body">
+                <div class="panelBox-content margin0 dashboard-saveAs-popup-container">
+                    <div class="panelBox-header">
+                        <div class="header-title">
+                            <span>
+                                    <i class="icon iconSmall" style="color:#c2c2c2">
+                                        <svg>
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Save"></use>
+                                        </svg>
+                                    </i>
+                                </span>
+                        
+                                <span class="saveLabel">
+                                    SAVE AS
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col s12 padding0 dashboard-saveAs-container">
+                            <div class="saveAs-container">
+                                    <div class="saveView">  
+                                        <div class="textfieldWrapper">
+                                            <smart-textfield [cssClass]="'line-height-manager'" class="input-field marginTop0" [config]="SaveAsPopupConfig" (keyup)="onKeyUp(SaveAsNewView.value)" [(modelData)]="SaveAsNewView"></smart-textfield>
+                                        </div>         
+                                    </div>
+                                </div>        
+                        <div class="modal-footer">
+                            <div class="right marginRight8">
+                                    <smart-button [config]="btnCancelConfig" (callback)="saveAsPopupCancel()"></smart-button>
+                                    <smart-button [config]="btnDoneConfig" (callback)="saveAsPopupDone()"></smart-button>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="lean-overlay" (click)="saveAsPopupCancel()"></div>
+    

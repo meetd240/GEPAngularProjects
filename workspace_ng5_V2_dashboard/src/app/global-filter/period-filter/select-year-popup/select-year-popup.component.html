@@ -1,0 +1,66 @@
+<!-- <h1>Select Year Popup Component</h1> -->
+
+<div class="scrollableModel select-year-popup modal-popup">
+    <div class="header-title-container modal-header scrollableModel ">
+        <div class="searchSlideMain searchSlideMain--inputBdrBNone">
+            <div class="searchWithHiddenTextField" [ngClass]="{'active':showSearchInput}">
+                <a class="search-icon btn-flat waves-circle waves-effect" (click)="showSearch()" smartTooltip
+                    [config]="searchTooltipConfig">
+                    <i class="icon iconSmall center grey-text">
+                        <svg>
+                            <use xlink:href="#icon_Search"></use>
+                        </svg>
+                    </i>
+                </a>
+                <smart-textfield class="input-field" [config]="searchYearConfig" [(modelData)]="searchYearModel">
+                </smart-textfield>
+                <a *ngIf="showSearchInput" class="waves-circle waves-effect cancel-icon btn-flat "
+                    (click)="closeSearch()" smartTooltip [config]="closeTooltipConfig">
+                    <i class="icon iconSmall center grey-text">
+                        <svg>
+                            <use xlink:href="#icon_Close"></use>
+                        </svg>
+                    </i>
+                </a>
+            </div>
+        </div>
+
+        <span>
+            <i class="icon iconSmall" style="color:#c2c2c2">
+                <svg>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Lookup"></use>
+                </svg>
+            </i>
+        </span>
+
+        <span class="paddingLeft10 select-year-label">
+            {{title}}<span class="year-count">({{selectedYearCount}}/{{sourceYear.length}})</span>
+        </span>
+    </div>
+
+    <div class="select-year-list-content"> 
+        <div class="select-year-list"
+            *ngFor="let year of sourceYear|filter:{term:searchYearModel.SearchYearValue, key:'name',isSelectAll:true};let index = index;">
+            <div class="year-checkbox">
+                <smart-checkbox [config]="SelecYearConfig" (onChange)="selectYearCheckbox(year)"
+                    [(modelData)]="year.IsCheckModel"></smart-checkbox>
+            </div>
+            <div class="year-name" (click)="year.IsCheckModel.IsCheck=!year.IsCheckModel.IsCheck;selectYearCheckbox(year)">
+                {{ year.name}}
+            </div>
+        </div>
+    </div>
+    <!-- no records found -->
+    <div class="no-records"
+        *ngIf="(sourceYear|filter:{term:searchYearModel.SearchYearValue, key:'name',isSelectAll:true}).length===0">No
+        records found</div>
+
+    <div class="select-year-footer footer modal-footer modal-footer-normalScroll paddingBtm10">
+        <div class="right">
+            <smart-button [config]="btnCancelConfig" (callback)="selectYearPopupCancel('Cancel')"></smart-button>
+            <smart-button [config]="btnDoneConfig" (callback)="selectYearPopupDone()"></smart-button>
+        </div>
+    </div>
+</div>
+
+<div class="lean-overlay" (click)="onCancel()"></div>

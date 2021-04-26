@@ -1,0 +1,122 @@
+.filter-panel-wrapper {
+  .filters-panel-header {
+    padding: 10px;
+    margin-top: 19px;
+    border-bottom: 1px solid #e5e5e5;
+    .toggleFilterHeader {
+      transform: rotate(90deg);
+      position: relative;
+      top: 50px;
+      right: 27px;
+    }
+  }
+  .applied-filter-panel-section {
+    .drop-filter-icon {
+      position: absolute;
+      top: 187px;
+      left: 40px;
+    }
+    .filter-panel-footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #fafafa;
+      z-index: 970;
+      border-top: 1px solid #e8e8e8;
+      padding-left: 33px;
+    }
+    .filter-panel-list-container{
+    .filters-panel-list {
+      .filter-panel-main-list {
+        // height: 355px;
+        overflow-y: auto;
+        // max-height: 335px;
+        .panel-content-iteamList-item {
+          padding-left: 25px;
+          padding-right: 50px;
+          padding: 8px 20px 8px 24px !important;
+          font-size: 12px;
+          position: relative;
+          cursor: pointer;
+
+          .filter-close-icon {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+          }
+          .filter-edit-icon {
+            position: absolute;
+            top: 2px;
+            right: 26px;
+          }
+          .filter-info-icon {
+            position: absolute;
+            top: 2px;
+            right: 50px;
+          }
+
+          .dirArrow {
+            position: absolute;
+            left: 1px;
+            transition: all .5s;
+            transform: rotate(-90deg);
+          }
+        }
+        .filter-expand-view {
+          .filter-child-group {
+            display: block;
+          }
+          .dirArrow {
+            transform: rotate(0deg);
+          }
+        }
+        .filter-child-group {
+          display: none;
+          .panel-content-iteamList-item {
+            font-size: 12px;
+            position: relative;
+            cursor: default;
+            padding-right: 25px;
+            padding: 8px 20px 8px 24px !important;
+          }
+        }
+      }
+    }
+  }
+  }
+  .filters-panel-search {
+    padding: 5px;
+    border-bottom: 1px solid #e5e5e5;
+    .filters-panel-search-cont {
+      border: 1px solid #e5e5e5;
+      border-radius: 3px;
+      position: relative;
+      .search-icon {
+        position: absolute;
+        top: calc(50% - 12px);
+        left: 2px;
+      }
+      .filter-search-input {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        box-sizing: border-box;
+        display: inline-block;
+        margin-left: 26px;
+        margin-bottom: 7px; 
+        .input-field {
+          input,
+          .materialize-textfield {
+            margin-top: 0 !important;
+            border: 0 !important;
+          }
+        }
+      }
+    }
+  }
+  .displayFilterChildList{
+    display: none;
+  }
+  .displayNameTitleWidth{
+    max-width: 130px;
+  }
+}

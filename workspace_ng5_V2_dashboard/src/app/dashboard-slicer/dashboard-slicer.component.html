@@ -1,0 +1,118 @@
+
+<div class="dashboard-slicer-wrapper">
+  <div class="filter-panel-wrapper">
+    <div class="filters-panel-header row marginBottom0 paddingRight0 paddingLeft0">
+      <div class="col s6 paddingLeft2">
+        <a href="javascript:void(0)" [style.display]="_dashboardComm.showSlicerLoader ? 'none':''"  (click)="_dashboardComm.bindSlicerExpandCallBack()">
+          <i class="icon iconSmall">
+            <svg>
+              <use [attr.xlink:href]="filterIconValue"></use>
+            </svg>
+          </i>
+        </a>
+        <div class="preloader-wrapper small active slicer-loader" [style.display]="_dashboardComm.showSlicerLoader ? '':'none'">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <span class="bold verticalAlignMiddle" [style.display] = "isSlicerFilterSidebarExpand ? '' : 'none'">
+          {{constants.UIMessageConstants.STRING_SLICER}}
+        </span>
+      </div>
+      <div class="col s2 right paddingRight0 clear-all-filter" [style.display] = "isSlicerFilterSidebarExpand ? '' :'none'">
+        <a href="javascript:void(0)" class="filter-close-icon" (click)="removeSlicerFilters()">
+          <i class="icon iconSmall">
+            <svg>
+              <use xlink:href="#icon_Close"></use>
+            </svg>
+          </i>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="relative applied-filter-panel-section height100P">
+      <div class="left height100P width100P absolutePos" id="filterListContainer">
+        <div class="filter-panel-list-container height100P relativePosition">
+          <div class="filters-panel-list height100P relativePosition">
+            <ul class="panel-content-iteamList filter-panel-main-list clearfix height100P relativePosition" [style.overflow] = "isSlicerFilterSidebarExpand ? 'auto' : 'none' ">
+              <li class="truncate pantel-content-item"
+                *ngFor="let filter of config.config;let _index=index; trackBy : trackByFilterId" id="selected-filter-{{_index}}">
+                <div class="panel-content-iteamList-item relativePosition slicerLazyLoading" >
+                  <a href="javascript:void(0)" (click)="filterItemClick(filter,_index)" [style.display] = "isSlicerFilterSidebarExpand ? '' : 'none'">
+                    <i class="icon iconSmall cursorPointer dirArrow grey-text">
+                      <svg>
+                        <use xlink:href="#icon_DownChevron"></use>
+                      </svg>
+                    </i>
+                  </a>
+                  <strong class="truncate truncateSlicer" title="{{filter.displayName}}">{{filter.DisplayName}}</strong>
+                  <a href="javascript:void(0)" class="filter-close-icon" (click)="removeFilter(_index)" [style.display] = "isSlicerFilterSidebarExpand ? '' : 'none'">
+                    <i class="icon iconSmall">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M15.6 7.6L12 11.3 8.4 7.6l-.8.8 3.7 3.6-3.7 3.6.8.8 3.6-3.7 3.6 3.7.8-.8-3.7-3.6 3.7-3.6z M12 3c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 17c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/>
+                   </svg>
+                    </i>
+                  </a>
+
+                  <!-- show search with close icon start-->
+                   <div class="searchWithHiddenTextField" [ngClass]="{'active':_dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId) ? _dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId).SearchConfig.IsSearchActive : false}"
+                   [style.display] = "isSlicerFilterSidebarExpand ? '' : 'none'">
+                    <a href="javascript:void(0)" class="search-icon btn-flat black-text" (click)="openSearch(_index)">
+                        <i class="icon iconSmall center grey-text">
+                            <svg>
+                                <use xlink:href="#icon_Search"></use>
+                            </svg>
+                        </i>
+                    </a>
+                    <input type="text" placeholder="search" class="searchInputBox" (input)="onSearchKeypress($event,filter)"
+                    [(ngModel)]="_dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId).SearchConfig.SearchText"
+                    [ngClass]="{'width100Percent': _dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId) ? _dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId).SearchConfig.IsSearchActive : false}" >
+
+                    <a href="javascript:void(0)" [ngClass]="{'hide':_dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId) ? !_dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId).SearchConfig.ShowSearchClose : true}"
+                        (click)="hideSearch(_index)"
+                        class="waves-circle waves-effect cancel-icon btn-flat black-text">
+                        <i class="icon iconSmall center grey-text">
+                            <svg>
+                                <use xlink:href="#icon_Close"></use>
+                            </svg>
+                        </i>
+                    </a>
+                </div> 
+                  <!-- show search with close icon end -->
+                </div>
+                <smart-block-loader id="slicerLazyLoader" [style.display] = "_dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId).SlicerFilterExpanded ? '' : 'none'" [config]="_dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId) ?  _dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId).SlicerLoaderConfig : {}"></smart-block-loader>
+                <ul (scroll)="onElementScroll($event, filter)" class="panel-content-iteamList filter-child-group marginTop3 relative"  [style.display] = "isSlicerFilterSidebarExpand ? '' : 'none'"> 
+                  <div *ngIf=" filter.FilterList &&  filter.FilterList.length > 0 ; else slicerMessage"> 
+                    <li class="panel-content-iteamList-item truncate"
+                      id="selected-filter-list-{{filter.reportObjectId}}-{{childindex}}" title="{{item.title}}"
+                      *ngFor="let item of filter.FilterList;let childindex=index;trackBy : childindex">
+                      <smart-checkbox class="objectCheckbox" [(modelData)]="filter.FilterList[childindex]"
+                        [config]="checkboxConfig" (change)="change(filter, filter.FilterList[childindex]['title'])">
+                      </smart-checkbox>
+                      <span class="roObjectTitle" [title]="item.title">{{item.title}}</span>
+                    </li>
+                  </div>
+                  <ng-template #slicerMessage>
+                    <div class="noChart"> {{_dashboardCommService.slicerFilterConfig.get(filter.ReportObjectId).Message}}
+                    </div>
+                  </ng-template>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="lean-overlay" (click)="onCancel()"></div> -->
+</div>

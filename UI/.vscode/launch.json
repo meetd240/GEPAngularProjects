@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+  
+    // Hover to view descriptions of existing attributes.
+  
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+
+    "version": "0.2.0",
+  
+    "configurations": [
+      {
+        "name": "Launch Chrome",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:3000",
+        "webRoot": "${workspaceFolder}",
+        "runtimeArgs": ["--disable-web-security", "--user-data-dir", "--allow-file-access-from-files", "--allow-cross-origin-auth-prompt"]
+      },
+      {
+        "name": "Attach Chromessssss",
+        "type": "chrome",
+        "request": "attach",
+        "url": "http://localhost:3000/*",
+        "webRoot": "${workspaceFolder}"
+      },
+      {
+        "name": "Unit Testing",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:4201/debug.html",
+        "webRoot": "${workspaceFolder}"
+      }
+    ]
+  }
+  

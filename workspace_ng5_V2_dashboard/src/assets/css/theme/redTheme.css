@@ -1,0 +1,190 @@
+﻿/* .smart1-navigation {
+    border-top-color: #fda529 !important;
+} */
+
+nav, 
+.extra-nav-wrap, 
+.extra-nav-wrap .subHeaderWithFilter, 
+.login-wrapper
+{
+	background-color : #C10E21;
+}
+
+.side-nav li:hover, 
+.side-nav li:active, 
+.side-nav li.active
+{
+	background-color : #700813;
+}
+
+.side-out-bm-nf-ct > div:first-child{
+	background-color : #910B19;
+}
+
+.side-out-bm-nf-ct .collection-item
+{
+	background-color : #700813;
+}
+
+.side-out-bm-nf-ct .collection {
+    background-color : #910B19;
+}
+
+::selection {
+  background-color: #C10E21;
+}
+
+a:focus, a:active:focus, a:hover:focus, a:visited:focus {
+    outline-color: #C10E21 !important;
+}
+
+.extra-nav-wrap .global-search .searchWithHiddenTextField, 
+.headersearch .searchWithHiddenTextField,
+.side-nav .smart-accordion-container .collection
+{
+	background-color : #700813 !important;
+}
+
+
+.side-nav .smart-accordion-container .collection li:hover, 
+.side-nav .smart-accordion-container .collection li:active, 
+.side-nav .smart-accordion-container .collection li.active
+{
+	background-color : #910B19;
+}
+
+.side-nav{
+    background-color: #C10E21  !important;
+}
+
+
+.nav-bottom-stick.copyrightBtmCont {
+	border-top-color: #910B19;
+}
+
+.nav-right-buttons.nav-slide-active li:last-child a {
+	color : #FFF;
+}
+
+
+/* =================================== Help Center =================================== */
+
+.help-center .title.support-title {
+	background : #C10E21;
+}
+
+.help-center .collection li .support-li {
+	background-color : #700813;
+}
+
+.support-title span {
+	color : #FFF;
+}
+
+/* =================================== Announcement =================================== */
+.side-out-bm-nf-ct .tabs {
+	background : #C10E21;
+}
+
+#slide-out-notification .borderBtmGray.tabparent-container,
+.nav-bottom-stick
+{
+	background : #C10E21;
+}
+
+.nav-notification.currentActive a,
+#slide-out-notification span.title,
+#slide-out-notification .icons-ops .icon
+{
+	color : #FFF;
+}
+
+.side-out-bm-nf-ct .tabs .tab a.active {
+	color : #FFF;
+	border-bottom: 2px solid #FFF !important;
+}
+
+#slide-out-notification .add-announce {
+	color: #FFF !important;
+}
+
+/* =================================== Bookmark =================================== */
+
+.side-nav #slide-out-bookmark li.collection-item a,
+.nav-bookmark.currentActive a
+{
+	color: #FFF;
+}
+
+#slide-out-bookmark,.collection-item.nav-bottom-stick, .nav-bottom-stick{
+	background-color: #910B19;
+}
+
+#slide-out-bookmark .add-announce {
+	color: #FFF !important;
+}
+
+.bookmark-list .scrollbar-outer{
+    background-color : #700813 !important;
+}
+
+
+
+/* =================================== Scroll bar =================================== */
+.help-center .scroll-element.scroll-y .scroll-element_outer .scroll-bar,
+.internal-external-notification .scroll-element.scroll-y .scroll-element_outer .scroll-bar
+{
+	background-color : #C10E21 !important;
+}
+
+
+#subheader-element {
+	background-color: #700813 !important;
+  }
+  
+  #subheader-filterContainer {
+	background-color: #700813 !important;
+  }
+  
+  .announcementContainer .announcement-tabs-container {
+	 background: #700813 !important;
+  }
+  
+  .announcementContainer .announcement-collection .announcement-collection-item {
+	 background-color: #700813 !important;  
+  }
+  
+  .announcementContainer .announcement-tabs-container .announcement-list a.active {
+	 color: white !important;
+	 border-bottom: 2px solid yellow !important;
+  }
+  
+  .announcementContainer .announcement-collection .announcement-collection-item a.announce-title .title {
+	 color: white;   
+  }
+  
+  .announcementContainer .announcement-collection .announce-actions a i {
+	 color: white !important;  
+  }
+  
+  .bookmarkContainer .bookmark-tabs-container .bookmark-list .active {
+	 color: white !important;
+	 border-bottom: 2px solid yellow !important;
+  }
+  
+  
+  .bookmarkContainer .bookmark-tabs-container {
+	 background: #700813 !important;    
+  }
+  
+  .bookmarkContainer .bookmark-scroll-container .bookmark-collection .bookmark-collection-item {
+	 background-color: #700813 !important;     
+  }
+  
+.btn-flat {    
+    color: #700813 !important;     
+}
+
+.bookmarkContainer .bookmark-scroll-container .bookmark-collection .bookmark-collection-item a {
+    color: white !important;
+}

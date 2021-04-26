@@ -1,0 +1,56 @@
+<div class="scrollableModel modal-popup1">
+	<div class="header-title-container modal-header scrollableModel ">
+		<span id="popUpHeader" class="paddingLeft10">
+			
+		</span>
+	</div>
+
+	<div class="paddingLabel">
+		<div>
+			<span id="labelPartNo"></span>
+			<span id="partName" class="marginLeft10 bold">  </span>
+		</div>
+
+		<div class="marginTop10">
+			<span id="labelPartDesc"></span>
+		</div>
+
+
+	</div>
+
+	<div class="padding15">
+		<span>
+			<a class='waves-effect'>
+				<i class="icon iconSmall">
+					<svg>
+						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Info"></use>
+					</svg>
+				</i>
+			</a>
+		</span>
+		<span id="infoMessage" class="bold marginLeft10"></span>  
+	</div>
+
+	<div  *ngIf="showGrid" class="ppv-grid-container">
+		<div style="height:180px ; padding:0px" class="overflowAuto grid-container">
+			<div flex-grid [config]="gridData"></div> 
+		</div>
+		<div class="totalSavingsSection">
+			<div class='totalSavingsLabel'>Total Savings :</div>
+			<div class='radioSection'><smart-radio class="col marginTop15" [config]="radioSavingsConfig" [(modelData)]="radioSavingsModel"></smart-radio></div>
+		</div>
+	</div>
+
+
+
+	<div class="footer modal-footer modal-footer-normalScroll paddingBtm10 marginRight10">
+		<div class="right">
+			<smart-button [config]="btnCreateOpportunityConfig" (callback)="createOppClick()"></smart-button>
+			<span class="separator"></span>
+			<smart-button [config]="btnDoneConfig" (callback)="onCancel()"></smart-button>
+
+		</div>
+	</div>
+</div>
+
+<div class="lean-overlay" (click)="onCancel()"></div>

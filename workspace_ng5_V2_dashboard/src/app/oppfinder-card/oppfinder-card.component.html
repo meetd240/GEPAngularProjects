@@ -1,0 +1,153 @@
+<div>
+<div id="oppFinderSelection" class="ax_default label" data-label="drilldown-info">
+  <span>
+    <i class="icon iconSmall">
+      <svg>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Info"></use>
+      </svg>
+    </i>
+  </span>
+  <span
+    style="font-family:'Noto Sans';font-weight:400;margin-left: 4px;">{{constants.UIMessageConstants.STRING_GRID_MESSAGE}}</span>
+  <span
+    style="font-family:'Noto Sans Bold', 'Noto Sans Regular', 'Noto Sans';font-weight:700; margin-left: 4px;">{{gridMessage}}</span>
+
+</div>
+<div id="oppFindertoggle">
+  <span id="activeinactivedropdown">
+    <span class="col s4 line-height-manager stringSelect" >
+      <label class="switch"><input type="checkbox" (change)="onOppfinderStatusDropDownChange($event)" id="togBtn">
+        <div class="slider round"></div>
+      </label>
+    </span>
+    <span class="col s4 line-height-manager stringSelect">
+      <label style="color: black;">&nbsp; Show  {{constants.UIMessageConstants.STRING_INACTIVEOPPORTUNITIES}}</label></span>
+  </span>
+</div>
+</div>
+<div class="md-stepper-horizontal" *ngIf="srsFlag">
+  <div class="md-step" (click)="stepCount!=0 && stepperClick(0)">
+    <div class="md-step-circle"  [ngStyle]="{'background': ' #2964bb' }">
+      <span *ngIf="stepCount==0">1</span>
+      <span *ngIf="stepCount!=0" class="checkedIcon"></span>
+    </div>
+    <div class="md-step-title">{{constants.UIMessageConstants.STRING_SELECT_SUPPLIER}}</div>
+    <div class="md-step-bar-left"></div>
+    <div class="md-step-bar-right"></div>
+  </div>
+  <div class="md-step" (click)="stepCount ==2 && stepperClick(1)">
+    <div class="md-step-circle"  [ngStyle]="{'background': stepCount ==0 ? ' grey' : '#2964bb' }">
+      <span *ngIf="stepCount!=2">2</span>
+      <span *ngIf="stepCount==2" class="checkedIcon"></span>
+    </div>
+    <div class="md-step-title">{{constants.UIMessageConstants.STRING_ASSIGN_SPENT}}</div>
+    <div class="md-step-bar-left"></div>
+    <div class="md-step-bar-right " style='left: 50% !important;'></div>
+  </div>
+  <div class="md-step">
+    <div class="md-step-circle" [ngStyle]="{'background': stepCount==2 ? ' #2964bb' : 'grey' }"><span>3</span></div>
+    <div class="md-step-title">{{constants.UIMessageConstants.STRING_CAL_EST_SAVING}}</div>
+    <div class="md-step-bar-left"></div>
+    <div class="md-step-bar-right"></div>
+  </div>
+</div>
+
+<div *ngIf="srsFlag && stepCount != 2">
+  <span class="savings"> Total Spend : {{currencySign}}{{totalSpend}} </span>
+  <span class="savings" style="margin-left:110px"> Assignable Spend : {{currencySign}}{{assignableSpend}} </span>
+
+</div>
+
+
+<div  flex-grid [config]="config.config" (flexEvents)="flexEvents($event)"
+  *ngIf="ddlOppfinderStatusSelected.value.Id == 0 && !nextflag && flexFlag" id="activeOppfinderFlexGrid" class="relativePosition">
+
+  <ul class='dd_data dropdown-content dashboard-kebab-DD' class="editable-div" [hidden]="editTextfield"
+    id="activeOppKebab">
+    <li *ngIf="isActiveKebabMenu" class="oppFinderKebabItem">
+      <a *ngIf="concoFlg" class="cursorPointer rename" (click)="createNewOpportunityForPonpo()">
+        {{constants.UIMessageConstants.STRING_POPUP_CREATE_OPPORTUNITY}}
+      </a>
+    </li>
+    <li *ngIf="isActiveKebabMenu" class="oppFinderKebabItem">
+      <a class="cursorPointer rename"
+        (click)="onOppfinderGridStatusChange($event,1)">{{constants.UIMessageConstants.STRING_KEBABMENU_OPTION_MARKASINACTIVE}}</a>
+    </li>
+    <li *ngIf="!isActiveKebabMenu" class="oppFinderKebabItem">
+      <a class="cursorPointer rename"
+        (click)="onOppfinderGridStatusChange($event,0)">{{constants.UIMessageConstants.STRING_KEBABMENU_OPTION_MARKASACTIVE}}</a>
+    </li>
+    <li [style.display]="viewPPVDetails ? '' : 'none'" class="oppFinderKebabItem">
+      <a id="viewDetails" class="cursorPointer rename"
+        (click)="openPpvViewDetailsPopUp()">View Details</a>
+    </li>
+  </ul>
+
+</div>
+<div class="editable-div_estspend" [hidden]="editTextfieldest">
+  <div class="textfield-wrapper left">
+    <div style=" font-weight: bold;">Enter value</div>
+    <smart-numeric class="marginTop0 numericClass" [config]="smartNumericConfig" (keyup)="onKeyUp()"
+      [(modelData)]="penaltyPercentage">
+    </smart-numeric>
+  </div>
+  <br>
+  <div class="separator">
+    <a class="link" (click)="applyCancel()">Cancel</a>
+    <a class="link" (click)="applyToAll()">Apply to all</a>
+    <a class="link" (click)="apply()">Apply</a>
+  </div>
+</div>
+<ng-template #olapGridTemplate let-config>
+  <div id="olapGrid" style="height: 100%; width: 100%; overflow-x: auto;margin-top: 20px;" olap-grid [config]="config"></div>
+</ng-template>
+<ng-container #widgetContainer>
+</ng-container>
+
+<div flex-grid [config]="config.config" (flexEvents)="flexEvents($event)"
+  *ngIf="ddlOppfinderStatusSelected.value.Id == 1;" id="inactiveOppfinderFlexGrid" class="relativePosition">
+  <ul class='dd_data dropdown-content dashboard-kebab-DD' class="editable-div" [hidden]="editTextfield">
+    <li class="oppFinderKebabItem">
+      <a class="cursorPointer rename"
+        (click)="onOppfinderGridStatusChange($event,0)">{{constants.UIMessageConstants.STRING_KEBABMENU_OPTION_MARKASACTIVE}}</a>
+    </li>
+  </ul>
+</div>
+<div>
+  <ng-container #paymentTermPopUpRef> </ng-container>
+</div>
+<div>
+  <ng-container #assignSpendPopUpRef></ng-container>
+</div>
+<div>
+  <ng-container #ppvViewDetailsPopupRef></ng-container>
+</div>
+<div class="dashboard-container marginTop15">
+  <ng-container #oppfinderStatusPopup></ng-container>
+</div>
+<div class="footercls" *ngIf="srsFlag">
+  <span class="left" style="margin-left: 2%;">
+    <smart-button [config]="btnCloseConfig" (callback)="resetGridData()">
+    </smart-button>
+  </span>
+  <span *ngIf="stepCount==0" class="right" style="margin-right: 2%;">
+    <smart-button [config]="btnNextConfig" (callback)="assignSpend()"></smart-button>
+  </span>
+  <span *ngIf="stepCount==1" class="right" style="margin-right: 2%;">
+    <smart-button [config]="btnNextConfig" (callback)="closeAssignSRSPopup()"></smart-button>
+  </span>
+  <span *ngIf="stepCount==2" class="right" style="margin-right: 2%;">
+    <smart-button [config]="btnCreateConfig" (callback)="createNewOpportunity($event)"></smart-button>
+  </span>
+  <span *ngIf="stepCount!=0" class="right" style="margin-right: 2%;">
+    <smart-button [config]="btnBackConfig" (callback)="backBtnClick()"></smart-button>
+  </span>
+  <span class="right" style="margin-right: 2%;">
+    <smart-button [config]="btnCancelConfig" (callback)="cnclBtnClick()"></smart-button>
+  </span>
+</div>
+
+
+<ng-template #outletTemplate let-manifestPath="manifestPath" let-config="config">
+  <smart-outlet [path]="manifestPath" [childConfig]="config"></smart-outlet>
+</ng-template>

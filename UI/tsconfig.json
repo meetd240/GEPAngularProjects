@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module":"esnext",
+    "paths": {
+      "@sharedServices/*": [
+        "src/core/services/*"
+      ],
+      "@sharedModule/*": [
+        "src/shared/*"
+      ],
+      "@interfaces/*": [
+        "src/modules/interfaces/*"
+      ],
+      "@sharedEnums/*": [
+        "src/modules/enums/*"
+      ]
+    },
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true, 
+    "downlevelIteration": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ]
+  }
+}

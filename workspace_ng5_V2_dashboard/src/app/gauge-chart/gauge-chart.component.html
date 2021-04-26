@@ -1,0 +1,5 @@
+<div *ngFor="let gaugeChartConfig of gaugeChartConfigList; let index= index" class="gaugeChartContainer">
+        <div chartWidget [config]="gaugeChartConfig" (eventHandler)="eventHandlerCallback($event)"
+                id="gaugeChart-{{index}}" class="gaugeChart">
+        </div>
+</div>

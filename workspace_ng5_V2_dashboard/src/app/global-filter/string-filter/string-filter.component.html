@@ -1,0 +1,182 @@
+<div class="row marginBtm0 height-auto stringFilterWrapper" [ngClass]="{'addedToSlicer': StringFilterObj.FilterIdentifier == 3}">
+  <div class="col s12 marginTop10">
+    <!-- <div class="left marginRight30 redio-chanel">
+            <smart-radio class="col marginTop15" [config]="FilterByConfig" [(modelData)]="filterByModel" (onChange)="onChangeFilterBy(StringFilterObj,filterByModel.field)" ></smart-radio>
+        </div> -->
+    <div class="left marginRight30 redio-chanel">
+      <input id="filterBySel" type="radio" class="with-gap" [(ngModel)]="StringFilterObj.FilterBy" [value]="1"
+        (change)="onChangeFilterBy(StringFilterObj,1)" />
+      <label for="filterBySel">Filter by Selection</label>
+    </div>
+    <div class="left marginRight30 redio-chanel">
+      <input id="filterByCnd" type="radio" class="with-gap" [(ngModel)]="StringFilterObj.FilterBy" [value]="2"
+        (change)="onChangeFilterBy(StringFilterObj,2)" />
+      <label for="filterByCnd">Filter by Condition</label>
+    </div>
+  </div>
+  <div *ngIf="StringFilterObj.FilterBy == 1" class="stringFilterContainer">
+    <div class="col s12 paddingLeft0 marginBtm0 marginTop10 searchStringSection">
+      <div class="filterSection sub-header-filter-main clearfix addHeight">
+        <i class="icon filterSearchIcon grey-text">
+          <svg>
+            <use xlink:href="#icon_Search"></use>
+          </svg>
+        </i>
+        <a smartTooltip [config]="closeTooltipConfig"
+          (click)="clearSearch(StringFilterObj,StringFilterObj.FilterSearchText.value)">
+          <i class="icon iconFix iconSmall filterCloseIcon marginTop7 fontsize-1rem">
+            <svg>
+              <use xlink:href="#icon_Close"></use>
+            </svg>
+          </i>
+        </a>
+        <smart-textfield [config]="searchFilterConfig" [(modelData)]="filterSeachText" [cssClass]="'line-height-manager'"  
+          (keyup)="onSearchKeypress($event,StringFilterObj,filterSeachText.value)"></smart-textfield>
+      </div>
+    </div>
+    <div class="StringFilterList">
+      <ul class="panel-content-iteamList">
+        <li class="panel-content-iteamList-item paddingLeft20 clearfix" *ngIf="StringFilterObj.filteredList.length">
+          <span class="left"
+            *ngIf="!(StringFilterObj.IsSelectAll==false && StringFilterObj.FilterSearchText.value=='')">
+            <span class="selectAll left" [ngClass]="{'filled-partial' : StringFilterObj.PartialSelect === true }"
+              *ngIf="!StringFilterObj.IsShowSelected">
+              <!-- <smart-checkbox [config]="selectAllConfig" [(modelData)]="StringFilterObj.SelectAll"
+                (onChange)="onChangeAllFilter(StringFilterObj,StringFilterObj.SelectAll, index)"> </smart-checkbox> -->
+              <input type="checkbox" id="filterAllChk_{{index}}" class="filled-in"
+                [(ngModel)]="StringFilterObj.SelectAll"
+                (change)="onChangeAllFilter(StringFilterObj,StringFilterObj.SelectAll, index)" />
+              <label for="filterAllChk_{{index}}">{{StringFilterObj.SelectAllTxt}}</label>
+            </span>
+          </span>
+          <span class="left relative" *ngIf="StringFilterObj.IsShowSelected">
+            {{StringFilterObj.FilterTabInfo}}
+          </span>
+          <div class="showSlctChk right width170">
+            <input type="checkbox" id="filterShowSelectecd_{{index}}" class="filled-in"
+                [(ngModel)]="StringFilterObj.IsShowSelected"
+                [ngStyle]="{'visibility': StringFilterObj.filterSelSet == true ? 'visible' : 'hidden'}"
+                (change)="onShowSelectedCallback(StringFilterObj,StringFilterObj.IsShowSelected, index)" />
+              <label for="filterShowSelectecd_{{index}}">Show Selected</label>
+            <!-- <smart-checkbox [config]="{ label:'Show Selected', disable:'!StringFilterObj.filterSelSet' }"
+              [(ngModel)]="StringFilterObj.IsShowSelected"
+              (change)="onShowSelectedCallback(StringFilterObj,StringFilterObj.IsShowSelected, index);"
+              [ngStyle]="{'visibility': StringFilterObj.filterSelSet == true ? 'visible' : 'hidden'}"></smart-checkbox> -->
+          </div>
+
+        </li>
+      </ul>
+      <div class="chart-error-msg"
+        *ngIf="!StringFilterObj.IsSelectAll && StringFilterObj.FilterSearchText.value!='' && (StringFilterObj.FilterList | filter: { term: StringFilterObj.FilterSearchText.value, key:'title',isSelectAll:StringFilterObj.IsSelectAll })?.length && StringFilterObj.SelectAll">
+        Only those search results are selected which are currently loaded till current scrolling
+      </div>
+      <ul class="collection noBorder filterListSection" id="filter-list"
+        [ngClass]="{'height215':!StringFilterObj.IsSelectAll && StringFilterObj.FilterSearchText.value!='' && (StringFilterObj.FilterList | filter: { term:
+      StringFilterObj.FilterSearchText.value, key:'title',isSelectAll:StringFilterObj.IsSelectAll })?.length && StringFilterObj.SelectAll}"
+        *ngIf="(StringFilterObj.FilterList | filter: { term: StringFilterObj.FilterSearchText.value, key:'title',isSelectAll:StringFilterObj.IsSelectAll })?.length && !StringFilterObj.IsShowSelected">
+        <li *ngFor="let n of StringFilterObj.filteredList; let i = index;trackBy :trackByFilteredList;"
+          class="clearfix paddingBtm0 collection-item">
+          <span class="left">
+            <input type="checkbox" id="filterChk_{{i}}" class="filled-in" [(ngModel)]="n.IsSelected"
+              (change)="onChangeFilterList(StringFilterObj,n, index, i)" />
+            <label for="filterChk_{{i}}" class="left marginTop2 item-name truncate width100P"
+              title="{{n.title}}">{{n.title}}</label>
+          </span>
+        </li>
+      </ul>
+      <ul class="collection noBorder filterListSection" [ngClass]="{'height206':!StringFilterObj.IsSelectAll && StringFilterObj.FilterSearchText.value!='' && (StringFilterObj.FilterList
+      | filter: { term: StringFilterObj.FilterSearchText.value, key:'title',isSelectAll:StringFilterObj.IsSelectAll })?.length
+      && StringFilterObj.SelectAll}" *ngIf="StringFilterObj.IsShowSelected">
+        <li *ngFor="let n of StringFilterObj.selectedFilterList; let i = index;trackBy i;"
+          class="clearfix paddingBtm0 collection-item">
+          <span class="left">
+            <input type="checkbox" id="filterChk_{{i}}" class="filled-in" [(ngModel)]="n.IsSelected"
+              (change)="onChangeFilterList(StringFilterObj,n, index, i)" />
+            <label for="filterChk_{{i}}" class="left marginTop2 item-name truncate width100P"
+              title="{{n.title}}">{{n.title}}</label>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="col s12 center-align"
+      *ngIf="!(StringFilterObj.filteredList | filter: { term: StringFilterObj.FilterSearchText.value, key:'title' })?.length">
+      <span class="center-align displayBlock grey-text padding75">No Records Found</span>
+    </div>
+  </div>
+  <div class="row stringFilterRightSection" *ngIf="StringFilterObj.FilterBy == 2">
+    <div class="col s3 line-height-manager stringSelect">
+      <smart-select id="resize-caret" [config]="filterByCdnConfig" class=""
+        [(modelData)]="StringFilterObj"
+        (onChange)="onChangeFilterByOp(StringFilterObj,StringFilterObj.FilterConditionOperator.op, index)"></smart-select>
+    </div>    
+    <div class="col s8 line-height-manager " [ngClass]="[ (StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.In ||
+    StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.NotIn) ? 'marginTop8' : 'marginTop17']">
+      <smart-textfield class="line-height-manager" [config]="filterByCdnValueConfig" 
+        (change)="onValueKeypress(StringFilterObj,StringFilterObj.FilterConditionText.value, index)"
+        [(modelData)]="StringFilterObj.FilterConditionText" *ngIf="( StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.Contains ||
+        StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.DoesNotContains ||
+        StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.Is ||
+        StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.IsNot ||
+        StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.BeginsWith ||
+        StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.EndsWith )">
+      </smart-textfield>
+
+      <!--ANLT-8623 Start-->
+      <div class="col 12 width100Percent  marginTop15">
+        <div class="col padding0">
+          <i [style.display]="(StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.In ||
+          StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.NotIn ) ? '' : 'none'" 
+            class="icon grey-text left" style="position: relative;">
+            <svg>
+              <use xlink:href="#icon_Search"></use>
+            </svg>
+          </i>
+        </div>
+        <div class="col s11 padding0" style="margin-top: -18px;">
+          <smart-autocomplete class="search-field auto-complete" id="filterAutoComplete" [config]="autoCompleteConfig"
+            [(modelData)]="StringFilterObj.autoCompleteFilterData"
+            (keyup)="onSearchAutoCompleteKeypress($event,StringFilterObj,$event.target.value)" *ngIf="StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.In ||
+                                    StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.NotIn">
+          </smart-autocomplete>
+        </div>
+        <div [hidden]="!(StringFilterObj.FilterConditionOperator.op != constants.ReportObjectOperators.IsNull &&
+                        StringFilterObj.FilterConditionOperator.op != constants.ReportObjectOperators.IsNotNull &&
+                        StringFilterObj.FilterConditionOperator.op != constants.ReportObjectOperators.IsEmpty &&
+                        StringFilterObj.FilterConditionOperator.op != constants.ReportObjectOperators.IsNotEmpty &&
+                        StringFilterObj.FilterConditionOperator.op != constants.ReportObjectOperators.In &&
+                        StringFilterObj.FilterConditionOperator.op != constants.ReportObjectOperators.NotIn)"
+          class="remainingTextIndicator">
+          {{StringFilterObj.FilterConditionText.value.length}}/
+          {{filterByCdnValuesConfig.attributes.maxLength}}
+        </div>
+      </div>
+      <div class="alert-bar--with-button alert-bar scroll-inner-wrapp shadowNone " style="height: 180px;border:none;padding-top:15px;" *ngIf="StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.In ||
+                      StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.NotIn">
+        <span class="chip chips-link hoverable "
+          *ngFor="let filterChip of StringFilterObj.autoCompleteFilterList; let i = index;">
+          <span class="filter-autoCompeletChip-link marginTop4" title="{{filterChip}}">{{filterChip}}</span>
+          <span class="removeAutoCompleteChipIcon">
+            <i class="icon iconXsmall grey-text" title="remove" (click)="removeFilterChip(StringFilterObj,i)">
+              <svg>
+                <use xlink:href="#icon_ChipRemove"></use>
+              </svg>
+            </i>
+          </span>
+        </span>
+      </div>
+      <div [style.display]="(StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.In ||
+      StringFilterObj.FilterConditionOperator.op === constants.ReportObjectOperators.NotIn ) ? '' : 'none'"  class="right">
+        {{StringFilterObj.autoCompleteFilterList.length}}/300
+      </div>
+      <!--ANLT-8623 End-->
+    </div>
+    <!-- <span class="col s1 values-infotip" *ngIf="StringFilterObj.FilterConditionOperator.op == 8 || StringFilterObj.FilterConditionOperator.op == 7"
+             smartInfotip [config]="filterInfotipConfig">
+                <i class="icon iconSmall marginTop15">
+                    <svg>
+                        <use xlink:href="#icon_Info"></use>
+                    </svg>
+                </i>
+        </span> -->
+  
+</div>

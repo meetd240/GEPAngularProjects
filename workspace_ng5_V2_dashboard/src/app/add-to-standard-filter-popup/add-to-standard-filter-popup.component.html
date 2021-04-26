@@ -1,0 +1,101 @@
+<div class="scrollableModel modal-popup panelBox-content add-to-standard-filter-popup">
+  <div class="panelBox-body padding0 add-to-standard-filter-popup-wrapper">
+    <div class="row margin0 add-to-standard-filter-popup-body">
+      <div class="panelBox-content margin0 add-to-standard-filter-popup-container">
+        <div class="modal-header">
+          <div class="searchSlideMain searchSlideMain--inputBdrBNone"
+            [ngClass]="{'hide':nonStandardFilterPopupConfig.nonStandardFilterList.length == 0 || isActiveSearchBlock }">
+            <div class="searchWithHiddenTextField" [ngClass]="{'active':isActiveSearch}">
+              <a href="javascript:void(0)" class="search-icon btn-flat black-text" (click)="showSearch()"
+                 smartTooltip [config]="addToStandardFilterSearchTooltipConfig">
+                <i class="icon iconSmall center grey-text">
+                  <svg>
+                    <use xlink:href="#icon_Search"></use>
+                  </svg>
+                </i>
+              </a>
+              <smart-textfield class="input-field" [config]="searchListConfig"
+                [(modelData)]="searchKeyText" (keyup)="onSearchKeypress(searchKeyText)">
+              </smart-textfield>
+              <a href="javascript:void(0)" [ngClass]="{'hide':!showMe}"
+                 (click)="searchKeyText.value='';hideSearch()"
+                class="waves-circle waves-effect cancel-icon btn-flat black-text" smartTooltip
+                [config]="addToStandardFilterCloseTooltipConfig">
+                <i class="icon iconSmall center grey-text">
+                  <svg>
+                    <use xlink:href="#icon_Close"></use>
+                  </svg>
+                </i>
+              </a>
+
+            </div>
+          </div>
+          <span
+                class="title marginLeft10 dashboard-views-title">{{ this.nonStandardFilterPopupConfig.title}}</span>
+        </div>
+        <div class="col s12 padding0 add-to-standard-filter-container">
+          <div class="filterContainerHeight filterConatinerMaxHeigt">
+            <div class="scroll-inner-wrapp listview-details filterConatinerMaxHeigt">
+              <ul class="collection filter-list noBorder filterContainerHeight">
+                <li class="collection-item col s12 padding15"
+                  *ngFor="let filterList of nonStandardFilterPopupConfig.nonStandardFilterList | filter : { term: searchKeyText.value, key:'DisplayName',isSelectAll:'true'};let i=index;trackBy:trackByReportObjectId">
+                  <!-- <span class="left"> -->
+                  <!-- <smart-checkbox  [(modelData)]="nonStandardFilterPopupConfig.nonStandardFilterList[i]"
+                                             [config]="filterListConfig"
+                                            (onChange)="onChangeAddToFilterList($event, filterList.isChecked, filterList)">
+                                        </smart-checkbox> -->
+                  <!-- <input type="checkbox" id="filterAllChk_{{index}}" class="filled-in"
+                                            [(ngModel)]="filterList.isChecked"
+                                            (change)="onChangeAddToFilterList($event, filterList.isChecked, filterList)" /> -->
+                  <span class="left">
+                    <div style="display: inline-block;" class="truncate truncateFilter" [ngClass]="{'disabled':filterList.isDisable}">
+                      <input type="checkbox" id="add_filterChk_{{i}}" class="filled-in"
+                        [(ngModel)]="filterList.isChecked"
+                        (change)="onChangeAddToFilterList($event, filterList.isChecked, filterList)"
+                        [disabled]="filterList.isDisable" />
+                      <label for="add_filterChk_{{i}}" class="left marginTop2 item-name truncate width100P"
+                        title="{{filterList.DisplayName}}">{{filterList.DisplayName}}</label>
+                    </div>
+                    <div class="addToStandardTooltip" [style.display] = "filterList.isDisable ? '':'none'">
+                        <smart-infotip [config]="tooltipconfig">
+                            <a class='waves-effect'>
+                              <i class="icon iconSmall">
+                                <svg>
+                                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Info"></use>
+                                </svg>
+                              </i>
+                            </a>
+                          </smart-infotip>
+                    </div>
+                  
+                  </span>
+                  <!-- </span> -->
+                  <!-- <div class="left">
+                                        <span class="truncate"
+                                            title="{{filterList.DisplayName}}">{{filterList.DisplayName}}</span>
+                                    </div> -->
+                </li>
+              </ul>
+            </div>           
+          </div>
+
+          <div class="modal-footer">
+            <span class="right">
+              <smart-button [config]="btnCloseConfig" (callback)="closeAddToStandardFilter()">
+              </smart-button>
+              <!-- {{config.popUpFor}}
+                            {{selectedFilter.length}}
+                            {{_dashboardCommServ.slicerFilterList.length}}
+                            {{selectedFilter.length + _dashboardCommServ.slicerFilterList.length}} -->
+              <smart-button [config]="btnAddConfig"
+                [ngClass]="{'disabled': config.popUpFor && config.popUpFor === _dashboardConst.PopupFor.Slicer && ((selectedFilter.length) > 9)}"
+                (callback)="addToStandardFilterClick(nonStandardFilterPopupConfig.nonStandardFilterList)">
+              </smart-button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lean-overlay" (click)="closeAddToStandardFilter()"></div>

@@ -1,0 +1,99 @@
+.stringFilterWrapper {
+  .stringFilterContainer {
+    .StringFilterList {
+      .selectAll {
+        height: 30px;
+        line-height: 26px;
+      }
+
+      .filterListSection {
+        // height: 190px;
+        height: 160px;
+        overflow-y: auto;
+      }
+    }
+
+    .searchStringSection {
+      .filterSection {
+        .filterCloseIcon {
+          top: -8px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .stringFilterRightSection {
+    .stringSelect {
+      padding-left: 26px;
+      margin-top: 6px;
+      height: 200px;
+    }
+    .filterByCdnLabel {
+      position: absolute;
+      margin-top: -4px;
+    }
+  }
+
+  ::ng-deep  label.field-label.active{
+    bottom: 29px;
+    left: 0;
+  }
+
+  .filter-autoCompeletChip-link {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+  }
+
+  .removeAutoCompleteChipIcon {
+    position: relative;
+    bottom: 6px;
+  }
+}
+
+.global-filter-fixed {
+  width: 100% !important;
+  background: white;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+  position: fixed;
+  overflow: hidden;
+}
+
+.height215 {
+  height: 215px !important;
+}
+
+.filterByCdn {
+  margin-top: -24px;
+  margin-left: 234px;
+}
+
+.remainingTextIndicator{
+  float: right;
+  margin-top: 5px;
+}
+
+.addHeight{
+  height: 50px;
+  margin-bottom: 0px;
+} 
+
+// .input-field label.active{
+//   bottom: 29px;
+//   left: 0;
+// }
+
+.addHeight{
+  height: 50px;
+  margin-bottom: 0px;
+}
+
+.addedToSlicer{
+  opacity: 0.5;
+  pointer-events: none;
+}

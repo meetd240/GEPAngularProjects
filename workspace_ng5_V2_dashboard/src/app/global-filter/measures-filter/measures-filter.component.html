@@ -1,0 +1,59 @@
+<div class="row marginBtm0 height-auto measureFilterRightSection">
+    <div class="row">
+        <smart-select id="resize-caret" class="col s3 line-height-manager" [config]="filterByMeasuresOpts"
+            [(modelData)]="measureFilterObj"
+            (onChange)="onChangeFilterByOp(measureFilterObj,measureFilterObj.FilterConditionOperator.op)">
+        </smart-select>
+        <smart-numeric [config]="{ label: 'Value' , 
+                attributes: {maxLength: 20}, 
+                data: 'measureConditionValue',
+                fieldKey: 'value'
+            }" class="col s3 line-height-manager add-margin-numeric"
+            (change)="onValueKeypress(measureFilterObj,measureConditionValue.value)"
+            (keyup)="onKeyUp()"
+            *ngIf="measureFilterObj.FilterConditionOperator.op != 14 && measureFilterObj.FilterConditionOperator.op != 15"
+            [(modelData)]="measureConditionValue"></smart-numeric>
+        <!-- <smart-numeric
+            [config]="{ label:'To', attributes: {maxLength: 20} ,  data: 'measureConditionValue',fieldKey: 'value'}"
+            class="col s3 line-height-manager add-margin-numeric"
+            (change)="onValueKeypress(measureFilterObj,measureConditionValue.value)"
+            [(modelData)]="measureConditionValue"
+            *ngIf="measureFilterObj.FilterConditionOperator.op == 14 || measureFilterObj.FilterConditionOperator.op == 15">
+        </smart-numeric> -->
+        <!-- <smart-numeric [config]="{ label:'Value', attributes: {maxLength: 2} , data: 'measureConditionValue',fieldKey: 'value'}" class="col s3 line-height-manager add-margin-numeric"
+            (change)="onValueKeypress(measureFilterObj,measureConditionValue.value)" [(modelData)]="measureConditionValue"
+            *ngIf="measureFilterObj.FilterConditionOperator.op == 7 || measureFilterObj.FilterConditionOperator.op == 8"></smart-numeric> 
+        <!-- <smart-numeric [config]="{ label:'Value(s)', attributes: {maxLength: 16}, data: 'measureConditionValue',fieldKey: 'value' }" class="col s3 line-height-manager add-margin-numeric"
+            (change)="onValueKeypress(measureFilterObj,measureConditionValue.value)" [(modelData)]="measureConditionValue"
+            *ngIf="measureFilterObj.FilterConditionOperator.op == 10 || measureFilterObj.FilterConditionOperator.op == 9"></smart-numeric>
+        -->
+        <smart-numeric [config]="{ label:'From', attributes: {maxLength: 20},fieldKey: 'from' }"
+            class="col s3 line-height-manager add-margin-numeric"
+            (change)="onValueKeypress(measureFilterObj,measureConditionRangeValue.from)"
+            (keyup)="onKeyUp()"
+            [(modelData)]="measureConditionRangeValue"
+            *ngIf="measureFilterObj.FilterConditionOperator.op == 14 || measureFilterObj.FilterConditionOperator.op == 15">
+        </smart-numeric>
+        <smart-numeric [config]="{ label:'To',attributes: {maxLength: 20} ,fieldKey: 'to'}"
+            class="col s3 line-height-manager add-margin-numeric"
+            (change)="onValueKeypress(measureFilterObj,measureConditionRangeValue.to)"
+            (keyup)="onKeyUp()"
+            [(modelData)]="measureConditionRangeValue"
+            *ngIf="measureFilterObj.FilterConditionOperator.op == 14 || measureFilterObj.FilterConditionOperator.op == 15">
+        </smart-numeric>
+    </div>
+            <smart-checkbox [(modelData)]="measureFilterObj"
+                 *ngIf="showEnableAsGlobalSliderCheckBox && _appConstants.userPreferences.moduleSettings.showEnableGlobalSliderChecbox && (measureFilterObj.FilterConditionOperator.op == 14 || measureFilterObj.FilterConditionOperator.op == 15)"
+                [config]="globalSliderChecBoxConfig" (change)="enabledAsGlobalSliderChange()"></smart-checkbox>
+    <!-- *ngIf="measureFilterObj.FilterConditionOperator.op>=16  && measureFilterObj.FilterConditionOperator.op<=19" -->
+    <ng-container #recordMessageContainer></ng-container>
+    <ng-template #displayRecordMessage>
+        <div class="row">
+            <div class="chart-error-msg">
+                N% records specified in the condition indicates the number of values in the data but not the number
+                of rows.
+            </div>
+        </div>
+    </ng-template>
+
+</div>

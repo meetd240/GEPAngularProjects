@@ -1,0 +1,13 @@
+ <sub-header [style.display]="_appConstants.userPreferences.moduleSettings.showSubheaderComponent ? '' : 'none'"
+  [subheaderConfig]="subheaderConfig" (viewInfo)="getSubheaderCompInfo($event)" id="mainContent" tabindex="-1"></sub-header> 
+
+<div class="dashboard-wrapper paddingBtm25" id="dashboard-container-id">
+
+  <ng-container #gridContainer>
+  </ng-container>
+
+  <ng-template #gridTemplate let-config>
+    <dashboard-grid [config]="config.config" (cardEvents)="cardEvents($event)" id="dashboard-container-id">
+    </dashboard-grid>
+  </ng-template>
+</div>

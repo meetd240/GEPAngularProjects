@@ -1,0 +1,30 @@
+<div class="scrollableModel">
+    <div class="header-title-container modal-header scrollableModel ">
+        <span>
+            <i class="icon iconSmall" style="color:#c2c2c2">
+                <svg>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Copy"></use>
+                </svg>
+            </i>
+        </span>
+
+        <span class="paddingLeft10">
+            COPY TO
+        </span>
+    </div>
+    <div class="content-container paddingTop20 ">
+
+        <div class="copy-items  paddingLeft10" *ngFor="let copy of copycontentdata;let index = index">
+            <div class="checkbox-wrapper left">
+                <smart-checkbox  [(ngModel)]="copy.isChecked"  [config]="checkboxConfig" (change)="copySelection()"  ></smart-checkbox>
+            </div>
+            <span class="paddingLeft10">{{copy.title}}</span>
+        </div>
+    </div>
+    <div class="footer modal-footer modal-footer-normalScroll">
+        <div class="right">
+            <smart-button [config]="btnDoneConfig" (callback)="copybtnDone()"></smart-button>
+            <smart-button [config]="btnCancelConfig" (callback)="copybtnCancel()"></smart-button>
+        </div>
+    </div>
+</div>

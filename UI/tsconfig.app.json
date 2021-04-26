@@ -1,0 +1,26 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "module": "esnext",
+      "strictNullChecks": false,
+      "suppressImplicitAnyIndexErrors": true,
+      "types": [
+        "node"
+      ]
+    },
+    "compileOnSave": false,
+    "buildOnSave": false,
+    "angularCompilerOptions": {
+      "preserveWhitespaces": false
+    },
+    "include": [
+      "**/*.ts",
+      "./node_modules/smart-*/*.ts",
+      "./node_modules/smart-*/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.spec.ts",
+      "**/*.e2e.ts",
+      "config-merge/*"  
+    ]
+  }

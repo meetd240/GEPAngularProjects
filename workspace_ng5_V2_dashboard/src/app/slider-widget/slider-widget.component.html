@@ -1,0 +1,40 @@
+<div class="clearfix slider-widget" *ngFor="let slider of config.sliderFilterArray; let index = index">
+    <!-- <div class="clearfix slider-widget"> -->
+    <span>{{slider.reportObjectName}}</span>
+    <i class="icon iconSmall blue-text" smartTooltip [config]="slider.sliderTooltipConfig">
+        <svg>
+            <use xlink:href="#icon_Info"></use>
+        </svg>
+    </i>
+
+    <span class="right paddingTop5">
+        <a class="reset-btn" (click)="resetSlide(index)" [innerHTML]="constants.UIMessageConstants.STRING_Reset"></a>
+    </span>
+    <ion-range-slider #sliderElement type="double" [min]="slider.min" [max]="slider.max" [from]="slider.range.from"
+        keyboard="true" [to]="slider.range.to" grid_num="10" decorate_both="false"
+        (onUpdate)="rangeOnUpdate($event,index)" (onChange)="rangeOnChange($event,index)"
+        (onFinish)="onFinish($event,index)">
+    </ion-range-slider>
+    <!-- <div *ngIf="slider.name=== 'Category Spend'" class="left slider-unit">$</div> -->
+
+    <smart-numeric class="marginTop0 left slider-input" #sliderFrom [config]="slider.ConfigFrom"
+        [ngClass]="{'redBorder': slider.min > slider.range.from}" [(modelData)]="slider.range"
+        (keyup)="onFromRangeBlur(index,slider.range.from)"></smart-numeric>
+    <div class="left slider-seperator paddingRight10">-</div>
+
+    <!-- <div *ngIf="slider.name=== 'Category Spend'" class="left slider-range">MM</div>
+    <div class="left slider-seperator">-</div>
+    <div *ngIf="slider.name=== 'Category Spend'" class="left slider-unit">$</div>
+     -->
+    <smart-numeric class="marginTop0 left slider-input" #sliderTo
+        [ngClass]="{'redBorder': slider.max < slider.range.to }" [config]="slider.ConfigTo" [(modelData)]="slider.range"
+        (keyup)="onToRangeBlur(index,slider.range.to)">
+    </smart-numeric>
+
+    <!-- <div *ngIf="slider.name=== 'Category Spend'" class="left slider-range">MM</div> -->
+</div>
+<div *ngIf="config.sliderFilterArray.length>0" class="slider-apply-btn">
+    <smart-button class="apply-btn" [config]="btnRangeApplyConfig"
+        (callback)="onApplySliderFilterRange(config.sliderFilterArray,$event)">
+    </smart-button>
+</div>

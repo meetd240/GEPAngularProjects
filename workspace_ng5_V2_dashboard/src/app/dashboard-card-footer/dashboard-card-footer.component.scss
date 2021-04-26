@@ -1,0 +1,177 @@
+.dashboard-card-footer {
+}
+.footerwidgetBar {
+  height: 20px;
+  clear: both;
+  margin-left: 2px;
+  position: relative;
+  top: -53px;
+}
+
+.linkedToDashboardMargin {
+  margin-left: 26px;
+}
+
+.iconMargin{
+  margin-left: 51px;
+}
+
+  .breadcrum-container{
+    // margin-bottom: 20px !important;
+  }
+
+.pagination-container {
+  bottom: -8px;
+}
+// .topOnFullscreen{
+//   top: -45px !important;
+// }
+
+//   .graph-title-seperator{
+//     position: relative;
+//     bottom: 53px; 
+//     left: -8px;
+//     color: #c2c2c2;
+//   }
+//   .bottomOnFullscreen{
+//     bottom: 45px; 
+//   }
+//   .FlexTop{
+//     top: -32px !important;
+//   }
+//   .PieChartGraphTop{
+//     top: 20px !important;
+//   }
+//   .PieChartGraphBottom{
+//     bottom: 38px !important;
+//   }
+// .bottomOnFullscreen{
+//   bottom: 45px;
+// }
+
+// .marginTop35 {
+//   margin-top: 35px !important;
+// }
+
+// .topwidgetBarMapGauge {
+//   top: -37px !important;
+// }
+
+// .bottomTitleSeperatorMapGauge {
+//   bottom: 37px !important;
+// }
+
+// .marginBottomN6{
+//   margin-bottom: -6px !important;
+// }
+// .cardlinkIcon{
+//   position: relative;
+//   top: 4px;
+// }
+// .graphTitleLeftOnLink{
+//   margin-left: -6px;
+// }
+// .graph-title{
+//   position: relative;
+//   top: 4px;
+// }
+// .breadcrumb-list-item{
+//   max-width: 130px ;
+// }
+// .mapChartBreadcrumbTop{
+//   top:25px !important;
+// }
+// .breadcrumbTopOnFullscreen{
+//   top: 12px;
+// }
+// .breadcrumbListBottomOnFullscreen{
+//   bottom: 7px;
+// }
+// .topWidgetBarMapOnFullscreen{
+//   top: -30px !important;
+// }
+// .PieChartGraphBottomOnFullscreen{
+//   bottom: 30px !important;
+// }
+// .MapChartBottomOnFullscreen{
+//   bottom: 32px !important;
+// }
+
+// ------------------------
+// breadcrumb revamp new css
+.LinkCardIcon{
+  display: inline;
+}
+.cardGraphTitle{
+  display: inline;
+}
+.footerIconContainer{
+  position: absolute;
+  bottom: 18px;
+
+}
+.cardIconSeperator{
+  display: inline-block;
+}
+.breadCrumbListWrapper{
+  display: inline-block;
+  position: relative;
+}
+.currentlyViewing{
+  display: inline;
+}
+.breadCrumbContainer{
+  position: absolute;
+  bottom: 19px;
+  left: 60px;
+  width: calc(100% - 70px);
+}
+.breadcrumbListContainer{
+  display: inline-flex;
+  position: absolute;
+  top: 3px;
+  left: 110px;
+
+}
+.breadcrumbListItem{
+  // max-width: 90px;
+  display: inline-block;
+}
+.drillUpContainer{
+  position: absolute;
+  right: 0;
+  top: 1px;
+  cursor: pointer;
+}
+.breadcumbItemSeperator{
+  display: inline;
+  position: relative;
+  // bottom: 4px;
+  vertical-align: top;
+}
+.breadCrumbContainerOnFullscreen{
+  bottom: 93px !important;
+}
+.footerIconContainerOnFullscreen{
+  bottom: 93px !important;
+}
+.dashboardCardFooterIcons{
+  width: 16px !important;
+  height: 16px !important;
+}
+.breadcrumbSeperator{
+  color: #c2c2c2;
+  display: inline;
+}
+.breadcrumbDropdown{
+  font-weight: bold;
+  color: #0177d6;
+}
+.breadcrumbLeftOnNoLinkReport{
+  left: 35px !important;
+}
+.plain-breadcrum {
+  color: #5c5c5c;
+  cursor: default;
+}
+// ----------------------------------

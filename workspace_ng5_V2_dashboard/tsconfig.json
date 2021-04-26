@@ -1,0 +1,81 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "module": "esnext",
+    "baseUrl": "src",
+    "paths": {
+      "@vsAnalyticsCommonService/*": ["shared/services/analytics-common-service/*"],
+      "@vsDashboardService/*": ["shared/services/dashboard-service/*"],
+      "@vsSmartBaseService": ["shared/services/smart-base-service/smart-base.service"],
+      "@vsOppfinderService/*": ["shared/services/opportunityFinder-service/*"],
+      "@vsBidInsightsService/*": ["shared/services/bid-insights-service/*"],
+
+      "@vsChartWidgetService": ["shared/directive/chart-widget/chart-widget.directive" ],
+      "@vsFlexGridWidgetDirective": ["shared/directive/flex-grid-directive/flex-grid.directive"],
+      "@vsOlapGridWidgetDirective": ["shared/directive/olap-grid-directive/olap-grid.directive"],
+      "@vsReportIdentifierDirective": ["shared/directive/report-identifier-directive/report-identifier-directive"],
+      "@vsMapChartDirective": ["shared/directive/map-chart-directive/map-chart-directive" ],
+
+      "@vsOlapGridDirectiveService": ["shared/services/directive-service/olap-grid-directive/olap-grid-directive-service"],
+      "@vsConditionalFormatingService": ["shared/services/conditional-formating-services/conditional-formating.service"],
+      "@vsNumberFormatingService": ["shared/services/conditional-formating-services/number-formating.service"],
+      "@vsDashboardCommService": ["shared/services/dashboard-comm-service/dashboard-comm.service"],
+      "@vsGlobalFilterService": ["shared/services/global-filter-service/global-filter.service"],
+      "@vsMapChartDirectiveService": ["shared/services/directive-service/map-chart-directive/map-chart-directive-service"],
+      "@vsAzureMapsApiService": ["shared/services/directive-service/map-chart-directive/azuremaps-api-loader-service"],
+      "@vsWindowService": ["shared/services/directive-service/map-chart-directive/window-service"],
+      "@vsDashboardDriveService": ["shared/services/dashboard-drive-service/dashboard-drive-service"],
+
+
+      "@vsCommonUtils": ["shared/common-utils/common-utilities"],
+      "@vsDashletModels/*": ["shared/models/dashboard-models/dashlet-models/*" ],
+      "@vsSliderFilterModels/*": ["shared/models/dashboard-models/slider-filter-model/*"],
+      "@vsViewFilterModels/*": ["shared/models/dashboard-models/view-filter-models/*"],
+      "@vsDataModels/*": ["shared/models/data-models/*"],
+      "@vsMetaDataModels/*": ["shared/models/metadata-models/*"],
+      "@vsOpportunityFinderModels/*": ["shared/models/opportunityfinder-models/*"],
+      "@vsAnalyticsCommonUrlsConstants": ["shared/constants/analytics-common-constants/analytics-common-urls.constants" ],
+      "@vsAnalyticsCommonConstants": ["shared/constants/analytics-common-constants/analytics-common.constants"],
+      "@vsDashboardConstants": [ "shared/constants/dashboard-constants/dashboard.constants" ],
+      "@vsMessageConstants": [ "shared/constants/analytics-common-constants/analytics-vision-common-message-constants" ],
+      "@vsCommonUrlsConstants": ["shared/constants/common-url-constants/common-urls.constants"],
+      "@vsSmartBaseInterceptor": ["shared/services/smart-base-service/smart-base.interceptor"],
+      "@vsLoaderService": ["shared/services/loader-service/loader.service"],
+      "@vsTabModels/*":["shared/models/dashboard-models/tab-models/*"],
+
+
+      "@vsDashboardInterface": [ "interfaces/dashboard-interface/dashboard-interfaces"],
+      "@vsCommonInterface": ["interfaces/common-interface/app-common-interface"],
+      "@vsOpportunityFinderInterface": ["interfaces/opportunityfinder-interface/opportunity-finder-interfaces"],
+
+      "@sharedServices/*": ["src/core/services/*"],
+      "@sharedModule/*": ["src/shared/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@root/*": ["./../*"]
+
+    },
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "include": [
+      "**/*.ts",
+      "./node_modules/smart-*/*.ts",
+      "./node_modules/smart-*/**/*.ts",
+    ],
+    "exclude": [
+      "**/*.spec.ts",
+      "**/*.e2e.ts"
+    ]
+  },
+}

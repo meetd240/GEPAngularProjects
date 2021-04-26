@@ -1,0 +1,54 @@
+.createNewEdit{
+    background: #eee;
+    height:60px;
+    .textfieldWrapper{
+        width:calc(100% - 75px);
+        .input-field{
+            label{
+                left: 0px;
+            }
+        }
+    }
+}
+
+.editCopy{
+    height:60px;width:100%;
+    background: #eee;
+    .textfieldWrapper{
+        width:calc(100% - 102px);
+        .input-field{
+            label{
+                left: 0px;
+            }
+        }
+    }
+}
+
+.footer{
+    clear:both;
+}
+
+.view-items{
+    .shared-users{
+        .dropdown-content{
+            max-height:255px;
+        }
+    }
+}
+
+.manage-views-popup{
+    .no-records{
+        text-align: center;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.truncateTitle{
+    width: 110%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

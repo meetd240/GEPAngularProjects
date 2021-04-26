@@ -1,0 +1,127 @@
+.dashboard-views-popup{
+    &.modal-popup {
+        z-index: 2003;
+        position: fixed;
+        right: 0;
+        left: 0;
+        top: 89px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 55%;
+        background-color: #fff;
+        box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+        .modal-header {
+            padding: 18px 20px;
+            height: 60px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            .title {
+                font-size: 18px;
+            }
+        }   
+        .modal-footer {
+            padding: 10px 0px;
+            border-top: 1px solid #eee;
+            text-align: right;
+            height: 56px;
+        }
+    }
+    .dashboard-views-popup-wrapper{
+        .dashboard-views-popup-body{
+            .dashboard-views-popup-container{
+                .dashboard-views-title{
+                    font-size: 18px !important;
+                }
+                .dashboard-views-container{
+                    background-color: #fff; 
+                    .tabs-vertical {
+                        .dashboard-views-tab-list {
+                            height: 0 !important;
+                            overflow:  hidden !important;
+                            border-bottom: none !important;
+                            .tabparent{
+                                .tab-list {
+                                    .tab > div.active {
+                                        border-left: 2px solid #0177d6;
+                                        border-bottom: 0;
+                                        background: #f5f5f5;
+                                        color: #0177d6;
+                                    }
+                                } 
+                            }
+
+                         }
+                        .dashboard-views-list{
+                            border-bottom: none !important;
+                            max-height: 300px;
+                            overflow-y:auto;
+                            .dashboard-views-wrapper{
+                                margin-top: 0px;
+                            }
+                            .dashboard-views-radio{
+                                padding: 10px !important;
+                                .truncate-view-name{
+                                    display: inline-block;
+                                    //white-space: nowrap;
+                                    //overflow: hidden;
+                                    //text-overflow: ellipsis;  
+                                     max-width: 260px;
+                                }
+                                .standard-view-text{
+                                    position: relative;
+                                    top: -9px; 
+                                }
+
+                          
+                            }
+                        }
+                    }
+
+                 }
+            }
+        }
+    }
+}
+.shareRighticon {
+    position: relative;
+        .counter_circle{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #0177d6;
+            top: -32px;
+            right: -18px;
+            border-radius: 4px;
+            label{
+                position: relative;
+                top: 4px;
+                font-size: 10px;
+                color: #ffffff;
+                display: block;
+                text-align: center;
+            } 
+        
+        } 
+    
+    } 
+         
+
+.lean-overlay {
+    position: fixed;
+    display: block ;
+    opacity: 0.5 ;
+    top: -100px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 125%;
+    width: 100%;
+    background: #000;
+}
+
+
+::ng-deep .crossProductFilter {
+.dashboard-views-popup.modal-popup{
+    top:2px !important;
+}
+}

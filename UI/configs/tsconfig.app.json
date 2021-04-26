@@ -1,0 +1,21 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "module": "esnext",
+    "types": [
+      "highcharts"
+    ]
+  },
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts",
+    "**/*.e2e.ts",
+    "../node_modules/**/*.spec.ts"
+  ],
+  "include": [
+    "**/*.ts",
+    "./node_modules/smart-*/*.ts",
+    "./node_modules/smart-*/**/*.ts"
+  ]
+}

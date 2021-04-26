@@ -1,0 +1,51 @@
+<div class="col s12">
+	<!-- <div class="main-investigate">
+		<i class="icon small" style="float:right">
+			<svg>
+				<use xlink:href="#icon_Back"></use>
+			</svg>
+		</i>
+	</div> -->
+
+	<div class="investigation-widget-main">
+		<i class="icon iconSmall">
+			<svg class="dashboardCardFooterIcons">
+				<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_dashboardCardInfo"></use>
+			</svg>
+		</i>
+		<h6 class="static-message">
+			{{staticMessage}}
+			 </h6>
+		<i class="icon iconSmall center grey-text close-icon" >
+			<svg>
+				<use xlink:href="#icon_Close"></use>
+			</svg>
+		</i>
+
+	</div>
+	<div *ngIf="showGrid">
+		<div class="report-detail-card-section-main">
+			<div>
+				<h5>Report Details</h5>
+			</div>
+
+			<div class="report-detail-card-section">
+
+				<ul id="ul_top_hypers">
+					<li class="li-crad-details" *ngFor="let o of statusArray">
+						<span class="report-detail-card-for-name">
+							{{o.name}}
+						</span>
+						<span class="report-detail-card-for-value">
+							{{o.value}}
+						</span>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	<hr>
+		<div class="scroll" flex-grid [config]="gridData">
+		</div>
+	</div>
+</div>

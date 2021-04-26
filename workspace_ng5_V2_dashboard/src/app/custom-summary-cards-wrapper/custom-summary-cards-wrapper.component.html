@@ -1,0 +1,5 @@
+<div >
+  <span *ngFor="let summ of config"  >
+  <summary-card class="bestpayment_summary_card" *ngIf='checkVal(summ.config.data.value)' [config]="summ"></summary-card>
+</span>
+</div> 
